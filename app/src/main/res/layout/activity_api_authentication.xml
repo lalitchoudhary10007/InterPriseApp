@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="shopcityshop.purplecommerce.com.interpriseapp.com.interpriseapp.ApiAuthenticationActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+       <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/interprise_welcome_image"
+            android:padding="@dimen/_40sdp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EEEEEE"
+            android:alpha="0.9"></LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/_5sdp"
+        android:gravity="center">
+
+
+
+    <views.textview.TypefaceTextView
+        geekui:customTypeface="fonts/CoreSansDBold.otf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:gravity="center"
+        android:textSize="@dimen/_16sdp"
+        android:text="Welcome to Interprise App"/>
+
+        <views.textview.TypefaceTextView
+            geekui:customTypeface="fonts/CoreSansDRegular.otf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:textSize="@dimen/_14sdp"
+            android:text="App is being launched for the first time on this device."
+            android:padding="@dimen/_5sdp"/>
+
+        <views.textview.TypefaceTextView
+            geekui:customTypeface="fonts/CoreSansDRegular.otf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:textSize="@dimen/_14sdp"
+            android:text="Enter URL and key to connect to Interprise webservice."
+            android:padding="@dimen/_5sdp"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:padding="@dimen/_10sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <views.textview.TypefaceTextView
+                    geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_16sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="URL"
+                    android:layout_gravity="center"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/ed_url"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/colorPrimary"
+                        />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/colorPrimary"/>
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_30sdp">
+
+                <views.textview.TypefaceTextView
+                    geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_16sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Key"
+                    android:layout_gravity="center"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/ed_key"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/colorPrimary"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/colorPrimary"/>
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+        <views.textview.TypefaceTextView
+            android:id="@+id/txt_submit"
+            geekui:customTypeface="fonts/CoreSansDRegular.otf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="@dimen/_18sdp"
+            android:text="SUBMIT"
+            android:padding="@dimen/_5sdp"
+            android:background="@drawable/primary_back_round"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:elevation="@dimen/_2sdp"/>
+
+
+        <views.textview.TypefaceTextView
+            geekui:customTypeface="fonts/CoreSansDRegular.otf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_grey"
+            android:gravity="center"
+            android:textSize="@dimen/_16sdp"
+            android:text="Please verify the credentials."
+            android:padding="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"/>
+
+
+        <views.textview.TypefaceTextView
+            geekui:customTypeface="fonts/CoreSansDRegular.otf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_grey"
+            android:gravity="center"
+            android:textSize="@dimen/_16sdp"
+            android:text="Contact customer support for help."
+            android:padding="@dimen/_5sdp"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+    </FrameLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

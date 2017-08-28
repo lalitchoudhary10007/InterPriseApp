@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?selectableItemBackground">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/_2sdp">
+
+        <views.textview.TypefaceTextView
+            android:id="@+id/customer_code"
+            geekui:customTypeface="fonts/CoreSansDBold.otf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:gravity="left"
+            android:textSize="@dimen/_10sdp"
+            android:text="CUST-001003"
+            android:layout_weight="1"/>
+
+        <views.textview.TypefaceTextView
+            android:id="@+id/name"
+            geekui:customTypeface="fonts/CoreSansDRegular.otf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:textSize="@dimen/_10sdp"
+            android:text="John Greenwood"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+    <views.textview.TypefaceTextView
+        android:id="@+id/price_level"
+        geekui:customTypeface="fonts/CoreSansDRegular.otf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:gravity="left"
+        android:textSize="@dimen/_10sdp"
+        android:text="John Greenwood"
+        android:padding="@dimen/_2sdp"
+        android:layout_marginLeft="@dimen/_20sdp"/>
+
+    <views.textview.TypefaceTextView
+        android:id="@+id/country"
+        geekui:customTypeface="fonts/CoreSansDRegular.otf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:gravity="right"
+        android:textSize="@dimen/_10sdp"
+        android:text="United Kingdom"
+        android:padding="@dimen/_2sdp"
+        android:layout_marginLeft="@dimen/_20sdp"/>
+
+    <views.textview.TypefaceTextView
+        android:id="@+id/customer_phone"
+        geekui:customTypeface="fonts/CoreSansDRegular.otf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:gravity="right"
+        android:textSize="@dimen/_10sdp"
+        android:text="United Kingdom"
+        android:padding="@dimen/_2sdp"
+        android:layout_marginLeft="@dimen/_20sdp"/>
+
+    <views.textview.TypefaceTextView
+        android:id="@+id/customer_email"
+        geekui:customTypeface="fonts/CoreSansDRegular.otf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:gravity="right"
+        android:textSize="@dimen/_10sdp"
+        android:text="United Kingdom"
+        android:padding="@dimen/_2sdp"
+        android:layout_marginLeft="@dimen/_20sdp"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey"
+        android:padding="@dimen/_2sdp"/>
+
+
+</LinearLayout>

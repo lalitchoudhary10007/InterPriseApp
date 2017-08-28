@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <views.textview.TypefaceTextView
+        android:id="@+id/toolbar_txt"
+        geekui:customTypeface="fonts/CoreSansDBold.otf"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:textColor="@drawable/txt_color_selector"
+        android:gravity="center"
+        android:textSize="@dimen/_16sdp"
+        android:text=""
+        android:singleLine="true"/>
+
+
+</LinearLayout>

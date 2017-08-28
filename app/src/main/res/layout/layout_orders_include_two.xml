@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <views.textview.TypefaceTextView
+        android:id="@+id/first_txt"
+        geekui:customTypeface="fonts/CoreSansDRegular.otf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_weight="0.8"
+        android:textSize="@dimen/_10sdp"
+        android:text=""
+        android:gravity="left"
+        />
+
+
+    <views.textview.TypefaceTextView
+        android:id="@+id/second_txt"
+        geekui:customTypeface="fonts/CoreSansDRegular.otf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_weight="0.4"
+        android:textSize="@dimen/_10sdp"
+        android:text=""
+        android:gravity="left"
+        />
+
+    <views.textview.TypefaceTextView
+        android:id="@+id/third_txt"
+        geekui:customTypeface="fonts/CoreSansDRegular.otf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_weight="1"
+        android:textSize="@dimen/_10sdp"
+        android:text="1"
+        android:gravity="center"
+        android:visibility="invisible"/>
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey"
+        android:padding="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:layout_marginBottom="@dimen/_3sdp"/>
+
+</LinearLayout>

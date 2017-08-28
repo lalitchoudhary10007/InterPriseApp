@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    tools:context="shopcityshop.purplecommerce.com.interpriseapp.com.interpriseapp.MainActivity">
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/interprise_welcome_image"
+            android:padding="@dimen/_40sdp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EEEEEE"
+            android:alpha="0.9"></LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <views.textview.TypefaceTextView
+                geekui:customTypeface="fonts/CoreSansDBold.otf"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center"
+                android:textSize="@dimen/_16sdp"
+                android:text="HOME"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/grey"/>
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp">
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+
+                  <FrameLayout
+                      android:id="@+id/frame_orders"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      >
+
+
+                  <FrameLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/_100sdp"
+                      android:layout_margin="@dimen/_10sdp"
+                      >
+
+                      <views.textview.TypefaceTextView
+                          android:id="@+id/txt_submit"
+                          geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:textColor="@color/white"
+                          android:gravity="center"
+                          android:textSize="@dimen/_18sdp"
+                          android:text="Orders"
+                          android:padding="@dimen/_5sdp"
+                          android:background="@drawable/primary_back_round"
+                          />
+
+
+                  </FrameLayout>
+
+
+                      <FrameLayout
+                          android:layout_width="@dimen/_35sdp"
+                          android:layout_height="@dimen/_35sdp"
+                          android:layout_gravity="right"
+                          android:background="@drawable/filled_round_back">
+
+                          <views.textview.TypefaceTextView
+                              geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:textColor="@color/black"
+                              android:gravity="center"
+                              android:textSize="@dimen/_14sdp"
+                              android:text="12"
+                              android:padding="@dimen/_5sdp"
+                              android:layout_gravity="center"/>
+
+
+                      </FrameLayout>
+
+
+
+                  </FrameLayout>
+
+
+
+                  <FrameLayout
+                      android:id="@+id/frame_customers"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      >
+
+
+                      <FrameLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="@dimen/_100sdp"
+                          android:layout_margin="@dimen/_10sdp"
+                          >
+
+                          <views.textview.TypefaceTextView
+                              android:id="@+id/txt_customers"
+                              geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              android:textColor="@color/white"
+                              android:gravity="center"
+                              android:textSize="@dimen/_18sdp"
+                              android:text="Customers"
+                              android:padding="@dimen/_5sdp"
+                              android:background="@drawable/primary_back_round"
+                              />
+
+
+                      </FrameLayout>
+
+
+                      <FrameLayout
+                          android:layout_width="@dimen/_35sdp"
+                          android:layout_height="@dimen/_35sdp"
+                          android:layout_gravity="right"
+                          android:background="@drawable/filled_round_back">
+
+                          <views.textview.TypefaceTextView
+                              android:id="@+id/txt_customer_count"
+                              geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:textColor="@color/black"
+                              android:gravity="center"
+                              android:textSize="@dimen/_14sdp"
+                              android:padding="@dimen/_5sdp"
+                              android:layout_gravity="center"/>
+
+
+                      </FrameLayout>
+
+
+
+                  </FrameLayout>
+
+
+              </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:id="@+id/fm_items"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_100sdp"
+                            android:layout_margin="@dimen/_10sdp"
+                            >
+
+                            <views.textview.TypefaceTextView
+                                android:id="@+id/txt_items"
+                                geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:textSize="@dimen/_18sdp"
+                                android:text="Items"
+                                android:padding="@dimen/_5sdp"
+                                android:background="@drawable/primary_back_round"
+                                />
+
+
+                        </FrameLayout>
+
+
+                        <FrameLayout
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_gravity="right"
+                            android:background="@drawable/filled_round_back">
+
+                            <views.textview.TypefaceTextView
+                                android:id="@+id/items_count"
+                                geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:gravity="center"
+                                android:textSize="@dimen/_14sdp"
+                                android:text="12"
+                                android:padding="@dimen/_5sdp"
+                                android:layout_gravity="center"/>
+
+
+                        </FrameLayout>
+
+
+
+                    </FrameLayout>
+
+
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        >
+
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_100sdp"
+                            android:layout_margin="@dimen/_10sdp"
+                            >
+
+                            <views.textview.TypefaceTextView
+                                android:id="@+id/txt_invoices"
+                                geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:textSize="@dimen/_18sdp"
+                                android:text="Invoices"
+                                android:padding="@dimen/_5sdp"
+                                android:background="@drawable/primary_back_round"
+                                />
+
+
+                        </FrameLayout>
+
+
+                        <FrameLayout
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_gravity="right"
+                            android:background="@drawable/filled_round_back">
+
+                            <views.textview.TypefaceTextView
+                                geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:gravity="center"
+                                android:textSize="@dimen/_14sdp"
+                                android:text="12"
+                                android:padding="@dimen/_5sdp"
+                                android:layout_gravity="center"/>
+
+
+                        </FrameLayout>
+
+
+
+                    </FrameLayout>
+
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_100sdp"
+                            android:layout_margin="@dimen/_10sdp"
+                            >
+
+                            <views.textview.TypefaceTextView
+                                android:id="@+id/txt_credit_notes"
+                                geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:textSize="@dimen/_18sdp"
+                                android:text="Credit Notes"
+                                android:padding="@dimen/_5sdp"
+                                android:background="@drawable/primary_back_round"
+                                />
+
+
+                        </FrameLayout>
+
+
+                        <FrameLayout
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_gravity="right"
+                            android:background="@drawable/filled_round_back">
+
+                            <views.textview.TypefaceTextView
+                                geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:gravity="center"
+                                android:textSize="@dimen/_14sdp"
+                                android:text="12"
+                                android:padding="@dimen/_5sdp"
+                                android:layout_gravity="center"/>
+
+
+                        </FrameLayout>
+
+
+
+                    </FrameLayout>
+
+
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        >
+
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_100sdp"
+                            android:layout_margin="@dimen/_10sdp"
+                            >
+
+                            <views.textview.TypefaceTextView
+                                android:id="@+id/txt_rmas"
+                                geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:textSize="@dimen/_18sdp"
+                                android:text="RMAs"
+                                android:padding="@dimen/_5sdp"
+                                android:background="@drawable/primary_back_round"
+                                />
+
+
+                        </FrameLayout>
+
+
+                        <FrameLayout
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_gravity="right"
+                            android:visibility="gone"
+                            android:background="@drawable/filled_round_back">
+
+                            <views.textview.TypefaceTextView
+                                geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:gravity="center"
+                                android:textSize="@dimen/_14sdp"
+                                android:text="12"
+                                android:padding="@dimen/_5sdp"
+                                android:layout_gravity="center"/>
+
+
+                        </FrameLayout>
+
+
+
+                    </FrameLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            </ScrollView>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+    </FrameLayout>
+
+
+
+
+
+</LinearLayout>

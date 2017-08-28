@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    tools:context="com.purplecommerce.interpriseapp.CustomersActivity">
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/interprise_welcome_image"
+        android:padding="@dimen/_40sdp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EEEEEE"
+        android:alpha="0.9"></LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/ll_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+
+
+        </LinearLayout>
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <views.textview.TypefaceTextView
+            android:id="@+id/txt_previous"
+            geekui:customTypeface="fonts/CoreSansDRegular.otf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:textSize="@dimen/_14sdp"
+            android:text="Previous"
+            android:layout_weight="1"
+            android:padding="@dimen/_3sdp"/>
+
+        <views.textview.TypefaceTextView
+            android:id="@+id/ordr_count_page"
+            geekui:customTypeface="fonts/CoreSansDRegular.otf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:textSize="@dimen/_14sdp"
+            android:text=""
+            android:layout_weight="0.8"
+            android:padding="@dimen/_3sdp"/>
+
+
+
+        <views.textview.TypefaceTextView
+            android:id="@+id/txt_next"
+            geekui:customTypeface="fonts/CoreSansDRegular.otf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:textSize="@dimen/_14sdp"
+            android:text="Next"
+            android:padding="@dimen/_3sdp"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/_5sdp"
+            android:visibility="gone">
+
+            <views.textview.TypefaceTextView
+                geekui:customTypeface="fonts/CoreSansDBold.otf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center"
+                android:textSize="@dimen/_14sdp"
+                android:text="Customer"
+                android:layout_weight="0.8"/>
+
+            <views.textview.TypefaceTextView
+                geekui:customTypeface="fonts/CoreSansDBold.otf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center"
+                android:textSize="@dimen/_14sdp"
+                android:text="Contact"
+                android:layout_weight="0.8"/>
+
+            <views.textview.TypefaceTextView
+                geekui:customTypeface="fonts/CoreSansDBold.otf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center"
+                android:textSize="@dimen/_14sdp"
+                android:text="Last Order"
+                android:layout_weight="0.8"/>
+
+
+            <views.textview.TypefaceTextView
+                geekui:customTypeface="fonts/CoreSansDBold.otf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center"
+                android:textSize="@dimen/_14sdp"
+                android:text=""
+                android:layout_weight="1"/>
+
+
+
+        </LinearLayout>
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:layout_marginBottom="@dimen/_50sdp">
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_orders_add_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_10sdp"
+                        >
+
+
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+
+
+            </FrameLayout>
+
+
+        </ScrollView>
+
+
+           </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/refresh_customers"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_70sdp"
+            android:background="@drawable/primary_round_layout"
+            android:orientation="vertical"
+            android:elevation="@dimen/_5sdp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:src="@drawable/ic_refresh"
+                android:tint="@color/white"
+                />
+
+            <views.textview.TypefaceTextView
+                android:id="@+id/last_update_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Last Updated - 2017-08-24"
+                android:textSize="@dimen/_5sdp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                />
+
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/_10sdp"
+            android:elevation="@dimen/_1sdp"
+            android:background="@drawable/primary_back_round"
+            android:baselineAligned="false">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp"
+                android:layout_weight="0.5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <views.textview.TypefaceTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:gravity="center"
+                        android:text="CUST-"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14sdp"
+                        geekui:customTypeface="fonts/CoreSansDRegular.otf" />
+
+
+                  <EditText
+                    android:id="@+id/ed_search_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Order No"
+                    android:textColorHint="@color/muted_white"
+                    android:background="@null"
+                    android:paddingLeft="@dimen/_4sdp"
+                    android:textColor="@color/white"
+                    android:inputType="number"/>
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/white"/>
+
+            </LinearLayout>
+
+
+            <views.textview.TypefaceTextView
+                android:id="@+id/txt_find"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:text="FIND"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18sdp"
+                geekui:customTypeface="fonts/CoreSansDRegular.otf" />
+
+
+        </LinearLayout>
+
+
+
+        </FrameLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+

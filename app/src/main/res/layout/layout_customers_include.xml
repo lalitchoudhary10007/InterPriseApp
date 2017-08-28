@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_5sdp"
+    android:gravity="center"
+    android:background="?selectableItemBackground">
+
+
+    <views.textview.TypefaceTextView
+        android:id="@+id/customers"
+        geekui:customTypeface="fonts/CoreSansDRegular.otf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:gravity="center"
+        android:textSize="@dimen/_10sdp"
+        android:text="Customer"
+        android:layout_weight="0.8"/>
+
+    <views.textview.TypefaceTextView
+        android:id="@+id/customers_contact"
+        geekui:customTypeface="fonts/CoreSansDRegular.otf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:gravity="center"
+        android:textSize="@dimen/_10sdp"
+        android:text="Contact"
+        android:layout_weight="0.8"/>
+
+    <views.textview.TypefaceTextView
+        android:id="@+id/customers_last_order"
+        geekui:customTypeface="fonts/CoreSansDRegular.otf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:gravity="center"
+        android:textSize="@dimen/_10sdp"
+        android:text="Last Order"
+        android:layout_weight="0.8"/>
+
+
+    <views.textview.TypefaceTextView
+        android:id="@+id/txt_next"
+        geekui:customTypeface="fonts/CoreSansDBold.otf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_weight="1"
+        android:textSize="@dimen/_20sdp"
+        android:text=">"
+        android:gravity="center"
+       />
+
+
+</LinearLayout>

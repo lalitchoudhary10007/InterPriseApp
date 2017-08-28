@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:geekui="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="shopcityshop.purplecommerce.com.interpriseapp.com.interpriseapp.OrderDetailsActivity">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/interprise_welcome_image"
+            android:padding="@dimen/_40sdp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EEEEEE"
+            android:alpha="0.9"></LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/ll_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <views.textview.TypefaceTextView
+                    android:id="@+id/txt_previous"
+                    geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    android:textSize="@dimen/_14sdp"
+                    android:text="Previous"
+                    android:layout_weight="1"
+                    android:padding="@dimen/_3sdp"/>
+
+                <views.textview.TypefaceTextView
+
+                    geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="left"
+                    android:textSize="@dimen/_14sdp"
+                    android:text=""
+                    android:layout_weight="1"
+                    android:padding="@dimen/_3sdp"/>
+
+                <views.textview.TypefaceTextView
+
+                    geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="left"
+                    android:textSize="@dimen/_14sdp"
+                    android:text=""
+                    android:layout_weight="1"
+                    android:padding="@dimen/_3sdp"/>
+
+                <views.textview.TypefaceTextView
+                    android:id="@+id/txt_next"
+                    geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"
+                    android:textSize="@dimen/_14sdp"
+                    android:text="Next"
+                    android:padding="@dimen/_3sdp"
+                    android:layout_weight="1"/>
+
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/grey"/>
+
+
+
+             <FrameLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+
+                 <ScrollView
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:fillViewport="true"
+                     >
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:orientation="vertical"
+                     android:padding="@dimen/_5sdp"
+                     >
+
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:padding="@dimen/_2sdp">
+
+
+                         <views.textview.TypefaceTextView
+                             geekui:customTypeface="fonts/CoreSansDBold.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="left"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="Customer#"
+                             android:singleLine="true"
+                             android:layout_weight="1"/>
+
+
+                         <views.textview.TypefaceTextView
+                             android:id="@+id/txt_customerid"
+                             geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="left"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="Cust-0012"
+                             android:layout_weight="0.5"
+                             android:padding="@dimen/_3sdp"
+                             />
+
+                     </LinearLayout>
+
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:padding="@dimen/_2sdp">
+
+
+                         <views.textview.TypefaceTextView
+                             geekui:customTypeface="fonts/CoreSansDBold.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="left"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="Name"
+                             android:singleLine="true"
+                             android:layout_weight="1"/>
+
+
+                         <views.textview.TypefaceTextView
+                             android:id="@+id/txt_customername"
+                             geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="left"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="Customer Name"
+                             android:layout_weight="0.5"
+                             android:padding="@dimen/_3sdp"
+                             />
+
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:padding="@dimen/_2sdp">
+
+
+                         <views.textview.TypefaceTextView
+                             geekui:customTypeface="fonts/CoreSansDBold.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="left"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="Ship To"
+                             android:singleLine="true"
+                             android:layout_weight="1"/>
+
+
+                         <views.textview.TypefaceTextView
+                             android:id="@+id/txt_shipto"
+                             geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="left"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="145 , 4th floor , MGF Megapolice Mall , M.G. Road , Gurgaon (122001)"
+                             android:layout_weight="0.5"
+                             android:padding="@dimen/_3sdp"
+                             />
+
+                     </LinearLayout>
+
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:padding="@dimen/_2sdp">
+
+
+                         <views.textview.TypefaceTextView
+                             geekui:customTypeface="fonts/CoreSansDBold.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="left"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="Bill To"
+                             android:singleLine="true"
+                             android:layout_weight="1"/>
+
+
+                         <views.textview.TypefaceTextView
+                             android:id="@+id/txt_billto"
+                             geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="left"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="145 , 4th floor , MGF Megapolice Mall , M.G. Road , Gurgaon (122001)"
+                             android:layout_weight="0.5"
+                             android:padding="@dimen/_3sdp"
+                             />
+
+                     </LinearLayout>
+
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginTop="@dimen/_10sdp"
+                         android:orientation="horizontal">
+
+                         <views.textview.TypefaceTextView
+                             geekui:customTypeface="fonts/CoreSansDBold.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="center"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="#"
+                             android:layout_weight="1"/>
+
+                         <views.textview.TypefaceTextView
+                             geekui:customTypeface="fonts/CoreSansDBold.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="center"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="Item"
+                             android:layout_weight="0.8"/>
+
+                         <views.textview.TypefaceTextView
+                             geekui:customTypeface="fonts/CoreSansDBold.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="center"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="Price"
+                             android:layout_weight="1"/>
+
+                         <views.textview.TypefaceTextView
+                             geekui:customTypeface="fonts/CoreSansDBold.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="center"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="Qty"
+                             android:layout_weight="1"/>
+
+
+
+                         <views.textview.TypefaceTextView
+                             geekui:customTypeface="fonts/CoreSansDBold.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="center"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="Tax"
+                             android:layout_weight="1"/>
+
+                         <views.textview.TypefaceTextView
+                             geekui:customTypeface="fonts/CoreSansDBold.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="center"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="Amt"
+                             android:layout_weight="1"/>
+
+
+
+                        </LinearLayout>
+
+
+                     <LinearLayout
+                         android:id="@+id/parent_products_layout"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="vertical">
+
+
+
+
+                     </LinearLayout>
+
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:padding="@dimen/_2sdp"
+                         android:layout_marginTop="@dimen/_10sdp">
+
+
+                         <views.textview.TypefaceTextView
+                             geekui:customTypeface="fonts/CoreSansDBold.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="right"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="Sub Total"
+                             android:singleLine="true"
+                             android:layout_weight="1"/>
+
+
+                         <views.textview.TypefaceTextView
+                             android:id="@+id/txt_subtotal"
+                             geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="right"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="148.22"
+                             android:layout_weight="0.8"
+                             android:padding="@dimen/_3sdp"
+                             />
+
+
+
+
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:padding="@dimen/_2sdp"
+                         android:layout_marginTop="@dimen/_5sdp">
+
+
+                         <views.textview.TypefaceTextView
+                             geekui:customTypeface="fonts/CoreSansDBold.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="right"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="Freight"
+                             android:singleLine="true"
+                             android:layout_weight="1"/>
+
+
+                         <views.textview.TypefaceTextView
+                             android:id="@+id/txt_freight"
+                             geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="right"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="7.00"
+                             android:layout_weight="0.8"
+                             android:padding="@dimen/_3sdp"
+                             android:textAlignment="gravity"/>
+
+
+
+                     </LinearLayout>
+
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:padding="@dimen/_2sdp"
+                         android:layout_marginTop="@dimen/_5sdp">
+
+
+                         <views.textview.TypefaceTextView
+                             geekui:customTypeface="fonts/CoreSansDBold.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="right"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="Total"
+                             android:singleLine="true"
+                             android:layout_weight="1"/>
+
+
+                         <views.textview.TypefaceTextView
+                             android:id="@+id/txt_total"
+                             geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="right"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="160.00"
+                             android:layout_weight="0.8"
+                             android:padding="@dimen/_3sdp"
+                             android:textAlignment="gravity"/>
+
+
+
+                     </LinearLayout>
+
+
+
+
+                 </LinearLayout>
+
+                 </ScrollView>
+
+
+                 <views.textview.TypefaceTextView
+                     android:id="@+id/txt_invoice"
+                     geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textColor="@color/white"
+                     android:gravity="center"
+                     android:layout_gravity="bottom|center"
+                     android:textSize="@dimen/_18sdp"
+                     android:text="Invoice"
+                     android:padding="@dimen/_5sdp"
+                     android:layout_margin="@dimen/_5sdp"
+                     android:background="@drawable/primary_back_round"
+                     android:elevation="@dimen/_2sdp"
+                     android:visibility="gone"/>
+
+
+
+
+             </FrameLayout>
+
+
+
+
+            </LinearLayout>
+
+
+    </FrameLayout>
+
+
+
+        </LinearLayout>
