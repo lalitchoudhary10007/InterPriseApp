@@ -26,6 +26,9 @@ import com.purplecommerce.interpriseapp.SessionManager.SessionManager;
 import com.purplecommerce.interpriseapp.SetterGetters.CustomerDetailsResponse;
 import com.purplecommerce.interpriseapp.Utils.Utils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.StringTokenizer;
 
@@ -197,6 +200,9 @@ public class CustomerDetailsActivity extends AppCompatActivity {
 
                 CustomerDetailsResponse detailsResponse = new CustomerDetailsResponse();
                 detailsResponse = gson.fromJson(response , CustomerDetailsResponse.class);
+
+
+                Log.e("**customer name",""+detailsResponse.getData().getAttributes().getCustomerName());
 
                 name.setText(detailsResponse.getData().getAttributes().getCustomerName());
                 address.setText(detailsResponse.getData().getAttributes().getAddress()+" , "+detailsResponse.getData().getAttributes().getCity()

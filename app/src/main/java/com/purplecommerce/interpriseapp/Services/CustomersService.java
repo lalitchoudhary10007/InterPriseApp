@@ -230,12 +230,12 @@ public class CustomersService extends IntentService {
                     e.printStackTrace();
                 }
 
-                customersDBManager.SaveCustomers(detailsResponse.getData().getId() , obj.optString("customerName"),
-                         obj.optString("telephone") , obj.optString("email") , obj.optString("defaultPrice") ,
-                        obj.optString("pricingLevel") , obj.optString("defaultShipToCode")
-                        ,obj.optString("country"),obj.optString("defaultContact"));
 
-
+                customersDBManager.SaveCustomers(detailsResponse.getData().getId() , detailsResponse.getData().getAttributes().getCustomerName(),
+                        detailsResponse.getData().getAttributes().getTelephone() , detailsResponse.getData().getAttributes().getEmail() ,
+                        detailsResponse.getData().getAttributes().getDefaultPrice(),""
+                        , detailsResponse.getData().getAttributes().getDefaultShipToCode(),detailsResponse.getData().getAttributes().getCountry()
+                        ,detailsResponse.getData().getAttributes().getDefaultContact());
 
                  Log.e("**name",""+customersDBManager.getCustomersCount());
 

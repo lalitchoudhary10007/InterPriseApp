@@ -51,7 +51,6 @@
             android:name=".Services.ItemsInventoryService"
             android:exported="false" />
 
-
         <activity
             android:name=".AddressesActivity"
             android:screenOrientation="portrait"
@@ -64,14 +63,14 @@
             android:name=".InvoicesActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".InventoryItems.InventoryItemsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
 
-        <activity android:name=".InventoryItems.InventoryItemsActivity"
+        <activity android:name=".InventoryItems.ItemDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
-
-
-
-
 
 
     </application>

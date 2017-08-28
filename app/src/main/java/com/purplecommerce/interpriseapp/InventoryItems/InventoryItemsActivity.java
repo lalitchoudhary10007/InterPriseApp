@@ -120,6 +120,10 @@ public class InventoryItemsActivity extends AppCompatActivity {
 
         String lastUpdate = "";
 
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        final String date = df.format(Calendar.getInstance().getTime());
+        StringTokenizer tokenizer = new StringTokenizer(date , "T");
+        lastUpdate = date ;
 
         if (changeLogDBManager.GetChangeLogAccordingName((Utils.ItemsChangeLog))==null){
             Toast.makeText(this, "No Change Logs", Toast.LENGTH_SHORT).show();
@@ -130,9 +134,6 @@ public class InventoryItemsActivity extends AppCompatActivity {
             last_update.setText(st.nextToken()+"\n"+st.nextToken());
         }
 
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        final String date = df.format(Calendar.getInstance().getTime());
-        StringTokenizer tokenizer = new StringTokenizer(date , "T");
 
 
         String to = tokenizer.nextToken();
@@ -159,7 +160,6 @@ public class InventoryItemsActivity extends AppCompatActivity {
 
                 //http://seventies.apexhelp.co.uk:82/Interprise.Web.Services/changelog/Customer?from=2017-07-07&to=2017-11-14
 
-
                 String PageSize = "2000";
                 String PageNumber = "1";
 
@@ -170,18 +170,15 @@ public class InventoryItemsActivity extends AppCompatActivity {
                 serviceIntent.putExtra("URL","/changelog/InventoryItem?from="+ finalLastUpdate +"&to="+ finalTodatetime                         +"&page[number]=1&page[size]="+PageSize);
                 serviceIntent.putExtra("TODATETIME" , finalTodatetime);
                 startService(serviceIntent);
+
+
+
             }
         });
 
 
 
 ////////////////
-
-
-
-
-
-
 
 
 
@@ -318,8 +315,6 @@ public class InventoryItemsActivity extends AppCompatActivity {
                             int max = Integer.parseInt(hs_orderpage.get(pageCount));
                             int min = Integer.parseInt(hs_orderpage.get(pageCount-1));
 
-                            Log.e("**max",""+max);
-                            Log.e("**min",""+min);
 
                             if (max < perpagecount){
 
@@ -364,14 +359,7 @@ public class InventoryItemsActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-    private View AddItemsOnPArent(ItemsInventoryTable attributesBean) {
+    private View AddItemsOnPArent(final ItemsInventoryTable attributesBean) {
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE );
         View vv = inflater.inflate(R.layout.items_add_layout, null);
@@ -388,6 +376,13 @@ public class InventoryItemsActivity extends AppCompatActivity {
         Bitmap bmp = BitmapFactory.decodeByteArray(attributesBean.getItemPhoto(), 0, attributesBean.getItemPhoto().length);
 
         item_image.setImageBitmap(bmp);
+
+        vv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(InventoryItemsActivity.this , ItemDetailsActivity.class).putExtra("ITEMCODE" , attributesBean.getItemCode()));
+            }
+        });
 
         return vv ;
 
@@ -454,21 +449,23 @@ public class InventoryItemsActivity extends AppCompatActivity {
 
             progress_dialog.dismiss();
 
+            Log.e("in receiver","**"+responseString);
+
             String lastUpdate = new ChangeLogDBManager(InventoryItemsActivity.this).GetChangeLogAccordingName(Utils.ItemsChangeLog).getChangeLogLastUpdate();
             StringTokenizer st = new StringTokenizer(lastUpdate , "T");
             last_update.setText(st.nextToken()+"\n"+st.nextToken());
 
 
-            if (responseString.equals(CustomersService.ADDRESPONSE)){
+            if (responseString.equals(ItemsInventoryService.ADDRESPONSE)){
 
                 PupulateListFromDbOnFirstPage();
 
 
-            }else if (responseString.equals(CustomersService.UPDATERESPONSE)){
+            }else if (responseString.equals(ItemsInventoryService.UPDATERESPONSE)){
 
                 Toast.makeText(context, "Already Updated !!", Toast.LENGTH_SHORT).show();
 
-            }else if (responseString.equals(CustomersService.NONEWCUSTOMER)){
+            }else if (responseString.equals(ItemsInventoryService.NONEWCUSTOMER)){
                 Toast.makeText(context, "NO NEW CUSTOMER FOUND !!", Toast.LENGTH_SHORT).show();
             }
 
@@ -534,15 +531,12 @@ public class InventoryItemsActivity extends AppCompatActivity {
         vv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (toolbartxt.getText().toString().equals("HOME >")){
+                if (toolbartxt.getText().toString().equals("HOME > ")){
                     finish();
-                    Intent i = new Intent(InventoryItemsActivity.this , MainActivity.class);
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(i);
+
                 }
             }
         });
-
 
         return vv ;
 
