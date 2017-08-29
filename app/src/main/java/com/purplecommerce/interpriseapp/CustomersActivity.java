@@ -124,7 +124,7 @@ public class CustomersActivity extends AppCompatActivity {
                 Log.e("**to time",""+ finalTodatetime);
 
                 Intent serviceIntent = new Intent(CustomersActivity.this, CustomersService.class);
-                serviceIntent.putExtra("URL","/changelog/Customer?from="+ finalLastUpdate +"&to="+ finalTodatetime +"&page[number]=1&page[size]="+PageSize);
+                serviceIntent.putExtra("URL","/changelog/Customer?from="+ "2017-07-2T14:53:46" +"&to="+ finalTodatetime +"&page[number]=1&page[size]="+PageSize);
                 serviceIntent.putExtra("TODATETIME" , finalTodatetime);
                 startService(serviceIntent);
             }
@@ -183,53 +183,7 @@ public class CustomersActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                prevoiusOne = "2" ;
-
-                if (pageCount+1 == hs_page.size()) {
-                    Toast.makeText(CustomersActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
-                }else {
-
-                    pageCount = pageCount + 1;
-
-                    if (pageCount < hs_page.size()) {
-
-                        Orders_parent_layout.removeAllViews();
-
-                        int max = Integer.parseInt(hs_orderpage.get(pageCount));
-                        int min = Integer.parseInt(hs_orderpage.get(pageCount - 1));
-
-                        Log.e("**max", "" + max);
-                        Log.e("**min", "" + min);
-
-                        if (max < perpagecount) {
-
-                            int max2 = min + max;
-                            OrderPageCount.setText(min + "-" + max2 + "/" + CustomerRows.size());
-                            Log.e("max2", "for last" + max2);
-
-                            for (int i = min; i < max2; i++) {
-
-                                Orders_parent_layout.addView(AddOrdersOnPArent(CustomerRows.get(i)));
-
-                            }
-
-                        } else {
-
-                            OrderPageCount.setText(min + "-" + max + "/" + CustomerRows.size());
-                            for (int i = min; i < max; i++) {
-
-                                Orders_parent_layout.addView(AddOrdersOnPArent(CustomerRows.get(i)));
-
-                            }
-
-                        }
-
-
-                    } else {
-                        //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
+           nextClick(Orders_parent_layout , CustomerRows.size() , perpagecount , hs_page , hs_orderpage ,OrderPageCount , CustomerRows);
 
             }
         });
@@ -239,74 +193,7 @@ public class CustomersActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (prevoiusOne.equals("1")){
-
-                    Toast.makeText(CustomersActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
-
-                }else {
-
-                    pageCount = pageCount - 1 ;
-                    if (pageCount == 0){
-
-                        prevoiusOne = "1" ;
-
-                        Orders_parent_layout.removeAllViews();
-
-                        Log.e("order page",""+hs_orderpage);
-                        Log.e(" page",""+hs_page);
-                        int max = Integer.parseInt(hs_orderpage.get(pageCount));
-                        OrderPageCount.setText("1"+"-"+max+"/"+CustomerRows.size());
-                        for (int i= 0 ; i < max ; i++){
-
-                            Orders_parent_layout.addView(AddOrdersOnPArent(CustomerRows.get(i)));
-
-                        }
-
-
-                    }else if (pageCount < hs_page.size()){
-
-                        prevoiusOne = "2" ;
-
-                        Orders_parent_layout.removeAllViews();
-
-                        Log.e("order page",""+hs_orderpage);
-                        Log.e(" page",""+hs_page);
-                        int max = Integer.parseInt(hs_orderpage.get(pageCount));
-                        int min = Integer.parseInt(hs_orderpage.get(pageCount-1));
-
-                        Log.e("**max",""+max);
-                        Log.e("**min",""+min);
-
-                        if (max < perpagecount){
-
-                            int max2 = min + max ;
-                            OrderPageCount.setText(min+"-"+max2+"/"+CustomerRows.size());
-                            Log.e("max2","for last"+max2);
-                            for (int i = min ; i < max2 ; i++){
-
-                                Orders_parent_layout.addView(AddOrdersOnPArent(CustomerRows.get(i)));
-                            }
-
-
-
-                        }else {
-
-                            Orders_parent_layout.removeAllViews();
-
-                            OrderPageCount.setText(min+"-"+max+"/"+CustomerRows.size());
-                            for (int i = min ; i < max ; i++){
-                                Orders_parent_layout.addView(AddOrdersOnPArent(CustomerRows.get(i)));
-                            }
-
-                        }
-
-
-                    }
-                    else {
-                        //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
+           PreviousClick(Orders_parent_layout , CustomerRows.size() ,perpagecount ,hs_page ,hs_orderpage , OrderPageCount , CustomerRows);
 
             }
         });
@@ -314,9 +201,157 @@ public class CustomersActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+    public void nextClick(LinearLayout ll_parent1 , int totaldata1 , int perpagecount1 ,
+                          ArrayList<String> hs_page1 , ArrayList<String> hs_orderpage1 , TextView pagetx1 , RealmResults<CustomersTable> data1){
+
+
+        if (!hs_orderpage1.isEmpty()) {
+
+
+            prevoiusOne = "2";
+
+            if (pageCount + 1 == hs_page1.size()) {
+                Toast.makeText(CustomersActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
+            } else {
+
+                pageCount = pageCount + 1;
+
+                if (pageCount < hs_page1.size()) {
+
+                    ll_parent1.removeAllViews();
+
+                    int max = Integer.parseInt(hs_orderpage1.get(pageCount));
+                    int min = Integer.parseInt(hs_orderpage1.get(pageCount - 1));
+
+                    Log.e("**max", "" + max);
+                    Log.e("**min", "" + min);
+
+                    if (max < perpagecount1) {
+
+                        int max2 = min + max;
+                        pagetx1.setText(min + "-" + max2 + "/" + totaldata1);
+                        Log.e("max2", "for last" + max2);
+
+                        for (int i = min; i < max2; i++) {
+
+                            ll_parent1.addView(AddOrdersOnPArent(CustomerRows.get(i)));
+
+                        }
+
+                    } else {
+
+                        pagetx1.setText(min + "-" + max + "/" + totaldata1);
+                        for (int i = min; i < max; i++) {
+
+                            ll_parent1.addView(AddOrdersOnPArent(CustomerRows.get(i)));
+
+                        }
+
+                    }
+
+
+                } else {
+                    //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }else {
+            Toast.makeText(CustomersActivity.this, "No Pages !!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
+    public void PreviousClick(LinearLayout ll_parent1 , int totaldata1 , int perpagecount1 ,
+                              ArrayList<String> hs_page1 , ArrayList<String> hs_orderpage1 , TextView pagetx1 , RealmResults<CustomersTable> data1){
+
+        if (!hs_orderpage1.isEmpty()) {
+
+            if (prevoiusOne.equals("1")) {
+
+                Toast.makeText(CustomersActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
+
+            } else {
+
+                if (pageCount==0){
+
+                }else {
+                    pageCount = pageCount - 1;
+                }
+
+
+                if (pageCount == 0) {
+
+                    prevoiusOne = "1";
+
+                    ll_parent1.removeAllViews();
+
+                    Log.e("order page", "" + hs_orderpage1);
+                    Log.e(" page", "" + hs_page1);
+                    int max = Integer.parseInt(hs_orderpage1.get(pageCount));
+                    pagetx1.setText("1" + "-" + max + "/" + totaldata1);
+                    for (int i = 0; i < max; i++) {
+
+                        ll_parent1.addView(AddOrdersOnPArent(data1.get(i)));
+
+                    }
+
+
+                } else if (pageCount < hs_page1.size()) {
+
+                    prevoiusOne = "2";
+
+                    ll_parent1.removeAllViews();
+
+                    Log.e("order page", "" + hs_orderpage);
+                    Log.e(" page", "" + hs_page);
+                    int max = Integer.parseInt(hs_orderpage1.get(pageCount));
+                    int min = Integer.parseInt(hs_orderpage1.get(pageCount - 1));
+
+                    Log.e("**max", "" + max);
+                    Log.e("**min", "" + min);
+
+                    if (max < perpagecount1) {
+
+                        int max2 = min + max;
+                        pagetx1.setText(min + "-" + max2 + "/" + totaldata1);
+                        Log.e("max2", "for last" + max2);
+                        for (int i = min; i < max2; i++) {
+
+                            ll_parent1.addView(AddOrdersOnPArent(data1.get(i)));
+                        }
+
+
+                    } else {
+
+                        ll_parent1.removeAllViews();
+
+                        pagetx1.setText(min + "-" + max + "/" + totaldata1);
+                        for (int i = min; i < max; i++) {
+                            ll_parent1.addView(AddOrdersOnPArent(data1.get(i)));
+                        }
+
+                    }
+
+
+                } else {
+                    //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+        }else {
+            Toast.makeText(CustomersActivity.this, "No Pages !!", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
+
+
+
 
 
 
@@ -400,7 +435,6 @@ public class CustomersActivity extends AppCompatActivity {
         progress_dialog.setContentView(v);
         Utils.clearParentsBackgrounds(v);
 
-
     }
 
 
@@ -419,7 +453,14 @@ public class CustomersActivity extends AppCompatActivity {
         customer_code.setText(""+customersTable.getCustomerCode());
         customer_name.setText(""+customersTable.getCustomerName());
         customer_contact.setText(""+customersTable.getCustomerPhone());
-        customer_pricelevel.setText(""+customersTable.getCustomerDefaultPrice()+" ("+customersTable.getCustomerDefaultPricingLevel()+")");
+        Log.e("","");
+        if (customersTable.getCustomerDefaultPricingLevel().equals("")){
+            customer_pricelevel.setText(""+customersTable.getCustomerDefaultPrice());
+
+        }else {
+            customer_pricelevel.setText(""+customersTable.getCustomerDefaultPrice()+" ("+customersTable.getCustomerDefaultPricingLevel()+")");
+
+        }
         customer_country.setText(""+customersTable.getCustomerCountry());
         customer_email.setText(""+customersTable.getCustomerEmail());
         vv.setOnClickListener(new View.OnClickListener() {

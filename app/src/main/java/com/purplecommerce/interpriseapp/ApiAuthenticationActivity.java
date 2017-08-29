@@ -32,7 +32,11 @@ import okhttp3.Response;
 import okhttp3.Route;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.purplecommerce.interpriseapp.Services.ItemsInventoryService;
 import com.purplecommerce.interpriseapp.SessionManager.SessionManager;
+import com.purplecommerce.interpriseapp.SetterGetters.ErrorResponse;
 import com.purplecommerce.interpriseapp.Utils.Utils;
 
 public class ApiAuthenticationActivity extends AppCompatActivity {
@@ -46,7 +50,8 @@ public class ApiAuthenticationActivity extends AppCompatActivity {
 
     final String TAG = "URlKEYVERIFY";
    // customer?onlyActive=true
-
+    GsonBuilder gsonBuilder;
+    Gson gson;
     SessionManager sm ;
 
 
@@ -145,7 +150,8 @@ public class ApiAuthenticationActivity extends AppCompatActivity {
       //  apiManager = new ApiManager(ApiAuthenticationActivity.this);
         sm = new SessionManager(ApiAuthenticationActivity.this);
 
-
+        gsonBuilder = new GsonBuilder();
+        gson = gsonBuilder.create();
     }
 
 
@@ -189,7 +195,10 @@ public class ApiAuthenticationActivity extends AppCompatActivity {
                 Log.e("error", "" + anError.getStackTrace());
                 Log.e("error", "" + anError.getCause());
 
-                Toast.makeText(ApiAuthenticationActivity.this, "Something Went wrong with url and key!!", Toast.LENGTH_SHORT).show();
+                ErrorResponse errorResponse = new ErrorResponse();
+                errorResponse = gson.fromJson(anError.getErrorBody() , ErrorResponse.class);
+
+                Toast.makeText(ApiAuthenticationActivity.this, ""+errorResponse.getErrors().get(0).getTitle(), Toast.LENGTH_SHORT).show();
 
             }
         });

@@ -230,12 +230,22 @@ public class CustomersService extends IntentService {
                     e.printStackTrace();
                 }
 
+                if (detailsResponse.getData().getAttributes().getTelephone()==null){
+                    customersDBManager.SaveCustomers(detailsResponse.getData().getId() , detailsResponse.getData().getAttributes().getCustomerName(),
+                            "" , obj.optString("email")  ,
+                            detailsResponse.getData().getAttributes().getDefaultPrice(),obj.optString("pricingLevel")
+                            , detailsResponse.getData().getAttributes().getDefaultShipToCode(),detailsResponse.getData().getAttributes().getCountry()
+                            ,detailsResponse.getData().getAttributes().getDefaultContact());
+                }
+                else {
+                    customersDBManager.SaveCustomers(detailsResponse.getData().getId() , detailsResponse.getData().getAttributes().getCustomerName(),
+                            detailsResponse.getData().getAttributes().getTelephone() , obj.optString("email")  ,
+                            detailsResponse.getData().getAttributes().getDefaultPrice(),obj.optString("pricingLevel")
+                            , detailsResponse.getData().getAttributes().getDefaultShipToCode(),detailsResponse.getData().getAttributes().getCountry()
+                            ,detailsResponse.getData().getAttributes().getDefaultContact());
+                }
 
-                customersDBManager.SaveCustomers(detailsResponse.getData().getId() , detailsResponse.getData().getAttributes().getCustomerName(),
-                        detailsResponse.getData().getAttributes().getTelephone() , detailsResponse.getData().getAttributes().getEmail() ,
-                        detailsResponse.getData().getAttributes().getDefaultPrice(),""
-                        , detailsResponse.getData().getAttributes().getDefaultShipToCode(),detailsResponse.getData().getAttributes().getCountry()
-                        ,detailsResponse.getData().getAttributes().getDefaultContact());
+
 
                  Log.e("**name",""+customersDBManager.getCustomersCount());
 

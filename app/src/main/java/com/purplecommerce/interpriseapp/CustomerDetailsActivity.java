@@ -22,8 +22,10 @@ import com.androidnetworking.interfaces.AnalyticsListener;
 import com.androidnetworking.interfaces.StringRequestListener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.purplecommerce.interpriseapp.SessionManager.SessionManager;
 import com.purplecommerce.interpriseapp.SetterGetters.CustomerDetailsResponse;
+import com.purplecommerce.interpriseapp.SetterGetters.ErrorResponse;
 import com.purplecommerce.interpriseapp.Utils.Utils;
 
 import org.json.JSONException;
@@ -201,6 +203,12 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                 CustomerDetailsResponse detailsResponse = new CustomerDetailsResponse();
                 detailsResponse = gson.fromJson(response , CustomerDetailsResponse.class);
 
+                JSONObject obj = null ;
+                try {
+                    obj = new JSONObject(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 Log.e("**customer name",""+detailsResponse.getData().getAttributes().getCustomerName());
 
@@ -209,7 +217,9 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                 +" , "+detailsResponse.getData().getAttributes().getPostalCode()+" , "+detailsResponse.getData().getAttributes().getCounty()+" , "
                 +detailsResponse.getData().getAttributes().getCounty());
 
-                if (detailsResponse.getData().getAttributes().getTelephone().isEmpty()){
+
+
+                if (detailsResponse.getData().getAttributes().getTelephone()==null){
                     ll_telephone.setVisibility(View.GONE);
                 }else {
                     ll_telephone.setVisibility(View.VISIBLE);
@@ -217,7 +227,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                 }
 
 
-                if (detailsResponse.getData().getAttributes().getFax()==null){
+                if (detailsResponse.getData().getAttributes().getTelephone()==null){
                     ll_fax.setVisibility(View.GONE);
                 }else {
                     ll_fax.setVisibility(View.VISIBLE);
@@ -235,7 +245,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                     ll_website.setVisibility(View.VISIBLE);
                     website.setText(detailsResponse.getData().getAttributes().getWebsite());
                 }
-                if (detailsResponse.getData().getAttributes().getDateCreated()==null){
+                if (obj.opt("dateCreated")==null){
                     ll_since.setVisibility(View.GONE);
                 }else {
                     ll_since.setVisibility(View.VISIBLE);
@@ -258,7 +268,10 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                 Log.e("*error", "" + anError.getStackTrace());
                 Log.e("*error", "" + anError.getCause());
 
-                Toast.makeText(CustomerDetailsActivity.this, "Customer Details Not Found !!", Toast.LENGTH_SHORT).show();
+                ErrorResponse errorResponse = new ErrorResponse();
+                errorResponse = gson.fromJson(anError.getErrorBody() , ErrorResponse.class);
+
+                Toast.makeText(CustomerDetailsActivity.this, ""+errorResponse.getErrors().get(0).getTitle(), Toast.LENGTH_SHORT).show();
 
             }
         });

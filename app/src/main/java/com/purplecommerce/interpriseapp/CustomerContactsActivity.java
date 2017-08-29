@@ -23,6 +23,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.purplecommerce.interpriseapp.SessionManager.SessionManager;
 import com.purplecommerce.interpriseapp.SetterGetters.CustomerContactsResponse;
+import com.purplecommerce.interpriseapp.SetterGetters.CustomerInvoicesResponse;
+import com.purplecommerce.interpriseapp.SetterGetters.ErrorResponse;
 import com.purplecommerce.interpriseapp.Utils.Utils;
 
 import java.io.IOException;
@@ -124,76 +126,7 @@ public class CustomerContactsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-             if (!hs_orderpage.isEmpty()){
-
-              prevoiusOne = "2" ;
-
-                if (pageCount+1 == hs_page.size()) {
-                    Toast.makeText(CustomerContactsActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
-                }else {
-
-                    pageCount = pageCount + 1;
-
-                    if (pageCount < hs_page.size()) {
-
-                        Contacts_parent_layout.removeAllViews();
-                        OrderAttributes.clear();
-
-                        int max = Integer.parseInt(hs_orderpage.get(pageCount));
-                        int min = Integer.parseInt(hs_orderpage.get(pageCount - 1));
-
-                        Log.e("**max", "" + max);
-                        Log.e("**min", "" + min);
-
-                        if (max < perpagecount) {
-
-                            int max2 = min + max;
-                            ContactsPageCount.setText(min + "-" + max2 + "/" + OrdersData.size());
-                            Log.e("max2", "for last" + max2);
-
-                            for (int i = min; i < max2; i++) {
-
-                                OrderAttributes.add(OrdersData.get(i).getAttributes());
-
-                            }
-
-                            for (int j = 0; j < OrderAttributes.size(); j++) {
-
-                                Contacts_parent_layout.addView(AddContactsOnPArent(OrderAttributes.get(j)));
-                            }
-
-
-                        } else {
-
-
-
-                            ContactsPageCount.setText(min + "-" + max + "/" + OrdersData.size());
-                            for (int i = min; i < max; i++) {
-
-                                OrderAttributes.add(OrdersData.get(i).getAttributes());
-
-                            }
-
-                            for (int j = 0; j < OrderAttributes.size(); j++) {
-
-                                Contacts_parent_layout.addView(AddContactsOnPArent(OrderAttributes.get(j)));
-
-                            }
-
-                        }
-
-
-                    } else {
-                        //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-             }else {
-                 Toast.makeText(CustomerContactsActivity.this, "No Pages !!", Toast.LENGTH_SHORT).show();
-             }
-
-
+         nextClick(Contacts_parent_layout , OrdersData.size() , perpagecount , hs_page , hs_orderpage , ContactsPageCount , OrdersData);
 
             }
         });
@@ -203,99 +136,8 @@ public class CustomerContactsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+        PreviousClick(Contacts_parent_layout , OrdersData.size() , perpagecount , hs_page , hs_orderpage , ContactsPageCount , OrdersData);
 
-                if (!hs_orderpage.isEmpty()) {
-
-                    if (prevoiusOne.equals("1")) {
-
-                        Toast.makeText(CustomerContactsActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
-
-                    } else {
-
-                        pageCount = pageCount - 1;
-                        if (pageCount == 0) {
-
-                            prevoiusOne = "1";
-
-                            Contacts_parent_layout.removeAllViews();
-                            OrderAttributes.clear();
-
-                            Log.e("order page", "" + hs_orderpage);
-                            Log.e(" page", "" + hs_page);
-                            int max = Integer.parseInt(hs_orderpage.get(pageCount));
-                            ContactsPageCount.setText("1" + "-" + max + "/" + OrdersData.size());
-                            for (int i = 0; i < max; i++) {
-
-                                OrderAttributes.add(OrdersData.get(i).getAttributes());
-
-                            }
-
-                            for (int j = 0; j < OrderAttributes.size(); j++) {
-
-                                Contacts_parent_layout.addView(AddContactsOnPArent(OrderAttributes.get(j)));
-
-                            }
-
-
-                        } else if (pageCount < hs_page.size()) {
-
-                            prevoiusOne = "2";
-
-                            Contacts_parent_layout.removeAllViews();
-                            OrderAttributes.clear();
-
-                            Log.e("order page", "" + hs_orderpage);
-                            Log.e(" page", "" + hs_page);
-                            int max = Integer.parseInt(hs_orderpage.get(pageCount));
-                            int min = Integer.parseInt(hs_orderpage.get(pageCount - 1));
-
-                            Log.e("**max", "" + max);
-                            Log.e("**min", "" + min);
-
-                            if (max < perpagecount) {
-
-                                int max2 = min + max;
-                                ContactsPageCount.setText(min + "-" + max2 + "/" + OrdersData.size());
-                                Log.e("max2", "for last" + max2);
-                                for (int i = min; i < max2; i++) {
-
-                                    OrderAttributes.add(OrdersData.get(i).getAttributes());
-                                }
-
-                                for (int j = 0; j < OrderAttributes.size(); j++) {
-
-                                    Contacts_parent_layout.addView(AddContactsOnPArent(OrderAttributes.get(j)));
-
-                                }
-
-                            } else {
-
-                                Contacts_parent_layout.removeAllViews();
-                                OrderAttributes.clear();
-                                ContactsPageCount.setText(min + "-" + max + "/" + OrdersData.size());
-                                for (int i = min; i < max; i++) {
-
-                                    OrderAttributes.add(OrdersData.get(i).getAttributes());
-                                }
-
-                                for (int j = 0; j < OrderAttributes.size(); j++) {
-
-                                    Contacts_parent_layout.addView(AddContactsOnPArent(OrderAttributes.get(j)));
-
-                                }
-
-                            }
-
-
-                        } else {
-                            //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-
-                }else {
-                    Toast.makeText(CustomerContactsActivity.this, "No Pages !!", Toast.LENGTH_SHORT).show();
-                }
 
             }
         });
@@ -466,7 +308,10 @@ public class CustomerContactsActivity extends AppCompatActivity {
                 Log.e("*error", "" + anError.getStackTrace());
                 Log.e("*error", "" + anError.getCause());
 
-                Toast.makeText(CustomerContactsActivity.this, "Orders Not Found !!", Toast.LENGTH_SHORT).show();
+                ErrorResponse errorResponse = new ErrorResponse();
+                errorResponse = gson.fromJson(anError.getErrorBody() , ErrorResponse.class);
+
+                Toast.makeText(CustomerContactsActivity.this, ""+errorResponse.getErrors().get(0).getTitle(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -502,6 +347,161 @@ public class CustomerContactsActivity extends AppCompatActivity {
         return vv ;
 
     }
+
+
+    public void nextClick(LinearLayout ll_parent1 , int totaldata1 , int perpagecount1 ,
+                          ArrayList<String> hs_page1 , ArrayList<String> hs_orderpage1 , TextView pagetx1 , List<CustomerContactsResponse.DataBean> data1){
+
+
+        if (!hs_orderpage1.isEmpty()) {
+
+            prevoiusOne = "2" ;
+
+            if (pageCount+1 == hs_page1.size()) {
+                Toast.makeText(CustomerContactsActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
+            }else {
+
+                pageCount = pageCount + 1;
+
+                if (pageCount < hs_page1.size()) {
+
+                    ll_parent1.removeAllViews();
+
+                    int max = Integer.parseInt(hs_orderpage1.get(pageCount));
+                    int min = Integer.parseInt(hs_orderpage1.get(pageCount - 1));
+
+                    Log.e("**max", "" + max);
+                    Log.e("**min", "" + min);
+
+                    if (max < perpagecount1) {
+
+                        int max2 = min + max;
+                        pagetx1.setText(min + "-" + max2 + "/" + totaldata1);
+                        Log.e("max2", "for last" + max2);
+
+                        for (int i = min; i < max2; i++) {
+                            ll_parent1.addView(AddContactsOnPArent(data1.get(i).getAttributes()));
+
+                        }
+
+                    } else {
+
+                        pagetx1.setText(min + "-" + max + "/" + totaldata1);
+                        for (int i = min; i < max; i++) {
+                            ll_parent1.addView(AddContactsOnPArent(data1.get(i).getAttributes()));
+                        }
+
+                    }
+
+
+                } else {
+                    //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }else {
+            Toast.makeText(CustomerContactsActivity.this, "No Pages !!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
+
+
+    public void PreviousClick(LinearLayout ll_parent1 , int totaldata1 , int perpagecount1 ,
+                              ArrayList<String> hs_page1 , ArrayList<String> hs_orderpage1 , TextView pagetx1 , List<CustomerContactsResponse.DataBean> data1){
+
+        if (!hs_orderpage1.isEmpty()) {
+
+            if (prevoiusOne.equals("1")){
+
+                Toast.makeText(CustomerContactsActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
+
+            }else {
+
+                if (pageCount==0){
+
+                }else {
+                    pageCount = pageCount - 1;
+                }
+
+
+                if (pageCount == 0){
+
+                    prevoiusOne = "1" ;
+
+                    ll_parent1.removeAllViews();
+
+                    Log.e("order page",""+hs_orderpage);
+                    Log.e(" page",""+hs_page);
+                    int max = Integer.parseInt(hs_orderpage1.get(pageCount));
+                    pagetx1.setText("1"+"-"+max+"/"+totaldata1);
+                    for (int i= 0 ; i < max ; i++){
+
+                        ll_parent1.addView(AddContactsOnPArent(data1.get(i).getAttributes()));
+                    }
+
+
+
+
+                }else if (pageCount < hs_page1.size()){
+
+                    prevoiusOne = "2" ;
+
+                    Log.e("**page","count"+pageCount);
+
+                    ll_parent1.removeAllViews();
+
+                    Log.e("order page",""+hs_orderpage);
+                    Log.e(" page",""+hs_page);
+                    int max = Integer.parseInt(hs_orderpage1.get(pageCount));
+                    int min = Integer.parseInt(hs_orderpage1.get(pageCount-1));
+
+                    Log.e("**max",""+max);
+                    Log.e("**min",""+min);
+
+                    if (max < perpagecount1){
+
+                        int max2 = min + max ;
+                        pagetx1.setText(min+"-"+max2+"/"+totaldata1);
+                        Log.e("max2","for last"+max2);
+                        for (int i = min ; i < max2 ; i++){
+
+                            ll_parent1.addView(AddContactsOnPArent(data1.get(i).getAttributes()));
+                        }
+
+
+
+                    }else {
+
+                        ll_parent1.removeAllViews();
+
+                        pagetx1.setText(min+"-"+max+"/"+totaldata1);
+                        for (int i = min ; i < max ; i++){
+
+                            ll_parent1.addView(AddContactsOnPArent(data1.get(i).getAttributes()));
+                        }
+
+
+
+                    }
+
+
+                }
+                else {
+                    //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }else {
+            Toast.makeText(CustomerContactsActivity.this, "No Pages !!", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+
+
 
 
 

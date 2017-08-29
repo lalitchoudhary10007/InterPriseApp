@@ -217,8 +217,8 @@ public class CustomerSalesOrdersResponse {
             private String dueDate;
             private String cancelDate;
             private String sourceCode;
-            private int amountPaid;
-            private int amountPaidRate;
+            private double amountPaid;
+            private double amountPaidRate;
             private boolean isPaid;
             private String paymentTermGroup;
             private String paymentTermCode;
@@ -512,19 +512,19 @@ public class CustomerSalesOrdersResponse {
                 this.sourceCode = sourceCode;
             }
 
-            public int getAmountPaid() {
+            public double getAmountPaid() {
                 return amountPaid;
             }
 
-            public void setAmountPaid(int amountPaid) {
+            public void setAmountPaid(double amountPaid) {
                 this.amountPaid = amountPaid;
             }
 
-            public int getAmountPaidRate() {
+            public double getAmountPaidRate() {
                 return amountPaidRate;
             }
 
-            public void setAmountPaidRate(int amountPaidRate) {
+            public void setAmountPaidRate(double amountPaidRate) {
                 this.amountPaidRate = amountPaidRate;
             }
 

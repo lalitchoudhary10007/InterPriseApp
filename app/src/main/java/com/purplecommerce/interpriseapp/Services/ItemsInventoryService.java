@@ -122,7 +122,7 @@ public class ItemsInventoryService extends IntentService {
 
                     for (int j = 0 ; j < NewItems.size() ; j++){
 
-                        GetItemsDetails("inventory/"+NewItems.get(j));
+                        GetItemsDetails("/inventory/"+NewItems.get(j));
 
                     }
 
@@ -149,6 +149,8 @@ public class ItemsInventoryService extends IntentService {
                 Log.e("*error", "" + anError.getStackTrace());
                 Log.e("*error", "" + anError.getCause());
 
+
+
                 ErrorResponse errorResponse = new ErrorResponse();
                 errorResponse = gson.fromJson(anError.getErrorBody() , ErrorResponse.class);
 
@@ -170,6 +172,7 @@ public class ItemsInventoryService extends IntentService {
     private void GetItemsDetails(String url){
 
         Log.e("*** URL",""+url);
+
 
         AndroidNetworking.get(sm.getUrlDetails().get(SessionManager.URL)+url)
                 .setTag(this).setPriority(Priority.MEDIUM)
@@ -196,25 +199,28 @@ public class ItemsInventoryService extends IntentService {
 
                 ItemsInventoryDBManager inventoryDBManager = new ItemsInventoryDBManager(ItemsInventoryService.this);
                 JSONObject obj = null;
+                byte[] photo = new byte[0];
+
                 try {
                     obj = new JSONObject(response);
+                    if (obj.optString("photo").equals("")){
 
+                    }else {
+                        photo = Base64.decode(obj.getString("photo") , Base64.DEFAULT);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                byte[] photo = new byte[0];
-
-                if (obj.optString("photo").equals("")){
-
-                }else {
-                   photo = Base64.decode("" , Base64.DEFAULT);
-                }
 
 
-                inventoryDBManager.SaveNewItems(obj.optString("itemCode") , obj.optString("itemName") ,
-                        obj.optString("itemType") , obj.optString("status") , photo , obj.optString("manufacturerCode") ,
-                        obj.optString("dateModified"));
+
+
+
+                inventoryDBManager.SaveNewItems(detailsResponse.getData().getAttributes().getItemCode(), detailsResponse.getData().getAttributes().getItemName() ,
+                        detailsResponse.getData().getAttributes().getItemType(), detailsResponse.getData().getAttributes().getStatus(), photo ,
+                        detailsResponse.getData().getAttributes().getManufacturerCode(),
+                        detailsResponse.getData().getAttributes().getDateCreated());
 
                 Log.e("**name",""+inventoryDBManager.GetItemsIventoryCount());
 

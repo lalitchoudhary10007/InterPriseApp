@@ -25,6 +25,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.AnalyticsListener;
 import com.androidnetworking.interfaces.StringRequestListener;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.purplecommerce.interpriseapp.CustomersActivity;
@@ -60,6 +61,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.Route;
+
+import static com.bumptech.glide.Glide.with;
 
 public class InventoryItemsActivity extends AppCompatActivity {
 
@@ -97,7 +100,7 @@ public class InventoryItemsActivity extends AppCompatActivity {
 
 //        if (itemsDBManager.ItemsInventoryIsEmpty()){
 //
-//            itemsDBManager.SaveNewItems("ITEM-000615" , "PRFE001-000-000" , "Stock" , "A" , "" , "Federal" ,                      "2017-06-29T13:33:14.08") ;
+//            itemsDBManager.SaveNewItems("ITEM-000615" , "PRFE001-000-000" , "Stock" , "A" , "" , "Federal" ,"2017-06-29T13:33:14.08") ;
 //
 //        }
 
@@ -167,7 +170,7 @@ public class InventoryItemsActivity extends AppCompatActivity {
                 Log.e("**to time",""+ finalTodatetime);
 
                 Intent serviceIntent = new Intent(InventoryItemsActivity.this, ItemsInventoryService.class);
-                serviceIntent.putExtra("URL","/changelog/InventoryItem?from="+ finalLastUpdate +"&to="+ finalTodatetime                         +"&page[number]=1&page[size]="+PageSize);
+                serviceIntent.putExtra("URL","/changelog/InventoryItem?from="+ "2017-08-11T11:55:37" +"&to="+ finalTodatetime                         +"&page[number]=1&page[size]="+PageSize);
                 serviceIntent.putExtra("TODATETIME" , finalTodatetime);
                 startService(serviceIntent);
 
@@ -216,58 +219,8 @@ public class InventoryItemsActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                if (!hs_orderpage.isEmpty()){
-
-                    prevoiusOne = "2" ;
-
-                    if (pageCount+1 == hs_page.size()) {
-                        Toast.makeText(InventoryItemsActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
-                    }else {
-
-                        pageCount = pageCount + 1;
-
-                        if (pageCount < hs_page.size()) {
-
-                            Items_parent_layout.removeAllViews();
-
-                            int max = Integer.parseInt(hs_orderpage.get(pageCount));
-                            int min = Integer.parseInt(hs_orderpage.get(pageCount - 1));
-
-                            Log.e("**max", "" + max);
-                            Log.e("**min", "" + min);
-
-                            if (max < perpagecount) {
-
-                                int max2 = min + max;
-                                ItemsPageCount.setText(min + "-" + max2 + "/" + ItemsInventoryRows.size());
-                                Log.e("max2", "for last" + max2);
-
-                                for (int i = min; i < max2; i++) {
-
-                                    Items_parent_layout.addView(AddItemsOnPArent(ItemsInventoryRows.get(i)));
-
-                                }
-
-                            } else {
-
-                                ItemsPageCount.setText(min + "-" + max + "/" + ItemsInventoryRows.size());
-                                for (int i = min; i < max; i++) {
-
-                                    Items_parent_layout.addView(AddItemsOnPArent(ItemsInventoryRows.get(i)));
-
-                                }
-
-                            }
-
-
-                        } else {
-                            //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                    }else{
-                            Toast.makeText(InventoryItemsActivity.this, "No Pages !!", Toast.LENGTH_SHORT).show();
-                        }
+                nextClick(Items_parent_layout , ItemsInventoryRows.size() , perpagecount , hs_page , hs_orderpage , ItemsPageCount ,
+                        ItemsInventoryRows );
 
             }
         });
@@ -277,79 +230,8 @@ public class InventoryItemsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-                if (!hs_orderpage.isEmpty()) {
-
-                    if (prevoiusOne.equals("1")){
-
-                        Toast.makeText(InventoryItemsActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
-
-                    }else {
-
-                        pageCount = pageCount - 1 ;
-                        if (pageCount == 0){
-
-                            prevoiusOne = "1" ;
-
-                            Items_parent_layout.removeAllViews();
-
-                            Log.e("order page",""+hs_orderpage);
-                            Log.e(" page",""+hs_page);
-                            int max = Integer.parseInt(hs_orderpage.get(pageCount));
-                            ItemsPageCount.setText("1"+"-"+max+"/"+ItemsInventoryRows.size());
-                            for (int i= 0 ; i < max ; i++){
-
-                                Items_parent_layout.addView(AddItemsOnPArent(ItemsInventoryRows.get(i)));
-
-                            }
-
-
-                        }else if (pageCount < hs_page.size()){
-
-                            prevoiusOne = "2" ;
-
-                            Items_parent_layout.removeAllViews();
-
-                            Log.e("order page",""+hs_orderpage);
-                            Log.e(" page",""+hs_page);
-                            int max = Integer.parseInt(hs_orderpage.get(pageCount));
-                            int min = Integer.parseInt(hs_orderpage.get(pageCount-1));
-
-
-                            if (max < perpagecount){
-
-                                int max2 = min + max ;
-                                ItemsPageCount.setText(min+"-"+max2+"/"+ItemsInventoryRows.size());
-                                Log.e("max2","for last"+max2);
-                                for (int i = min ; i < max2 ; i++){
-
-                                    Items_parent_layout.addView(AddItemsOnPArent(ItemsInventoryRows.get(i)));
-                                }
-
-
-
-                            }else {
-
-                                Items_parent_layout.removeAllViews();
-
-                                ItemsPageCount.setText(min+"-"+max+"/"+ItemsInventoryRows.size());
-                                for (int i = min ; i < max ; i++){
-                                    Items_parent_layout.addView(AddItemsOnPArent(ItemsInventoryRows.get(i)));
-                                }
-
-                            }
-
-
-                        }
-                        else {
-                            //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-
-                }else {
-                    Toast.makeText(InventoryItemsActivity.this, "No Pages !!", Toast.LENGTH_SHORT).show();
-                }
+          PreviousClick(Items_parent_layout , ItemsInventoryRows.size() , perpagecount , hs_page , hs_orderpage , ItemsPageCount ,
+                  ItemsInventoryRows );
 
             }
         });
@@ -366,21 +248,38 @@ public class InventoryItemsActivity extends AppCompatActivity {
 
         ImageView item_image = (ImageView) vv.findViewById(R.id.img_item);
         TextView second = (TextView)vv.findViewById(R.id.txt_item);
-       // TextView third = (TextView)vv.findViewById(R.id.third_txt);
+        // TextView third = (TextView)vv.findViewById(R.id.third_txt);
 
-       StringTokenizer tokenizer = new StringTokenizer(attributesBean.getItemlastUpdate(),"T");
+       final StringTokenizer tokenizer = new StringTokenizer(attributesBean.getItemlastUpdate(),"T");
+
 
        second.setText(attributesBean.getItemName()+"\n"+attributesBean.getItemCode()+"("+attributesBean.getItemType()+")            "+"\n" +"By "+attributesBean.getItemManufactureCode()+
                 "\n"+"Last Updated On "+tokenizer.nextToken());
 
+        Log.e("**image is ","database"+attributesBean.getItemPhoto());
+
         Bitmap bmp = BitmapFactory.decodeByteArray(attributesBean.getItemPhoto(), 0, attributesBean.getItemPhoto().length);
 
-        item_image.setImageBitmap(bmp);
+        Glide.with(InventoryItemsActivity.this)
+                .fromBytes()
+                .load(attributesBean.getItemPhoto())
+                .placeholder(R.drawable.png_loading)
+                .error(R.drawable.no_image)
+                .into(item_image);
+
+        //item_image.setImageBitmap(bmp);
 
         vv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(InventoryItemsActivity.this , ItemDetailsActivity.class).putExtra("ITEMCODE" , attributesBean.getItemCode()));
+
+                startActivity(new Intent(InventoryItemsActivity.this , ItemDetailsActivity.class)
+                        .putExtra("ITEMCODE" , attributesBean.getItemCode())
+                        .putExtra("ITEMNAME"  , attributesBean.getItemName())
+                        .putExtra("ITEMTYPE" , attributesBean.getItemType())
+                        .putExtra("MANUFACTURECODE" , attributesBean.getItemManufactureCode())
+                        .putExtra("IMAGEBYTES" , attributesBean.getItemPhoto())
+                        .putExtra("LastUpdate" , attributesBean.getItemlastUpdate()));
             }
         });
 
@@ -554,6 +453,155 @@ public class InventoryItemsActivity extends AppCompatActivity {
         }
 
     }
+
+
+    public void nextClick(LinearLayout ll_parent1 , int totaldata1 , int perpagecount1 ,
+                          ArrayList<String> hs_page1 , ArrayList<String> hs_orderpage1 , TextView pagetx1 , RealmResults<ItemsInventoryTable> data1){
+
+
+        if (!hs_orderpage1.isEmpty()) {
+
+
+            prevoiusOne = "2";
+
+            if (pageCount + 1 == hs_page1.size()) {
+                Toast.makeText(InventoryItemsActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
+            } else {
+
+                pageCount = pageCount + 1;
+
+                if (pageCount < hs_page1.size()) {
+
+                    ll_parent1.removeAllViews();
+
+                    int max = Integer.parseInt(hs_orderpage1.get(pageCount));
+                    int min = Integer.parseInt(hs_orderpage1.get(pageCount - 1));
+
+                    Log.e("**max", "" + max);
+                    Log.e("**min", "" + min);
+
+                    if (max < perpagecount1) {
+
+                        int max2 = min + max;
+                        pagetx1.setText(min + "-" + max2 + "/" + totaldata1);
+                        Log.e("max2", "for last" + max2);
+
+                        for (int i = min; i < max2; i++) {
+
+                            ll_parent1.addView(AddItemsOnPArent(data1.get(i)));
+
+                        }
+
+                    } else {
+
+                        pagetx1.setText(min + "-" + max + "/" + totaldata1);
+                        for (int i = min; i < max; i++) {
+
+                            ll_parent1.addView(AddItemsOnPArent(data1.get(i)));
+
+                        }
+
+                    }
+
+
+                } else {
+                    //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }else {
+            Toast.makeText(InventoryItemsActivity.this, "No Pages !!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
+    public void PreviousClick(LinearLayout ll_parent1 , int totaldata1 , int perpagecount1 ,
+                              ArrayList<String> hs_page1 , ArrayList<String> hs_orderpage1 , TextView pagetx1 , RealmResults<ItemsInventoryTable> data1){
+
+        if (!hs_orderpage1.isEmpty()) {
+
+            if (prevoiusOne.equals("1")) {
+
+                Toast.makeText(InventoryItemsActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
+
+            } else {
+
+                if (pageCount==0){
+
+                }else {
+                    pageCount = pageCount - 1;
+                }
+
+                if (pageCount == 0) {
+
+                    prevoiusOne = "1";
+
+                    ll_parent1.removeAllViews();
+
+                    Log.e("order page", "" + hs_orderpage1);
+                    Log.e(" page", "" + hs_page1);
+                    int max = Integer.parseInt(hs_orderpage1.get(pageCount));
+                    pagetx1.setText("1" + "-" + max + "/" + totaldata1);
+                    for (int i = 0; i < max; i++) {
+
+                        ll_parent1.addView(AddItemsOnPArent(data1.get(i)));
+
+                    }
+
+
+                } else if (pageCount < hs_page1.size()) {
+
+                    prevoiusOne = "2";
+
+                    ll_parent1.removeAllViews();
+
+                    Log.e("order page", "" + hs_orderpage);
+                    Log.e(" page", "" + hs_page);
+                    int max = Integer.parseInt(hs_orderpage1.get(pageCount));
+                    int min = Integer.parseInt(hs_orderpage1.get(pageCount - 1));
+
+                    Log.e("**max", "" + max);
+                    Log.e("**min", "" + min);
+
+                    if (max < perpagecount1) {
+
+                        int max2 = min + max;
+                        pagetx1.setText(min + "-" + max2 + "/" + totaldata1);
+                        Log.e("max2", "for last" + max2);
+                        for (int i = min; i < max2; i++) {
+
+                            ll_parent1.addView(AddItemsOnPArent(data1.get(i)));
+                        }
+
+
+                    } else {
+
+                        ll_parent1.removeAllViews();
+
+                        pagetx1.setText(min + "-" + max + "/" + totaldata1);
+                        for (int i = min; i < max; i++) {
+                            ll_parent1.addView(AddItemsOnPArent(data1.get(i)));
+                        }
+
+                    }
+
+
+                } else {
+                    //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+        }else {
+            Toast.makeText(InventoryItemsActivity.this, "No Pages !!", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+
+
 
 
 

@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.purplecommerce.interpriseapp.SessionManager.SessionManager;
 import com.purplecommerce.interpriseapp.SetterGetters.CustomerSalesOrdersResponse;
+import com.purplecommerce.interpriseapp.SetterGetters.ErrorResponse;
 import com.purplecommerce.interpriseapp.SetterGetters.OrderProductsResponse;
 import com.purplecommerce.interpriseapp.Utils.Utils;
 
@@ -184,7 +185,10 @@ public class OrderDetailsActivity extends AppCompatActivity {
                 Log.e("*error", "" + anError.getStackTrace());
                 Log.e("*error", "" + anError.getCause());
 
-                Toast.makeText(OrderDetailsActivity.this, "Products Not Found !!", Toast.LENGTH_SHORT).show();
+                ErrorResponse errorResponse = new ErrorResponse();
+                errorResponse = gson.fromJson(anError.getErrorBody() , ErrorResponse.class);
+
+                Toast.makeText(OrderDetailsActivity.this, ""+errorResponse.getErrors().get(0).getTitle(), Toast.LENGTH_SHORT).show();
 
             }
         });

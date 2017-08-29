@@ -26,9 +26,12 @@ import com.androidnetworking.interfaces.AnalyticsListener;
 import com.androidnetworking.interfaces.StringRequestListener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.purplecommerce.interpriseapp.Database.ItemsInventoryTable;
+import com.purplecommerce.interpriseapp.InventoryItems.InventoryItemsActivity;
 import com.purplecommerce.interpriseapp.SessionManager.SessionManager;
 import com.purplecommerce.interpriseapp.SetterGetters.CustomerDetailsResponse;
 import com.purplecommerce.interpriseapp.SetterGetters.CustomerSalesOrdersResponse;
+import com.purplecommerce.interpriseapp.SetterGetters.ErrorResponse;
 import com.purplecommerce.interpriseapp.Utils.*;
 
 import java.io.IOException;
@@ -36,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import io.realm.RealmResults;
 import okhttp3.Authenticator;
 import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
@@ -128,6 +132,7 @@ public class OrdersActivity extends AppCompatActivity {
                         {
 
                             OrderAttributes.add(OrdersData.get(i).getAttributes());
+
                         }
                     }
                     if (OrderAttributes.isEmpty()){
@@ -139,14 +144,7 @@ public class OrdersActivity extends AppCompatActivity {
                         Utils.hideKeyboard(OrdersActivity.this);
                         for (int i = 0 ; i < OrderAttributes.size(); i++){
                             Log.e("**Order Search","*"+OrderAttributes.get(i).getSalesOrderCode());
-                          Orders_parent_layout.addView(AddOrdersOnPArent(OrderAttributes.get(i).getSalesOrderCode(),OrderAttributes.get(i).getTotal() ,
-                                  OrderAttributes.get(i).getSalesOrderDate() ,  OrderAttributes.get(i).getOrderStatus() , OrderAttributes.get(i).getSubTotal() ,
-                                  OrderAttributes.get(i).getFreight() , OrderAttributes.get(i).getShipToAddress() , OrderAttributes.get(i).getBillToAddress() ,
-                                  OrderAttributes.get(i).getShipToCity() , OrderAttributes.get(i).getShipToCounty() , OrderAttributes.get(i).getShipToCountry() ,
-                                  OrderAttributes.get(i).getBillToCity() , OrderAttributes.get(i).getBillToCounty() , OrderAttributes.get(i).getBillToCountry() ,  CustCode ,
-                                  OrderAttributes.get(i).getShipToName()
-                                  , OrderAttributes.get(i).getShipToPostalCode() , OrderAttributes.get(i).getShipToPhone() , OrderAttributes.get(i).getSourceCode() ,
-                                  OrderAttributes.get(i).getPoCode()));
+                          Orders_parent_layout.addView(AddOrdersOnPArent(OrderAttributes.get(i)));
                         }
 
 
@@ -164,82 +162,8 @@ public class OrdersActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                prevoiusOne = "2" ;
-
-                if (pageCount+1 == hs_page.size()) {
-                    Toast.makeText(OrdersActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
-                }else {
-
-                    pageCount = pageCount + 1;
-
-                    if (pageCount < hs_page.size()) {
-
-                        Orders_parent_layout.removeAllViews();
-                        OrderAttributes.clear();
-
-                        int max = Integer.parseInt(hs_orderpage.get(pageCount));
-                        int min = Integer.parseInt(hs_orderpage.get(pageCount - 1));
-
-                        Log.e("**max", "" + max);
-                        Log.e("**min", "" + min);
-
-                        if (max < perpagecount) {
-
-                            int max2 = min + max;
-                            OrderPageCount.setText(min + "-" + max2 + "/" + OrdersData.size());
-                            Log.e("max2", "for last" + max2);
-
-                            for (int i = min; i < max2; i++) {
-
-                                OrderAttributes.add(OrdersData.get(i).getAttributes());
-
-                            }
-
-                            for (int j = 0; j < OrderAttributes.size(); j++) {
-
-                                Orders_parent_layout.addView(AddOrdersOnPArent(OrderAttributes.get(j).getSalesOrderCode(),OrderAttributes.get(j).getTotal() ,
-                                        OrderAttributes.get(j).getSalesOrderDate() ,  OrderAttributes.get(j).getOrderStatus() , OrderAttributes.get(j).getSubTotal() ,
-                                        OrderAttributes.get(j).getFreight() , OrderAttributes.get(j).getShipToAddress() , OrderAttributes.get(j).getBillToAddress() ,
-                                        OrderAttributes.get(j).getShipToCity() , OrderAttributes.get(j).getShipToCounty() , OrderAttributes.get(j).getShipToCountry() ,
-                                        OrderAttributes.get(j).getBillToCity() , OrderAttributes.get(j).getBillToCounty() , OrderAttributes.get(j).getBillToCountry() ,  CustCode
-                                        , OrderAttributes.get(j).getShipToName()
-                                        , OrderAttributes.get(j).getShipToPostalCode() , OrderAttributes.get(j).getShipToPhone() , OrderAttributes.get(j).getSourceCode() ,
-                                        OrderAttributes.get(j).getPoCode()));
-                            }
-
-
-                            } else {
-
-
-
-                            OrderPageCount.setText(min + "-" + max + "/" + OrdersData.size());
-                            for (int i = min; i < max; i++) {
-
-                                OrderAttributes.add(OrdersData.get(i).getAttributes());
-
-                            }
-
-                            for (int j = 0; j < OrderAttributes.size(); j++) {
-
-                                Orders_parent_layout.addView(AddOrdersOnPArent(OrderAttributes.get(j).getSalesOrderCode(),OrderAttributes.get(j).getTotal() ,
-                                        OrderAttributes.get(j).getSalesOrderDate() ,  OrderAttributes.get(j).getOrderStatus() , OrderAttributes.get(j).getSubTotal() ,
-                                        OrderAttributes.get(j).getFreight() , OrderAttributes.get(j).getShipToAddress() , OrderAttributes.get(j).getBillToAddress() ,
-                                        OrderAttributes.get(j).getShipToCity() , OrderAttributes.get(j).getShipToCounty() , OrderAttributes.get(j).getShipToCountry() ,
-                                        OrderAttributes.get(j).getBillToCity() , OrderAttributes.get(j).getBillToCounty() , OrderAttributes.get(j).getBillToCountry() ,  CustCode
-                                        , OrderAttributes.get(j).getShipToName()
-                                        , OrderAttributes.get(j).getShipToPostalCode() , OrderAttributes.get(j).getShipToPhone() , OrderAttributes.get(j).getSourceCode() ,
-                                        OrderAttributes.get(j).getPoCode()));
-
-                            }
-
-                        }
-
-
-                    } else {
-                        //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
+              nextClick(Orders_parent_layout , OrdersData.size() , perpagecount , hs_page , hs_orderpage , OrderPageCount ,
+                      OrdersData);
 
             }
         });
@@ -248,112 +172,7 @@ public class OrdersActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-                if (prevoiusOne.equals("1")){
-
-                    Toast.makeText(OrdersActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
-
-                }else {
-
-                    pageCount = pageCount - 1 ;
-                    if (pageCount == 0){
-
-                        prevoiusOne = "1" ;
-
-                        Orders_parent_layout.removeAllViews();
-                        OrderAttributes.clear();
-
-                        Log.e("order page",""+hs_orderpage);
-                        Log.e(" page",""+hs_page);
-                        int max = Integer.parseInt(hs_orderpage.get(pageCount));
-                        OrderPageCount.setText("1"+"-"+max+"/"+OrdersData.size());
-                        for (int i= 0 ; i < max ; i++){
-
-                            OrderAttributes.add(OrdersData.get(i).getAttributes());
-
-                        }
-
-                      for (int j = 0 ; j < OrderAttributes.size() ; j++){
-
-                          Orders_parent_layout.addView(AddOrdersOnPArent(OrderAttributes.get(j).getSalesOrderCode(),OrderAttributes.get(j).getTotal() ,
-                                  OrderAttributes.get(j).getSalesOrderDate() ,  OrderAttributes.get(j).getOrderStatus() , OrderAttributes.get(j).getSubTotal() ,
-                                  OrderAttributes.get(j).getFreight() , OrderAttributes.get(j).getShipToAddress() , OrderAttributes.get(j).getBillToAddress() ,
-                                  OrderAttributes.get(j).getShipToCity() , OrderAttributes.get(j).getShipToCounty() , OrderAttributes.get(j).getShipToCountry() ,
-                                  OrderAttributes.get(j).getBillToCity() , OrderAttributes.get(j).getBillToCounty() , OrderAttributes.get(j).getBillToCountry() ,  CustCode
-                                  , OrderAttributes.get(j).getShipToName()
-                                  , OrderAttributes.get(j).getShipToPostalCode() , OrderAttributes.get(j).getShipToPhone() , OrderAttributes.get(j).getSourceCode() ,
-                                  OrderAttributes.get(j).getPoCode()));
-                             }
-
-
-                    }else if (pageCount < hs_page.size()){
-
-                        prevoiusOne = "2" ;
-
-                        Orders_parent_layout.removeAllViews();
-                        OrderAttributes.clear();
-
-                        Log.e("order page",""+hs_orderpage);
-                        Log.e(" page",""+hs_page);
-                        int max = Integer.parseInt(hs_orderpage.get(pageCount));
-                        int min = Integer.parseInt(hs_orderpage.get(pageCount-1));
-
-                        Log.e("**max",""+max);
-                        Log.e("**min",""+min);
-
-                        if (max < perpagecount){
-
-                            int max2 = min + max ;
-                            OrderPageCount.setText(min+"-"+max2+"/"+OrdersData.size());
-                            Log.e("max2","for last"+max2);
-                            for (int i = min ; i < max2 ; i++){
-
-                                OrderAttributes.add(OrdersData.get(i).getAttributes());
-                            }
-
-                       for (int j = 0 ; j < OrderAttributes.size() ; j++){
-
-                           Orders_parent_layout.addView(AddOrdersOnPArent(OrderAttributes.get(j).getSalesOrderCode(),OrderAttributes.get(j).getTotal() ,
-                                   OrderAttributes.get(j).getSalesOrderDate() ,  OrderAttributes.get(j).getOrderStatus() , OrderAttributes.get(j).getSubTotal() ,
-                                   OrderAttributes.get(j).getFreight() , OrderAttributes.get(j).getShipToAddress() , OrderAttributes.get(j).getBillToAddress() ,
-                                   OrderAttributes.get(j).getShipToCity() , OrderAttributes.get(j).getShipToCounty() , OrderAttributes.get(j).getShipToCountry() ,
-                                   OrderAttributes.get(j).getBillToCity() , OrderAttributes.get(j).getBillToCounty() , OrderAttributes.get(j).getBillToCountry() ,  CustCode
-                                   , OrderAttributes.get(j).getShipToName()
-                                   , OrderAttributes.get(j).getShipToPostalCode() , OrderAttributes.get(j).getShipToPhone() , OrderAttributes.get(j).getSourceCode() ,
-                                   OrderAttributes.get(j).getPoCode()));
-                           }
-
-                        }else {
-
-                            Orders_parent_layout.removeAllViews();
-                            OrderAttributes.clear();
-                            OrderPageCount.setText(min+"-"+max+"/"+OrdersData.size());
-                            for (int i = min ; i < max ; i++){
-
-                                OrderAttributes.add(OrdersData.get(i).getAttributes());
-                            }
-
-                            for (int j = 0 ; j < OrderAttributes.size() ; j++){
-
-                                Orders_parent_layout.addView(AddOrdersOnPArent(OrderAttributes.get(j).getSalesOrderCode(),OrderAttributes.get(j).getTotal() ,
-                                        OrderAttributes.get(j).getSalesOrderDate() ,  OrderAttributes.get(j).getOrderStatus() , OrderAttributes.get(j).getSubTotal() ,
-                                        OrderAttributes.get(j).getFreight() , OrderAttributes.get(j).getShipToAddress() , OrderAttributes.get(j).getBillToAddress() ,
-                                        OrderAttributes.get(j).getShipToCity() , OrderAttributes.get(j).getShipToCounty() , OrderAttributes.get(j).getShipToCountry() ,
-                                        OrderAttributes.get(j).getBillToCity() , OrderAttributes.get(j).getBillToCounty() , OrderAttributes.get(j).getBillToCountry() ,  CustCode
-                                        , OrderAttributes.get(j).getShipToName()
-                                        , OrderAttributes.get(j).getShipToPostalCode() , OrderAttributes.get(j).getShipToPhone() , OrderAttributes.get(j).getSourceCode() ,
-                                        OrderAttributes.get(j).getPoCode()));
-                            }
-
-                        }
-
-
-                    }
-                    else {
-                        //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
+               PreviousClick(Orders_parent_layout , OrdersData.size()  , perpagecount , hs_page , hs_orderpage ,OrderPageCount , OrdersData);
 
             }
         });
@@ -363,13 +182,13 @@ public class OrdersActivity extends AppCompatActivity {
 
     }
 
-    private View AddOrdersOnPArent(final String salesOrderCode, final double total, String salesOrderDate,
-                                   String orderStatus, final double subTotal, final double freight,
-                                   final String shipToAddress, final String billToAddress,
-                                   final String shipToCity, final String shipToCounty, final String shipToCountry,
-                                   final String billToCity, final String billToCounty, final String billToCountry,
-                                   final String custCode, final String custName , String shippostalcode , String shipphone ,
-                                   String sourcecode , String pocode ) {
+
+
+
+
+
+
+    private View AddOrdersOnPArent(final CustomerSalesOrdersResponse.DataBean.AttributesBean attributes) {
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE );
         View vv = inflater.inflate(R.layout.layout_orders_include_two, null);
@@ -378,16 +197,20 @@ public class OrdersActivity extends AppCompatActivity {
         TextView second = (TextView)vv.findViewById(R.id.second_txt);
         TextView third = (TextView)vv.findViewById(R.id.third_txt);
 
-        StringTokenizer tokens = new StringTokenizer(salesOrderDate, "T");
+        StringTokenizer tokens = new StringTokenizer(attributes.getSalesOrderDate(), "T");
 
-        first.setText(tokens.nextToken()+"\n"+tokens.nextToken()+"\n"+String.format( "%.2f", Double.parseDouble(""+total ))+"\n"+orderStatus);
+        first.setText(tokens.nextToken()+"\n"+tokens.nextToken()+"\n"+String.format( "%.2f", Double.parseDouble(""+attributes.getTotal()  ))+"\n"+attributes.getOrderStatus());
 
-        Log.e("order code",""+salesOrderCode);
-        Log.e("customer name",""+custName);
-        Log.e("ship address",""+shipToAddress);
+        if (attributes.getShipToPhone()==null){
+            second.setText(attributes.getSalesOrderCode()+"\n"+attributes.getShipToName()+"\n"+attributes.getShipToAddress()+"\n"+attributes.getShipToCity()+" , "+attributes.getShipToCounty()+" , "+attributes.getShipToPostalCode()
+                    +"\n"+attributes.getShipToCountry()+ "\n"+"source : "+attributes.getSourceCode()+"\n"+"PO Code : "+attributes.getPoCode());
+        }else {
+            second.setText(attributes.getSalesOrderCode()+"\n"+attributes.getShipToName()+"\n"+attributes.getShipToAddress()+"\n"+attributes.getShipToCity()+" , "+attributes.getShipToCounty()+" , "+attributes.getShipToPostalCode()
+                    +"\n"+attributes.getShipToCountry()+"\n"+attributes.getShipToPhone() + "\n"+"source : "+attributes.getSourceCode()+"\n"+"PO Code : "+attributes.getPoCode());
+        }
 
-        second.setText(salesOrderCode+"\n"+custName+"\n"+shipToAddress+"\n"+shipToCity+" , "+shipToCounty+" , "+shippostalcode
-        +"\n"+shipToCountry+"\n"+shipphone + "\n"+"source : "+sourcecode+"\n"+"PO Code : "+pocode);
+      //  second.setText(attributes.getSalesOrderCode()+"\n"+attributes.getShipToName()+"\n"+attributes.getShipToAddress()+"\n"+attributes.getShipToCity()+" , "+attributes.getShipToCounty()+" , "+attributes.getShipToPostalCode()
+      //  +"\n"+attributes.getShipToCountry()+"\n"+attributes.getShipToPhone() + "\n"+"source : "+attributes.getSourceCode()+"\n"+"PO Code : "+attributes.getPoCode());
        // txt_amount.setText( String.format( "%.2f", Double.parseDouble(""+total )) );
        // txt_amount.setText(""+total);
        // txt_status.setText(orderStatus);
@@ -395,14 +218,14 @@ public class OrdersActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(OrdersActivity.this , OrderDetailsActivity.class);
-                i.putExtra("OrderNo",salesOrderCode);
-                i.putExtra("CustomeId" , ""+custCode);
-                i.putExtra("CustomerName", ""+custName);
-                i.putExtra("ShipTo" , ""+shipToAddress+"\n"+shipToCity+"\n"+shipToCounty+"\n"+shipToCountry);
-                i.putExtra("BillTo" , ""+billToAddress+"\n"+billToCity+"\n"+billToCounty+"\n"+billToCountry);
-                i.putExtra("SubTotal",""+subTotal);
-                i.putExtra("Freight", ""+freight);
-                i.putExtra("Total",""+total);
+                i.putExtra("OrderNo",attributes.getSalesOrderCode());
+                i.putExtra("CustomeId" , ""+CustCode);
+                i.putExtra("CustomerName", ""+attributes.getShipToName());
+                i.putExtra("ShipTo" , ""+attributes.getShipToAddress()+"\n"+attributes.getShipToCity()+"\n"+attributes.getShipToCounty()+"\n"+attributes.getShipToCountry());
+                i.putExtra("BillTo" , ""+attributes.getBillToAddress()+"\n"+attributes.getBillToCity()+"\n"+attributes.getBillToCounty()+"\n"+attributes.getBillToCountry());
+                i.putExtra("SubTotal",""+attributes.getSubTotal());
+                i.putExtra("Freight", ""+attributes.getFreight());
+                i.putExtra("Total",""+attributes.getTotal());
                 startActivity(i);
             }
         });
@@ -457,6 +280,8 @@ public class OrdersActivity extends AppCompatActivity {
 
     private void GetCustomerSalesOrders(String url, final String customercode, final String customername){
 
+        Log.d("*** URL",""+url);
+
         progress_dialog.show();
 
         AndroidNetworking.get(url)
@@ -493,22 +318,8 @@ public class OrdersActivity extends AppCompatActivity {
 
                     for (int i = 0 ; i < OrdersData.size() ; i++){
 
-                        OrderAttributes.add(OrdersData.get(i).getAttributes());
+                        Orders_parent_layout.addView(AddOrdersOnPArent(OrdersData.get(i).getAttributes()));
                     }
-
-                    for (int j = 0 ; j < OrderAttributes.size() ; j++){
-
-                        Orders_parent_layout.addView(AddOrdersOnPArent(OrderAttributes.get(j).getSalesOrderCode(),OrderAttributes.get(j).getTotal() ,
-                                OrderAttributes.get(j).getSalesOrderDate() ,  OrderAttributes.get(j).getOrderStatus() , OrderAttributes.get(j).getSubTotal() ,
-                                OrderAttributes.get(j).getFreight() , OrderAttributes.get(j).getShipToAddress() , OrderAttributes.get(j).getBillToAddress() ,
-                                OrderAttributes.get(j).getShipToCity() , OrderAttributes.get(j).getShipToCounty() , OrderAttributes.get(j).getShipToCountry() ,
-                                OrderAttributes.get(j).getBillToCity() , OrderAttributes.get(j).getBillToCounty() , OrderAttributes.get(j).getBillToCountry() ,  CustCode
-                                , OrderAttributes.get(j).getShipToName()
-                                , OrderAttributes.get(j).getShipToPostalCode() , OrderAttributes.get(j).getShipToPhone() , OrderAttributes.get(j).getSourceCode() ,
-                                OrderAttributes.get(j).getPoCode()));
-
-                    }
-
 
 
                 }else {
@@ -538,21 +349,11 @@ public class OrdersActivity extends AppCompatActivity {
 
                     for (int i = 0 ; i < siz ; i++){
 
-                        OrderAttributes.add(OrdersData.get(i).getAttributes());
+                        Orders_parent_layout.addView(AddOrdersOnPArent(OrdersData.get(i).getAttributes()));
 
                     }
 
-                    for (int j = 0 ; j < OrderAttributes.size() ; j++){
 
-                        Orders_parent_layout.addView(AddOrdersOnPArent(OrderAttributes.get(j).getSalesOrderCode(),OrderAttributes.get(j).getTotal() ,
-                                OrderAttributes.get(j).getSalesOrderDate() ,  OrderAttributes.get(j).getOrderStatus() , OrderAttributes.get(j).getSubTotal() ,
-                                OrderAttributes.get(j).getFreight() , OrderAttributes.get(j).getShipToAddress() , OrderAttributes.get(j).getBillToAddress() ,
-                                OrderAttributes.get(j).getShipToCity() , OrderAttributes.get(j).getShipToCounty() , OrderAttributes.get(j).getShipToCountry() ,
-                                OrderAttributes.get(j).getBillToCity() , OrderAttributes.get(j).getBillToCounty() , OrderAttributes.get(j).getBillToCountry() ,  CustCode
-                                , OrderAttributes.get(j).getShipToName()
-                                , OrderAttributes.get(j).getShipToPostalCode() , OrderAttributes.get(j).getShipToPhone() , OrderAttributes.get(j).getSourceCode() ,
-                                OrderAttributes.get(j).getPoCode()));
-                    }
 
                 }
 
@@ -571,7 +372,11 @@ public class OrdersActivity extends AppCompatActivity {
                 Log.e("*error", "" + anError.getStackTrace());
                 Log.e("*error", "" + anError.getCause());
 
-                Toast.makeText(OrdersActivity.this, "Orders Not Found !!", Toast.LENGTH_SHORT).show();
+                ErrorResponse errorResponse = new ErrorResponse();
+                errorResponse = gson.fromJson(anError.getErrorBody() , ErrorResponse.class);
+
+                Toast.makeText(OrdersActivity.this, ""+errorResponse.getErrors().get(0).getTitle(), Toast.LENGTH_SHORT).show();
+
 
             }
         });
@@ -606,6 +411,157 @@ public class OrdersActivity extends AppCompatActivity {
 
     }
 
+
+    public void nextClick(LinearLayout ll_parent1 , int totaldata1 , int perpagecount1 ,
+                          ArrayList<String> hs_page1 , ArrayList<String> hs_orderpage1 , TextView pagetx1 , List<CustomerSalesOrdersResponse.DataBean> data1){
+
+
+        if (!hs_orderpage1.isEmpty()) {
+
+            prevoiusOne = "2" ;
+
+            if (pageCount+1 == hs_page1.size()) {
+                Toast.makeText(OrdersActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
+            }else {
+
+                pageCount = pageCount + 1;
+
+                if (pageCount < hs_page1.size()) {
+
+                    ll_parent1.removeAllViews();
+
+                    int max = Integer.parseInt(hs_orderpage1.get(pageCount));
+                    int min = Integer.parseInt(hs_orderpage1.get(pageCount - 1));
+
+                    Log.e("**max", "" + max);
+                    Log.e("**min", "" + min);
+
+                    if (max < perpagecount1) {
+
+                        int max2 = min + max;
+                        pagetx1.setText(min + "-" + max2 + "/" + totaldata1);
+                        Log.e("max2", "for last" + max2);
+
+                        for (int i = min; i < max2; i++) {
+                        ll_parent1.addView(AddOrdersOnPArent(data1.get(i).getAttributes()));
+
+                        }
+
+                    } else {
+
+                        pagetx1.setText(min + "-" + max + "/" + totaldata1);
+                        for (int i = min; i < max; i++) {
+                            ll_parent1.addView(AddOrdersOnPArent(data1.get(i).getAttributes()));
+                        }
+
+                    }
+
+
+                } else {
+                    //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }else {
+            Toast.makeText(OrdersActivity.this, "No Pages !!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
+
+
+    public void PreviousClick(LinearLayout ll_parent1 , int totaldata1 , int perpagecount1 ,
+                              ArrayList<String> hs_page1 , ArrayList<String> hs_orderpage1 , TextView pagetx1 , List<CustomerSalesOrdersResponse.DataBean> data1){
+
+        if (!hs_orderpage1.isEmpty()) {
+
+            if (prevoiusOne.equals("1")){
+
+                Toast.makeText(OrdersActivity.this, "Page Finished !!", Toast.LENGTH_SHORT).show();
+
+            }else {
+
+                if (pageCount==0){
+
+                }else {
+                    pageCount = pageCount - 1;
+                }
+
+
+                if (pageCount == 0){
+
+                    prevoiusOne = "1" ;
+
+                    ll_parent1.removeAllViews();
+
+                    Log.e("order page",""+hs_orderpage);
+                    Log.e(" page",""+hs_page);
+                    int max = Integer.parseInt(hs_orderpage1.get(pageCount));
+                    pagetx1.setText("1"+"-"+max+"/"+totaldata1);
+                    for (int i= 0 ; i < max ; i++){
+
+                        ll_parent1.addView(AddOrdersOnPArent(data1.get(i).getAttributes()));
+                    }
+
+
+
+
+                }else if (pageCount < hs_page1.size()){
+
+                    prevoiusOne = "2" ;
+
+                    Log.e("**page","count"+pageCount);
+
+                    ll_parent1.removeAllViews();
+
+                    Log.e("order page",""+hs_orderpage);
+                    Log.e(" page",""+hs_page);
+                    int max = Integer.parseInt(hs_orderpage1.get(pageCount));
+                    int min = Integer.parseInt(hs_orderpage1.get(pageCount-1));
+
+                    Log.e("**max",""+max);
+                    Log.e("**min",""+min);
+
+                    if (max < perpagecount1){
+
+                        int max2 = min + max ;
+                        pagetx1.setText(min+"-"+max2+"/"+totaldata1);
+                        Log.e("max2","for last"+max2);
+                        for (int i = min ; i < max2 ; i++){
+
+                            ll_parent1.addView(AddOrdersOnPArent(data1.get(i).getAttributes()));
+                        }
+
+
+
+                    }else {
+
+                        ll_parent1.removeAllViews();
+
+                        pagetx1.setText(min+"-"+max+"/"+totaldata1);
+                        for (int i = min ; i < max ; i++){
+
+                            ll_parent1.addView(AddOrdersOnPArent(data1.get(i).getAttributes()));
+                        }
+
+
+
+                    }
+
+
+                }
+                else {
+                    //  Toast.makeText(paginationlogic.this, "That' it", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }else {
+            Toast.makeText(OrdersActivity.this, "No Pages !!", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
 
 
 
