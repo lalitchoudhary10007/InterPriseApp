@@ -30,7 +30,7 @@ public class Utils {
 
     public static final String CustomerChangeLog = "CustomersChangeLog" ;
     public static final String ItemsChangeLog = "ItemsChangeLog" ;
-
+    public static final int PerPageCount = 20 ;
 
 
     public static void clearParentsBackgrounds(View view) {

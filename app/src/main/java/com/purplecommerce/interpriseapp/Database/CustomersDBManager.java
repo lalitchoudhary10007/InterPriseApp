@@ -142,6 +142,29 @@ public class CustomersDBManager {
     }
 
 
+    public void DeleteAccordingCustomerID(final String custCODE){
+
+        myRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<CustomersTable> customers = myRealm.where(CustomersTable.class).findAll();
+
+                CustomersTable cust =  customers.where().equalTo("CustomerCode" , custCODE).findFirst();
+
+                if (cust!=null){
+                    cust.removeFromRealm();
+                }else {
+                    Toast.makeText(con, "Customer Id Not Exist !!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+    }
+
+
+
 
     public  void ClearCustomersTable(){
         myRealm.beginTransaction();

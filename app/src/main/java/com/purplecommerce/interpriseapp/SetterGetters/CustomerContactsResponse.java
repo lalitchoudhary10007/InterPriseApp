@@ -145,69 +145,18 @@ public class CustomerContactsResponse {
              * userNameModified : Jane
              */
 
-            private int counter;
-            private String contactCode;
-            private String entityCode;
-            private String type;
-            private String contactSalutationCode;
-            private String contactFirstName;
-            private String contactLastName;
-            private String jobRoleCode;
-            private String departmentCode;
-            private String assignedTo;
-            private String address;
-            private String country;
-            private String city;
-            private String postalCode;
-            private String county;
-            private String businessPhone;
-            private String businessFax;
-            private String homePhone;
-            private String mobile;
-            private String email1;
-            private String timeZone;
-            private boolean isAllowWebAccess;
-            private String username;
-            private String password;
-            private String passwordIV;
-            private String passwordSalt;
-            private String languageCode;
-            private String emailRule;
-            private boolean isActive;
-            private String userCreated;
-            private String dateCreated;
-            private String userModified;
-            private String dateModified;
-            private boolean isOkToEmail;
-            private boolean isOkToFax;
-            private boolean isOkToCall;
-            private String webSiteCode;
-            private String entityName;
-            private String entityCountry;
-            private String entityAddress;
-            private String entityCity;
-            private String entityPostalCode;
-            private String entityCounty;
-            private String entityEmail;
-            private String entityPhone;
-            private String entityFax;
-            private boolean isProspect;
-            private String contactFullName;
-            private String assistantFullName;
-            private String jobRole;
-            private String department;
-            private String webSite;
-            private String assignedToName;
-            private String userNameCreated;
-            private String userNameModified;
+              private String contactCode;
 
-            public int getCounter() {
-                return counter;
-            }
+              private String contactFirstName;
+              private String contactLastName;
+              private String address;
+              private String country;
+              private String city;
+              private String postalCode;
+              private String county;
+              private String businessPhone;
 
-            public void setCounter(int counter) {
-                this.counter = counter;
-            }
+              private String email1;
 
             public String getContactCode() {
                 return contactCode;
@@ -217,29 +166,6 @@ public class CustomerContactsResponse {
                 this.contactCode = contactCode;
             }
 
-            public String getEntityCode() {
-                return entityCode;
-            }
-
-            public void setEntityCode(String entityCode) {
-                this.entityCode = entityCode;
-            }
-
-            public String getType() {
-                return type;
-            }
-
-            public void setType(String type) {
-                this.type = type;
-            }
-
-            public String getContactSalutationCode() {
-                return contactSalutationCode;
-            }
-
-            public void setContactSalutationCode(String contactSalutationCode) {
-                this.contactSalutationCode = contactSalutationCode;
-            }
 
             public String getContactFirstName() {
                 return contactFirstName;
@@ -257,29 +183,6 @@ public class CustomerContactsResponse {
                 this.contactLastName = contactLastName;
             }
 
-            public String getJobRoleCode() {
-                return jobRoleCode;
-            }
-
-            public void setJobRoleCode(String jobRoleCode) {
-                this.jobRoleCode = jobRoleCode;
-            }
-
-            public String getDepartmentCode() {
-                return departmentCode;
-            }
-
-            public void setDepartmentCode(String departmentCode) {
-                this.departmentCode = departmentCode;
-            }
-
-            public String getAssignedTo() {
-                return assignedTo;
-            }
-
-            public void setAssignedTo(String assignedTo) {
-                this.assignedTo = assignedTo;
-            }
 
             public String getAddress() {
                 return address;
@@ -329,30 +232,6 @@ public class CustomerContactsResponse {
                 this.businessPhone = businessPhone;
             }
 
-            public String getBusinessFax() {
-                return businessFax;
-            }
-
-            public void setBusinessFax(String businessFax) {
-                this.businessFax = businessFax;
-            }
-
-            public String getHomePhone() {
-                return homePhone;
-            }
-
-            public void setHomePhone(String homePhone) {
-                this.homePhone = homePhone;
-            }
-
-            public String getMobile() {
-                return mobile;
-            }
-
-            public void setMobile(String mobile) {
-                this.mobile = mobile;
-            }
-
             public String getEmail1() {
                 return email1;
             }
@@ -361,285 +240,7 @@ public class CustomerContactsResponse {
                 this.email1 = email1;
             }
 
-            public String getTimeZone() {
-                return timeZone;
-            }
 
-            public void setTimeZone(String timeZone) {
-                this.timeZone = timeZone;
-            }
-
-            public boolean isIsAllowWebAccess() {
-                return isAllowWebAccess;
-            }
-
-            public void setIsAllowWebAccess(boolean isAllowWebAccess) {
-                this.isAllowWebAccess = isAllowWebAccess;
-            }
-
-            public String getUsername() {
-                return username;
-            }
-
-            public void setUsername(String username) {
-                this.username = username;
-            }
-
-            public String getPassword() {
-                return password;
-            }
-
-            public void setPassword(String password) {
-                this.password = password;
-            }
-
-            public String getPasswordIV() {
-                return passwordIV;
-            }
-
-            public void setPasswordIV(String passwordIV) {
-                this.passwordIV = passwordIV;
-            }
-
-            public String getPasswordSalt() {
-                return passwordSalt;
-            }
-
-            public void setPasswordSalt(String passwordSalt) {
-                this.passwordSalt = passwordSalt;
-            }
-
-            public String getLanguageCode() {
-                return languageCode;
-            }
-
-            public void setLanguageCode(String languageCode) {
-                this.languageCode = languageCode;
-            }
-
-            public String getEmailRule() {
-                return emailRule;
-            }
-
-            public void setEmailRule(String emailRule) {
-                this.emailRule = emailRule;
-            }
-
-            public boolean isIsActive() {
-                return isActive;
-            }
-
-            public void setIsActive(boolean isActive) {
-                this.isActive = isActive;
-            }
-
-            public String getUserCreated() {
-                return userCreated;
-            }
-
-            public void setUserCreated(String userCreated) {
-                this.userCreated = userCreated;
-            }
-
-            public String getDateCreated() {
-                return dateCreated;
-            }
-
-            public void setDateCreated(String dateCreated) {
-                this.dateCreated = dateCreated;
-            }
-
-            public String getUserModified() {
-                return userModified;
-            }
-
-            public void setUserModified(String userModified) {
-                this.userModified = userModified;
-            }
-
-            public String getDateModified() {
-                return dateModified;
-            }
-
-            public void setDateModified(String dateModified) {
-                this.dateModified = dateModified;
-            }
-
-            public boolean isIsOkToEmail() {
-                return isOkToEmail;
-            }
-
-            public void setIsOkToEmail(boolean isOkToEmail) {
-                this.isOkToEmail = isOkToEmail;
-            }
-
-            public boolean isIsOkToFax() {
-                return isOkToFax;
-            }
-
-            public void setIsOkToFax(boolean isOkToFax) {
-                this.isOkToFax = isOkToFax;
-            }
-
-            public boolean isIsOkToCall() {
-                return isOkToCall;
-            }
-
-            public void setIsOkToCall(boolean isOkToCall) {
-                this.isOkToCall = isOkToCall;
-            }
-
-            public String getWebSiteCode() {
-                return webSiteCode;
-            }
-
-            public void setWebSiteCode(String webSiteCode) {
-                this.webSiteCode = webSiteCode;
-            }
-
-            public String getEntityName() {
-                return entityName;
-            }
-
-            public void setEntityName(String entityName) {
-                this.entityName = entityName;
-            }
-
-            public String getEntityCountry() {
-                return entityCountry;
-            }
-
-            public void setEntityCountry(String entityCountry) {
-                this.entityCountry = entityCountry;
-            }
-
-            public String getEntityAddress() {
-                return entityAddress;
-            }
-
-            public void setEntityAddress(String entityAddress) {
-                this.entityAddress = entityAddress;
-            }
-
-            public String getEntityCity() {
-                return entityCity;
-            }
-
-            public void setEntityCity(String entityCity) {
-                this.entityCity = entityCity;
-            }
-
-            public String getEntityPostalCode() {
-                return entityPostalCode;
-            }
-
-            public void setEntityPostalCode(String entityPostalCode) {
-                this.entityPostalCode = entityPostalCode;
-            }
-
-            public String getEntityCounty() {
-                return entityCounty;
-            }
-
-            public void setEntityCounty(String entityCounty) {
-                this.entityCounty = entityCounty;
-            }
-
-            public String getEntityEmail() {
-                return entityEmail;
-            }
-
-            public void setEntityEmail(String entityEmail) {
-                this.entityEmail = entityEmail;
-            }
-
-            public String getEntityPhone() {
-                return entityPhone;
-            }
-
-            public void setEntityPhone(String entityPhone) {
-                this.entityPhone = entityPhone;
-            }
-
-            public String getEntityFax() {
-                return entityFax;
-            }
-
-            public void setEntityFax(String entityFax) {
-                this.entityFax = entityFax;
-            }
-
-            public boolean isIsProspect() {
-                return isProspect;
-            }
-
-            public void setIsProspect(boolean isProspect) {
-                this.isProspect = isProspect;
-            }
-
-            public String getContactFullName() {
-                return contactFullName;
-            }
-
-            public void setContactFullName(String contactFullName) {
-                this.contactFullName = contactFullName;
-            }
-
-            public String getAssistantFullName() {
-                return assistantFullName;
-            }
-
-            public void setAssistantFullName(String assistantFullName) {
-                this.assistantFullName = assistantFullName;
-            }
-
-            public String getJobRole() {
-                return jobRole;
-            }
-
-            public void setJobRole(String jobRole) {
-                this.jobRole = jobRole;
-            }
-
-            public String getDepartment() {
-                return department;
-            }
-
-            public void setDepartment(String department) {
-                this.department = department;
-            }
-
-            public String getWebSite() {
-                return webSite;
-            }
-
-            public void setWebSite(String webSite) {
-                this.webSite = webSite;
-            }
-
-            public String getAssignedToName() {
-                return assignedToName;
-            }
-
-            public void setAssignedToName(String assignedToName) {
-                this.assignedToName = assignedToName;
-            }
-
-            public String getUserNameCreated() {
-                return userNameCreated;
-            }
-
-            public void setUserNameCreated(String userNameCreated) {
-                this.userNameCreated = userNameCreated;
-            }
-
-            public String getUserNameModified() {
-                return userNameModified;
-            }
-
-            public void setUserNameModified(String userNameModified) {
-                this.userNameModified = userNameModified;
-            }
         }
     }
 }

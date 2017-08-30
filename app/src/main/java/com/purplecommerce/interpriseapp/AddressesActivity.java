@@ -49,7 +49,7 @@ public class AddressesActivity extends AppCompatActivity {
 
     LinearLayout Addresses_parent_layout , ll_toolbar ;
     TextView nxt , previous , find ;
-    int pageCount = 0 , totalPage = 1  , perpagecount = 5 , remainingcount = 0  ;
+    int pageCount = 0 , totalPage = 1  , perpagecount = Utils.PerPageCount , remainingcount = 0  ;
     EditText ed_srch_address ;
     SessionManager sessionManager ;
     OkHttpClient okHttpClient ;

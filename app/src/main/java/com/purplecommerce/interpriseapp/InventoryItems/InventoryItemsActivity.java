@@ -1,5 +1,6 @@
 package com.purplecommerce.interpriseapp.InventoryItems;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -28,6 +29,8 @@ import com.androidnetworking.interfaces.StringRequestListener;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.purplecommerce.interpriseapp.CustomersActivity;
 import com.purplecommerce.interpriseapp.Database.ChangeLogDBManager;
 import com.purplecommerce.interpriseapp.Database.CustomersDBManager;
@@ -67,8 +70,8 @@ import static com.bumptech.glide.Glide.with;
 public class InventoryItemsActivity extends AppCompatActivity {
 
     LinearLayout Items_parent_layout , ll_toolbar , ll_refresh;
-    TextView nxt , previous , find , last_update ;
-    int pageCount = 0 , totalPage = 1  , perpagecount = 5 , remainingcount = 0  ;
+    TextView nxt , previous , find , last_update , scan ;
+    int pageCount = 0 , totalPage = 1  , perpagecount = Utils.PerPageCount , remainingcount = 0  ;
     EditText ed_srch_items ;
 
     final String TAG = "ITEMS-INVENTORY";
@@ -182,6 +185,17 @@ public class InventoryItemsActivity extends AppCompatActivity {
 
 
 ////////////////
+
+
+        scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new IntentIntegrator((Activity) InventoryItemsActivity.this).initiateScan();
+            }
+        });
+
+
+
 
 
 
@@ -395,7 +409,7 @@ public class InventoryItemsActivity extends AppCompatActivity {
         ItemsPageCount = (TextView)findViewById(R.id.ordr_count_page);
         //sm = new SessionManager(CustomersActivity.this);
         changeLogDBManager = new ChangeLogDBManager(InventoryItemsActivity.this);
-
+        scan = (TextView)findViewById(R.id.txt_scan);
         LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = vi.inflate(R.layout.progress_view, null);
         progress_dialog = new Dialog(InventoryItemsActivity.this);
@@ -453,6 +467,48 @@ public class InventoryItemsActivity extends AppCompatActivity {
         }
 
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result != null) {
+            if(result.getContents() == null) {
+                  Toast.makeText(this, "Scan Cancelled !!", Toast.LENGTH_LONG).show();
+
+            } else {
+                Log.e("content idd",""+result.getContents());
+
+            ItemsInventoryTable inventoryTable =   itemsDBManager.GetItemAccordingItemCode(""+result.getContents());
+
+                if (inventoryTable==null){
+                    Toast.makeText(this, "Item Code Does Not Exist !!", Toast.LENGTH_SHORT).show();
+                }else {
+                    startActivity(new Intent(InventoryItemsActivity.this , ItemDetailsActivity.class)
+                            .putExtra("ITEMCODE" , inventoryTable.getItemCode())
+                            .putExtra("ITEMNAME"  , inventoryTable.getItemName())
+                            .putExtra("ITEMTYPE" , inventoryTable.getItemType())
+                            .putExtra("MANUFACTURECODE" , inventoryTable.getItemManufactureCode())
+                            .putExtra("IMAGEBYTES" , inventoryTable.getItemPhoto())
+                            .putExtra("LastUpdate" , inventoryTable.getItemlastUpdate()));
+                }
+
+
+
+            }
+
+        } else {
+            // This is important, otherwise the result will not be passed to the fragment
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+
+
+
+
+
+
 
 
     public void nextClick(LinearLayout ll_parent1 , int totaldata1 , int perpagecount1 ,

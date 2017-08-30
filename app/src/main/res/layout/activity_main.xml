@@ -65,35 +65,35 @@
                   android:layout_height="wrap_content"
                   android:orientation="horizontal">
 
+
                   <FrameLayout
-                      android:id="@+id/frame_orders"
+                      android:id="@+id/fm_items"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      >
+                      android:layout_weight="1">
 
 
-                  <FrameLayout
-                      android:layout_width="match_parent"
-                      android:layout_height="@dimen/_100sdp"
-                      android:layout_margin="@dimen/_10sdp"
-                      >
-
-                      <views.textview.TypefaceTextView
-                          android:id="@+id/txt_submit"
-                          geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                      <FrameLayout
                           android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          android:textColor="@color/white"
-                          android:gravity="center"
-                          android:textSize="@dimen/_18sdp"
-                          android:text="Orders"
-                          android:padding="@dimen/_5sdp"
-                          android:background="@drawable/primary_back_round"
-                          />
+                          android:layout_height="@dimen/_100sdp"
+                          android:layout_margin="@dimen/_10sdp"
+                          >
+
+                          <views.textview.TypefaceTextView
+                              android:id="@+id/txt_items"
+                              geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              android:textColor="@color/white"
+                              android:gravity="center"
+                              android:textSize="@dimen/_18sdp"
+                              android:text="Items"
+                              android:padding="@dimen/_5sdp"
+                              android:background="@drawable/primary_back_round"
+                              />
 
 
-                  </FrameLayout>
+                      </FrameLayout>
 
 
                       <FrameLayout
@@ -103,13 +103,14 @@
                           android:background="@drawable/filled_round_back">
 
                           <views.textview.TypefaceTextView
+                              android:id="@+id/items_count"
                               geekui:customTypeface="fonts/CoreSansDRegular.otf"
                               android:layout_width="match_parent"
                               android:layout_height="wrap_content"
                               android:textColor="@color/black"
                               android:gravity="center"
                               android:textSize="@dimen/_14sdp"
-                              android:text="12"
+                              android:text="0"
                               android:padding="@dimen/_5sdp"
                               android:layout_gravity="center"/>
 
@@ -119,6 +120,8 @@
 
 
                   </FrameLayout>
+
+
 
 
 
@@ -168,7 +171,8 @@
                               android:gravity="center"
                               android:textSize="@dimen/_14sdp"
                               android:padding="@dimen/_5sdp"
-                              android:layout_gravity="center"/>
+                              android:layout_gravity="center"
+                              android:text="0"/>
 
 
                       </FrameLayout>
@@ -184,13 +188,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
 
                     <FrameLayout
-                        android:id="@+id/fm_items"
+                        android:id="@+id/frame_orders"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        >
 
 
                         <FrameLayout
@@ -200,14 +207,14 @@
                             >
 
                             <views.textview.TypefaceTextView
-                                android:id="@+id/txt_items"
+                                android:id="@+id/txt_submit"
                                 geekui:customTypeface="fonts/CoreSansDRegular.otf"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:textColor="@color/white"
                                 android:gravity="center"
                                 android:textSize="@dimen/_18sdp"
-                                android:text="Items"
+                                android:text="Orders"
                                 android:padding="@dimen/_5sdp"
                                 android:background="@drawable/primary_back_round"
                                 />
@@ -223,7 +230,6 @@
                             android:background="@drawable/filled_round_back">
 
                             <views.textview.TypefaceTextView
-                                android:id="@+id/items_count"
                                 geekui:customTypeface="fonts/CoreSansDRegular.otf"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -240,7 +246,6 @@
 
 
                     </FrameLayout>
-
 
 
                     <FrameLayout

@@ -43,7 +43,7 @@ public class InvoicesActivity extends AppCompatActivity {
 
     LinearLayout Invoices_parent_layout , ll_toolbar ;
     TextView nxt , previous , find ;
-    int pageCount = 0 , totalPage = 1  , perpagecount = 5 , remainingcount = 0  ;
+    int pageCount = 0 , totalPage = 1  , perpagecount = Utils.PerPageCount , remainingcount = 0  ;
     EditText ed_srch_invoice ;
     SessionManager sessionManager ;
     OkHttpClient okHttpClient ;

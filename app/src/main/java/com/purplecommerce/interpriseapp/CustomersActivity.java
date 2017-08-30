@@ -8,13 +8,18 @@ import android.content.IntentFilter;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +46,7 @@ public class CustomersActivity extends AppCompatActivity {
 
     LinearLayout Orders_parent_layout , ll_toolbar , ll_refresh ;
     TextView nxt , previous , find , last_update ;
-    int pageCount = 0 , totalPage = 1  , perpagecount = 5 , remainingcount = 0  ;
+    int pageCount = 0 , totalPage = 1  , perpagecount = Utils.PerPageCount , remainingcount = 0  ;
     EditText ed_srch_order ;
     CustomersDBManager dbManager ;
     RealmResults<CustomersTable> CustomerRows ;
@@ -53,6 +58,10 @@ public class CustomersActivity extends AppCompatActivity {
     ChangeLogDBManager changeLogDBManager ;
     private CustomersRequestReceiver receiver;
     Dialog progress_dialog ;
+    ListView SearchlistView ;
+    ArrayList<String> AllCustomerCodes = new ArrayList<>();
+    ArrayAdapter<String> SearchAdapter ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +140,7 @@ public class CustomersActivity extends AppCompatActivity {
         });
 
 
-
+        dbManager.DeleteAccordingCustomerID("CUST-001454");
 
         if (dbManager.CustomerTableisEmpty()){
 
@@ -146,6 +155,25 @@ public class CustomersActivity extends AppCompatActivity {
 
 
         PupulateListFromDbOnFirstPage();
+
+
+//        ed_srch_order.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//               // SearchlistView.setVisibility(View.GONE);
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//                CustomersActivity.this.SearchAdapter.getFilter().filter(charSequence.toString());
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//
+//            }
+//        });
 
 
 
@@ -426,7 +454,7 @@ public class CustomersActivity extends AppCompatActivity {
         OrderPageCount = (TextView)findViewById(R.id.ordr_count_page);
         sm = new SessionManager(CustomersActivity.this);
         changeLogDBManager = new ChangeLogDBManager(CustomersActivity.this);
-
+        SearchlistView = (ListView)findViewById(R.id.searched_list_view);
         LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = vi.inflate(R.layout.progress_view, null);
         progress_dialog = new Dialog(CustomersActivity.this);
@@ -435,6 +463,14 @@ public class CustomersActivity extends AppCompatActivity {
         progress_dialog.setContentView(v);
         Utils.clearParentsBackgrounds(v);
 
+//        RealmResults<CustomersTable> AllCustomerCodes22 = dbManager.getAllrows();
+//        for (int i = 0 ; i < AllCustomerCodes22.size() ; i++){
+//           AllCustomerCodes.add(AllCustomerCodes22.get(i).getCustomerCode());
+//        }
+//
+//        SearchAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, data);
+//        SearchlistView.setAdapter(SearchAdapter);
+//        SearchlistView.setTextFilterEnabled(true);
     }
 
 

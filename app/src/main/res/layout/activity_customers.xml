@@ -247,8 +247,26 @@
             android:layout_gravity="bottom"
             android:layout_margin="@dimen/_10sdp"
             android:elevation="@dimen/_1sdp"
-            android:background="@drawable/primary_back_round"
-            android:baselineAligned="false">
+
+            android:baselineAligned="false"
+            android:orientation="vertical">
+
+
+                <ListView
+                    android:id="@+id/searched_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp"
+                    android:visibility="gone">
+
+                </ListView>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/primary_back_round">
 
 
             <LinearLayout
@@ -296,6 +314,9 @@
             </LinearLayout>
 
 
+
+
+
             <views.textview.TypefaceTextView
                 android:id="@+id/txt_find"
                 android:layout_width="match_parent"
@@ -308,6 +329,9 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_18sdp"
                 geekui:customTypeface="fonts/CoreSansDRegular.otf" />
+
+            </LinearLayout>
+
 
 
         </LinearLayout>

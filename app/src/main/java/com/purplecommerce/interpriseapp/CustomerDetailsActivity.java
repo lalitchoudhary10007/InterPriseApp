@@ -227,7 +227,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                 }
 
 
-                if (detailsResponse.getData().getAttributes().getTelephone()==null){
+                if (detailsResponse.getData().getAttributes().getFax()==null){
                     ll_fax.setVisibility(View.GONE);
                 }else {
                     ll_fax.setVisibility(View.VISIBLE);

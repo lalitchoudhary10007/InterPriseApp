@@ -213,14 +213,19 @@ public class ItemsInventoryService extends IntentService {
                 }
 
 
+                if (detailsResponse.getData().getAttributes().getItemType().equals("Matrix Group")){
+
+                    Log.e("**","Matrix group");
+
+                }else {
+                    inventoryDBManager.SaveNewItems(detailsResponse.getData().getAttributes().getItemCode(), detailsResponse.getData().getAttributes().getItemName() ,
+                            detailsResponse.getData().getAttributes().getItemType(), detailsResponse.getData().getAttributes().getStatus(), photo ,
+                            detailsResponse.getData().getAttributes().getManufacturerCode(),
+                            detailsResponse.getData().getAttributes().getDateCreated());
+                }
 
 
 
-
-                inventoryDBManager.SaveNewItems(detailsResponse.getData().getAttributes().getItemCode(), detailsResponse.getData().getAttributes().getItemName() ,
-                        detailsResponse.getData().getAttributes().getItemType(), detailsResponse.getData().getAttributes().getStatus(), photo ,
-                        detailsResponse.getData().getAttributes().getManufacturerCode(),
-                        detailsResponse.getData().getAttributes().getDateCreated());
 
                 Log.e("**name",""+inventoryDBManager.GetItemsIventoryCount());
 

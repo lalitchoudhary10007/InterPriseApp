@@ -175,13 +175,7 @@ public class ItemInventoryDetailsResponse {
                 this.status = status;
             }
 
-            public int getLeadTime() {
-                return leadTime;
-            }
 
-            public void setLeadTime(int leadTime) {
-                this.leadTime = leadTime;
-            }
 
             public String getManufacturerCode() {
                 return manufacturerCode;

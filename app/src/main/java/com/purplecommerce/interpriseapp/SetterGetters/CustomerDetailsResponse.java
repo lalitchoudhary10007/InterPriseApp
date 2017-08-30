@@ -196,13 +196,6 @@ public class CustomerDetailsResponse {
             private boolean isSaveCCDetails;
             private List<?> customFields;
 
-            public int getCounter() {
-                return counter;
-            }
-
-            public void setCounter(int counter) {
-                this.counter = counter;
-            }
 
             public String getCustomerCode() {
                 return customerCode;
@@ -292,21 +285,6 @@ public class CustomerDetailsResponse {
                 this.website = website;
             }
 
-            public String getNotes() {
-                return notes;
-            }
-
-            public void setNotes(String notes) {
-                this.notes = notes;
-            }
-
-            public String getSourceCode() {
-                return sourceCode;
-            }
-
-            public void setSourceCode(String sourceCode) {
-                this.sourceCode = sourceCode;
-            }
 
             public String getDefaultContact() {
                 return defaultContact;
@@ -316,77 +294,6 @@ public class CustomerDetailsResponse {
                 this.defaultContact = defaultContact;
             }
 
-            public String getDefaultAPContact() {
-                return defaultAPContact;
-            }
-
-            public void setDefaultAPContact(String defaultAPContact) {
-                this.defaultAPContact = defaultAPContact;
-            }
-
-            public String getShippingMethodGroup() {
-                return shippingMethodGroup;
-            }
-
-            public void setShippingMethodGroup(String shippingMethodGroup) {
-                this.shippingMethodGroup = shippingMethodGroup;
-            }
-
-            public String getShippingMethod() {
-                return shippingMethod;
-            }
-
-            public void setShippingMethod(String shippingMethod) {
-                this.shippingMethod = shippingMethod;
-            }
-
-            public String getWarehouseCode() {
-                return warehouseCode;
-            }
-
-            public void setWarehouseCode(String warehouseCode) {
-                this.warehouseCode = warehouseCode;
-            }
-
-            public String getClassCode() {
-                return classCode;
-            }
-
-            public void setClassCode(String classCode) {
-                this.classCode = classCode;
-            }
-
-            public String getGlClassCode() {
-                return glClassCode;
-            }
-
-            public void setGlClassCode(String glClassCode) {
-                this.glClassCode = glClassCode;
-            }
-
-            public String getCurrencyCode() {
-                return currencyCode;
-            }
-
-            public void setCurrencyCode(String currencyCode) {
-                this.currencyCode = currencyCode;
-            }
-
-            public String getPaymentTermGroup() {
-                return paymentTermGroup;
-            }
-
-            public void setPaymentTermGroup(String paymentTermGroup) {
-                this.paymentTermGroup = paymentTermGroup;
-            }
-
-            public String getPaymentTermCode() {
-                return paymentTermCode;
-            }
-
-            public void setPaymentTermCode(String paymentTermCode) {
-                this.paymentTermCode = paymentTermCode;
-            }
 
             public String getDefaultPrice() {
                 return defaultPrice;
@@ -396,212 +303,12 @@ public class CustomerDetailsResponse {
                 this.defaultPrice = defaultPrice;
             }
 
-            public String getPricingMethod() {
-                return pricingMethod;
-            }
-
-            public void setPricingMethod(String pricingMethod) {
-                this.pricingMethod = pricingMethod;
-            }
-
-            public int getDiscount() {
-                return discount;
-            }
-
-            public void setDiscount(int discount) {
-                this.discount = discount;
-            }
-
-            public String getCreditCardCode() {
-                return creditCardCode;
-            }
-
-            public void setCreditCardCode(String creditCardCode) {
-                this.creditCardCode = creditCardCode;
-            }
-
-            public int getCreditLimit() {
-                return creditLimit;
-            }
-
-            public void setCreditLimit(int creditLimit) {
-                this.creditLimit = creditLimit;
-            }
-
-            public int getCredit() {
-                return credit;
-            }
-
-            public void setCredit(int credit) {
-                this.credit = credit;
-            }
-
-            public int getPricingPercent() {
-                return pricingPercent;
-            }
-
-            public void setPricingPercent(int pricingPercent) {
-                this.pricingPercent = pricingPercent;
-            }
-
-            public boolean isIsActive() {
-                return isActive;
-            }
-
-            public void setIsActive(boolean isActive) {
-                this.isActive = isActive;
-            }
-
-            public boolean isIsCreditHold() {
-                return isCreditHold;
-            }
-
-            public void setIsCreditHold(boolean isCreditHold) {
-                this.isCreditHold = isCreditHold;
-            }
-
-            public boolean isIsProspect() {
-                return isProspect;
-            }
-
-            public void setIsProspect(boolean isProspect) {
-                this.isProspect = isProspect;
-            }
-
-            public boolean isIsAllowBackOrder() {
-                return isAllowBackOrder;
-            }
-
-            public void setIsAllowBackOrder(boolean isAllowBackOrder) {
-                this.isAllowBackOrder = isAllowBackOrder;
-            }
-
-            public boolean isIsWebAccess() {
-                return isWebAccess;
-            }
-
-            public void setIsWebAccess(boolean isWebAccess) {
-                this.isWebAccess = isWebAccess;
-            }
-
-            public String getPricingLevel() {
-                return pricingLevel;
-            }
-
-            public void setPricingLevel(String pricingLevel) {
-                this.pricingLevel = pricingLevel;
-            }
-
-            public String getSalesRepGroupCode() {
-                return salesRepGroupCode;
-            }
-
-            public void setSalesRepGroupCode(String salesRepGroupCode) {
-                this.salesRepGroupCode = salesRepGroupCode;
-            }
-
-            public String getCommission() {
-                return commission;
-            }
-
-            public void setCommission(String commission) {
-                this.commission = commission;
-            }
-
-            public int getCommissionPercent() {
-                return commissionPercent;
-            }
-
-            public void setCommissionPercent(int commissionPercent) {
-                this.commissionPercent = commissionPercent;
-            }
-
-            public String getTaxNumber() {
-                return taxNumber;
-            }
-
-            public void setTaxNumber(String taxNumber) {
-                this.taxNumber = taxNumber;
-            }
-
-            public String getTaxCode() {
-                return taxCode;
-            }
-
-            public void setTaxCode(String taxCode) {
-                this.taxCode = taxCode;
-            }
-
-            public String getRecallDate() {
-                return recallDate;
-            }
-
-            public void setRecallDate(String recallDate) {
-                this.recallDate = recallDate;
-            }
-
-            public double getRank() {
-                return rank;
-            }
-
-            public void setRank(double rank) {
-                this.rank = rank;
-            }
-
-            public int getCreditRating() {
-                return creditRating;
-            }
-
-            public void setCreditRating(int creditRating) {
-                this.creditRating = creditRating;
-            }
-
-            public boolean isIsFromProspect() {
-                return isFromProspect;
-            }
-
-            public void setIsFromProspect(boolean isFromProspect) {
-                this.isFromProspect = isFromProspect;
-            }
-
-            public String getLastRankCalculated() {
-                return lastRankCalculated;
-            }
-
-            public void setLastRankCalculated(String lastRankCalculated) {
-                this.lastRankCalculated = lastRankCalculated;
-            }
-
-            public boolean isIsRankUserOverriden() {
-                return isRankUserOverriden;
-            }
-
-            public void setIsRankUserOverriden(boolean isRankUserOverriden) {
-                this.isRankUserOverriden = isRankUserOverriden;
-            }
-
-            public String getAssignedTo() {
-                return assignedTo;
-            }
-
-            public void setAssignedTo(String assignedTo) {
-                this.assignedTo = assignedTo;
-            }
-
             public String getDefaultShipToCode() {
                 return defaultShipToCode;
             }
 
             public void setDefaultShipToCode(String defaultShipToCode) {
                 this.defaultShipToCode = defaultShipToCode;
-            }
-
-            public String getDiscountType() {
-                return discountType;
-            }
-
-            public void setDiscountType(String discountType) {
-                this.discountType = discountType;
             }
 
             public String getUserCreated() {
@@ -620,61 +327,7 @@ public class CustomerDetailsResponse {
                 this.dateCreated = dateCreated;
             }
 
-            public String getUserModified() {
-                return userModified;
-            }
 
-            public void setUserModified(String userModified) {
-                this.userModified = userModified;
-            }
-
-            public String getDateModified() {
-                return dateModified;
-            }
-
-            public void setDateModified(String dateModified) {
-                this.dateModified = dateModified;
-            }
-
-            public int getTotalCredits() {
-                return totalCredits;
-            }
-
-            public void setTotalCredits(int totalCredits) {
-                this.totalCredits = totalCredits;
-            }
-
-            public boolean isIsRTShipping() {
-                return isRTShipping;
-            }
-
-            public void setIsRTShipping(boolean isRTShipping) {
-                this.isRTShipping = isRTShipping;
-            }
-
-            public boolean isOver13Checked() {
-                return over13Checked;
-            }
-
-            public void setOver13Checked(boolean over13Checked) {
-                this.over13Checked = over13Checked;
-            }
-
-            public String getCustomerTypeCode() {
-                return customerTypeCode;
-            }
-
-            public void setCustomerTypeCode(String customerTypeCode) {
-                this.customerTypeCode = customerTypeCode;
-            }
-
-            public boolean isIsSaveCCDetails() {
-                return isSaveCCDetails;
-            }
-
-            public void setIsSaveCCDetails(boolean isSaveCCDetails) {
-                this.isSaveCCDetails = isSaveCCDetails;
-            }
 
             public List<?> getCustomFields() {
                 return customFields;

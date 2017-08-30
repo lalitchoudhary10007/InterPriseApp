@@ -123,7 +123,7 @@ public class ItemsInventoryDBManager {
 
                 .count()==0)
         {
-            Toast.makeText(con, "Item Code Not Exist !!", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(con, "Item Code Not Exist !!", Toast.LENGTH_SHORT).show();
         }else {
             Item =
                     myRealm.where(ItemsInventoryTable.class)

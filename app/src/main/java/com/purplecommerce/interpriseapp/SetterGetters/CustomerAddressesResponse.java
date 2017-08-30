@@ -128,54 +128,21 @@ public class CustomerAddressesResponse {
              * customFields : []
              */
 
-            private int counter;
-            private String customerCode;
-            private String shipToCode;
-            private String shipToName;
-            private String classCode;
-            private String glClassCode;
-            private String address;
-            private String city;
-            private String postalCode;
-            private String county;
-            private String country;
-            private String telephone;
-            private String fax;
-            private String email;
-            private String webSite;
-            private String taxCode;
-            private String shippingMethodGroup;
-            private String shippingMethod;
-            private String warehouseCode;
-            private boolean isAllowBackOrder;
-            private boolean isActive;
-            private boolean isCreditHold;
-            private String salesRepGroupCode;
-            private String commission;
-            private int commissionPercent;
-            private int creditLimit;
-            private int pricingPercent;
-            private String pricingLevel;
-            private String paymentTermGroup;
-            private String paymentTermCode;
-            private String openTime;
-            private String closeTime;
-            private String specialInstructions;
-            private boolean isBookTimeDateAndBay;
-            private String residenceType;
-            private String userCreated;
-            private String dateCreated;
-            private String userModified;
-            private String dateModified;
+
+              private String customerCode;
+              private String shipToCode;
+              private String shipToName;
+
+              private String address;
+              private String city;
+              private String postalCode;
+              private String county;
+              private String country;
+              private String telephone;
+              private String email;
+
             private List<?> customFields;
 
-            public int getCounter() {
-                return counter;
-            }
-
-            public void setCounter(int counter) {
-                this.counter = counter;
-            }
 
             public String getCustomerCode() {
                 return customerCode;
@@ -199,22 +166,6 @@ public class CustomerAddressesResponse {
 
             public void setShipToName(String shipToName) {
                 this.shipToName = shipToName;
-            }
-
-            public String getClassCode() {
-                return classCode;
-            }
-
-            public void setClassCode(String classCode) {
-                this.classCode = classCode;
-            }
-
-            public String getGlClassCode() {
-                return glClassCode;
-            }
-
-            public void setGlClassCode(String glClassCode) {
-                this.glClassCode = glClassCode;
             }
 
             public String getAddress() {
@@ -265,220 +216,12 @@ public class CustomerAddressesResponse {
                 this.telephone = telephone;
             }
 
-            public String getFax() {
-                return fax;
-            }
-
-            public void setFax(String fax) {
-                this.fax = fax;
-            }
-
             public String getEmail() {
                 return email;
             }
 
             public void setEmail(String email) {
                 this.email = email;
-            }
-
-            public String getWebSite() {
-                return webSite;
-            }
-
-            public void setWebSite(String webSite) {
-                this.webSite = webSite;
-            }
-
-            public String getTaxCode() {
-                return taxCode;
-            }
-
-            public void setTaxCode(String taxCode) {
-                this.taxCode = taxCode;
-            }
-
-            public String getShippingMethodGroup() {
-                return shippingMethodGroup;
-            }
-
-            public void setShippingMethodGroup(String shippingMethodGroup) {
-                this.shippingMethodGroup = shippingMethodGroup;
-            }
-
-            public String getShippingMethod() {
-                return shippingMethod;
-            }
-
-            public void setShippingMethod(String shippingMethod) {
-                this.shippingMethod = shippingMethod;
-            }
-
-            public String getWarehouseCode() {
-                return warehouseCode;
-            }
-
-            public void setWarehouseCode(String warehouseCode) {
-                this.warehouseCode = warehouseCode;
-            }
-
-            public boolean isIsAllowBackOrder() {
-                return isAllowBackOrder;
-            }
-
-            public void setIsAllowBackOrder(boolean isAllowBackOrder) {
-                this.isAllowBackOrder = isAllowBackOrder;
-            }
-
-            public boolean isIsActive() {
-                return isActive;
-            }
-
-            public void setIsActive(boolean isActive) {
-                this.isActive = isActive;
-            }
-
-            public boolean isIsCreditHold() {
-                return isCreditHold;
-            }
-
-            public void setIsCreditHold(boolean isCreditHold) {
-                this.isCreditHold = isCreditHold;
-            }
-
-            public String getSalesRepGroupCode() {
-                return salesRepGroupCode;
-            }
-
-            public void setSalesRepGroupCode(String salesRepGroupCode) {
-                this.salesRepGroupCode = salesRepGroupCode;
-            }
-
-            public String getCommission() {
-                return commission;
-            }
-
-            public void setCommission(String commission) {
-                this.commission = commission;
-            }
-
-            public int getCommissionPercent() {
-                return commissionPercent;
-            }
-
-            public void setCommissionPercent(int commissionPercent) {
-                this.commissionPercent = commissionPercent;
-            }
-
-            public int getCreditLimit() {
-                return creditLimit;
-            }
-
-            public void setCreditLimit(int creditLimit) {
-                this.creditLimit = creditLimit;
-            }
-
-            public int getPricingPercent() {
-                return pricingPercent;
-            }
-
-            public void setPricingPercent(int pricingPercent) {
-                this.pricingPercent = pricingPercent;
-            }
-
-            public String getPricingLevel() {
-                return pricingLevel;
-            }
-
-            public void setPricingLevel(String pricingLevel) {
-                this.pricingLevel = pricingLevel;
-            }
-
-            public String getPaymentTermGroup() {
-                return paymentTermGroup;
-            }
-
-            public void setPaymentTermGroup(String paymentTermGroup) {
-                this.paymentTermGroup = paymentTermGroup;
-            }
-
-            public String getPaymentTermCode() {
-                return paymentTermCode;
-            }
-
-            public void setPaymentTermCode(String paymentTermCode) {
-                this.paymentTermCode = paymentTermCode;
-            }
-
-            public String getOpenTime() {
-                return openTime;
-            }
-
-            public void setOpenTime(String openTime) {
-                this.openTime = openTime;
-            }
-
-            public String getCloseTime() {
-                return closeTime;
-            }
-
-            public void setCloseTime(String closeTime) {
-                this.closeTime = closeTime;
-            }
-
-            public String getSpecialInstructions() {
-                return specialInstructions;
-            }
-
-            public void setSpecialInstructions(String specialInstructions) {
-                this.specialInstructions = specialInstructions;
-            }
-
-            public boolean isIsBookTimeDateAndBay() {
-                return isBookTimeDateAndBay;
-            }
-
-            public void setIsBookTimeDateAndBay(boolean isBookTimeDateAndBay) {
-                this.isBookTimeDateAndBay = isBookTimeDateAndBay;
-            }
-
-            public String getResidenceType() {
-                return residenceType;
-            }
-
-            public void setResidenceType(String residenceType) {
-                this.residenceType = residenceType;
-            }
-
-            public String getUserCreated() {
-                return userCreated;
-            }
-
-            public void setUserCreated(String userCreated) {
-                this.userCreated = userCreated;
-            }
-
-            public String getDateCreated() {
-                return dateCreated;
-            }
-
-            public void setDateCreated(String dateCreated) {
-                this.dateCreated = dateCreated;
-            }
-
-            public String getUserModified() {
-                return userModified;
-            }
-
-            public void setUserModified(String userModified) {
-                this.userModified = userModified;
-            }
-
-            public String getDateModified() {
-                return dateModified;
-            }
-
-            public void setDateModified(String dateModified) {
-                this.dateModified = dateModified;
             }
 
             public List<?> getCustomFields() {
