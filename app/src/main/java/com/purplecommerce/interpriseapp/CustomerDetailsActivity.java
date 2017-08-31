@@ -94,6 +94,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                 Intent ii = new Intent(CustomerDetailsActivity.this , OrdersActivity.class);
                 ii.putExtra("CUST-CODE",Customer_Code);
                 ii.putExtra("CUST-NAME", name.getText().toString());
+                ii.putExtra("FROM" , "1" );
                 startActivity(ii);
 
             }

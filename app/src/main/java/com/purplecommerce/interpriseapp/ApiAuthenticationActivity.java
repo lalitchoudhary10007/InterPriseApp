@@ -87,8 +87,8 @@ public class ApiAuthenticationActivity extends AppCompatActivity {
                     InputType.TYPE_TEXT_VARIATION_URI);
         }
 
-        ed_Url.setText("http://seventies.apexhelp.co.uk:82/Interprise.Web.Services");
-        ed_Key.setText("0ab63a19-d325-4439-90ba-a845611bacbe");
+        ed_Url.setText("http://test.interprise.co.uk:82/Interprise.Web.Services.issidemouk");
+        ed_Key.setText("73a0d866-770a-46be-a26f-1b837ce5a371");
 
 
         submit.setOnClickListener(new View.OnClickListener() {

@@ -64,7 +64,7 @@ public class OrdersActivity extends AppCompatActivity {
     Gson gson;
     Dialog progress_dialog ;
     TextView  OrderPageCount ;
-    String CustName , CustCode ;
+    String CustName , CustCode  ;
     List<CustomerSalesOrdersResponse.DataBean> OrdersData ;
     ArrayList<CustomerSalesOrdersResponse.DataBean.AttributesBean> OrderAttributes = new ArrayList<>();
     Spinner OrdersSpinner ;
@@ -87,9 +87,9 @@ public class OrdersActivity extends AppCompatActivity {
 
 
         Intent ii = getIntent();
-       // toolbartxt.setText("HOME > "+ii.getStringExtra("CUST-CODE")+ " > ORDERS");
         CustName = ii.getStringExtra("CUST-CODE");
         CustCode = ii.getStringExtra("CUST-NAME");
+
 
         ll_toolbar.addView(Toolbartxts("HOME >"));
         ll_toolbar.addView(Toolbartxts(" "+ii.getStringExtra("CUST-CODE")));

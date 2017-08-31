@@ -61,7 +61,7 @@ public class CustomersActivity extends AppCompatActivity {
     ListView SearchlistView ;
     ArrayList<String> AllCustomerCodes = new ArrayList<>();
     ArrayAdapter<String> SearchAdapter ;
-
+    String lastUpdate = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,21 +84,11 @@ public class CustomersActivity extends AppCompatActivity {
 
         /////////////////////
 
-        String lastUpdate = "";
+
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         final String date = df.format(Calendar.getInstance().getTime());
         StringTokenizer tokenizer = new StringTokenizer(date , "T");
-        lastUpdate = date ;
-        if (changeLogDBManager.GetChangeLogAccordingName((Utils.CustomerChangeLog))==null){
-            Toast.makeText(this, "No Change Logs", Toast.LENGTH_SHORT).show();
-            last_update.setText("Not Yet");
-        }else {
-            lastUpdate = changeLogDBManager.GetChangeLogAccordingName(Utils.CustomerChangeLog).getChangeLogLastUpdate();
-            StringTokenizer st = new StringTokenizer(lastUpdate , "T");
-            last_update.setText(st.nextToken()+"\n"+st.nextToken());
-        }
-
 
         String to = tokenizer.nextToken();
         String totime = tokenizer.nextToken();
@@ -118,13 +108,21 @@ public class CustomersActivity extends AppCompatActivity {
 
 
         final String finalTodatetime = todatetime;
-        final String finalLastUpdate = lastUpdate;
+
         ll_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //http://seventies.apexhelp.co.uk:82/Interprise.Web.Services/changelog/Customer?from=2017-07-07&to=2017-11-14
 
+                if (changeLogDBManager.GetChangeLogAccordingName((Utils.CustomerChangeLog))==null){
+                    last_update.setText("Updating...");
+                    lastUpdate = "2016-06-11T11:55:37";
+                }else {
+                    lastUpdate = changeLogDBManager.GetChangeLogAccordingName(Utils.CustomerChangeLog).getChangeLogLastUpdate();
+                    StringTokenizer st = new StringTokenizer(lastUpdate , "T");
+                    last_update.setText(st.nextToken()+"\n"+st.nextToken());
+                }
 
                  String PageSize = "2000";
                  String PageNumber = "1";
@@ -133,22 +131,26 @@ public class CustomersActivity extends AppCompatActivity {
                 Log.e("**to time",""+ finalTodatetime);
 
                 Intent serviceIntent = new Intent(CustomersActivity.this, CustomersService.class);
-                serviceIntent.putExtra("URL","/changelog/Customer?from="+ "2017-07-2T14:53:46" +"&to="+ finalTodatetime +"&page[number]=1&page[size]="+PageSize);
+                serviceIntent.putExtra("URL","/changelog/Customer?from="+ "2016-06-11T11:55:37" +"&to="+ finalTodatetime +"&page[number]=1&page[size]="+PageSize);
                 serviceIntent.putExtra("TODATETIME" , finalTodatetime);
                 startService(serviceIntent);
             }
         });
 
 
-        dbManager.DeleteAccordingCustomerID("CUST-001454");
 
         if (dbManager.CustomerTableisEmpty()){
 
-            dbManager.SaveCustomers("CUST-001003" , "John Greenwood" , "01708 474429" ,"info@seventies.co.uk" , "Wholesale" ,"TRAD01" , "SHIP-001232" , "United Kingdom" , "CCTC-001294");
+            dbManager.SaveCustomers("CUST-000001" , "Toy Prospect UK Ltd" , "0800 032 4000" ,"info@toyprospect.co.uk" , "Retail" ,"" , "SHIP-000002" , "United Kingdom" , "CCTC-000002");
 
-            dbManager.SaveCustomers("CUST-001004" , "Curlys Shack" , "0755 242 6490" ,"curlysshack@gmail.com" , "Wholesale" ,"TRAD01" , "SHIP-001232" , "United Kingdom" , "CCTC-001294");
+            dbManager.SaveCustomers("CUST-000002" , "Undergound Toys UK" , "0194 494839" ,"simon.mermon@underground.co.uk" , "Wholesale" ,"" , "SHIP-000003" , "United Kingdom" , "CCTC-000003");
 
-            dbManager.SaveCustomers("CUST-001005" , "Rasmus Paimre" , "+372 5559 3835" ,"info@seventies.co.uk" , "Wholesale" ,"TRAD01" , "SHIP-001232" , "United Kingdom" , "CCTC-001294");
+            dbManager.SaveCustomers("CUST-000003" , "The Gadget Store" , "0191 948392" ,"tony.sandland@gadgetstore.co.uk" , "Wholesale" ,"" , "SHIP-000004" , "United Kingdom" , "CCTC-000004");
+
+            dbManager.SaveCustomers("CUST-001004" , "We Love Toys" , "01978 828348" ,"cherry.mcclenent@lovetoys.co.uk" , "Wholesale" ,"" , "SHIP-000005" , "United Kingdom" , "CCTC-000005");
+
+
+
 
         }
 
@@ -390,47 +392,53 @@ public class CustomersActivity extends AppCompatActivity {
 
         CustomerRows =  dbManager.getAllrows();
 
-        if (CustomerRows.size() < perpagecount){
-
-            OrderPageCount.setText("1"+"-"+CustomerRows.size()+"/"+CustomerRows.size());
-
-            for (int i = 0 ; i < CustomerRows.size() ; i++){
-
-                Orders_parent_layout.addView(AddOrdersOnPArent(CustomerRows.get(i)));
-
-            }
-
+        if (CustomerRows.isEmpty()){
+            Toast.makeText(this, "No Customers !!", Toast.LENGTH_SHORT).show();
         }else {
+            if (CustomerRows.size() < perpagecount){
 
-            hs_page.clear();
-            hs_orderpage.clear();
+                OrderPageCount.setText("1"+"-"+CustomerRows.size()+"/"+CustomerRows.size());
 
-            pageCount = 0 ;
+                for (int i = 0 ; i < CustomerRows.size() ; i++){
 
-            totalPage = CustomerRows.size() / perpagecount ;
-            remainingcount = CustomerRows.size() % perpagecount ;
+                    Orders_parent_layout.addView(AddOrdersOnPArent(CustomerRows.get(i)));
 
-            for (int i = 1 ; i <= totalPage ; i++){
-                hs_page.add(""+i);
-                hs_orderpage.add(String.valueOf(i*perpagecount));
-            }
-            if (remainingcount == 0){
-                // Toast.makeText(OrdersActivity.this, "No remain", Toast.LENGTH_SHORT).show();
+                }
+
             }else {
-                hs_page.add(String.valueOf(totalPage+1));
-                hs_orderpage.add(String.valueOf(remainingcount));
+
+                hs_page.clear();
+                hs_orderpage.clear();
+
+                pageCount = 0 ;
+
+                totalPage = CustomerRows.size() / perpagecount ;
+                remainingcount = CustomerRows.size() % perpagecount ;
+
+                for (int i = 1 ; i <= totalPage ; i++){
+                    hs_page.add(""+i);
+                    hs_orderpage.add(String.valueOf(i*perpagecount));
+                }
+                if (remainingcount == 0){
+                    // Toast.makeText(OrdersActivity.this, "No remain", Toast.LENGTH_SHORT).show();
+                }else {
+                    hs_page.add(String.valueOf(totalPage+1));
+                    hs_orderpage.add(String.valueOf(remainingcount));
+                }
+                int siz = Integer.parseInt(hs_orderpage.get(pageCount));
+
+                OrderPageCount.setText("1"+"-"+siz+"/"+CustomerRows.size());
+
+                for (int i = 0 ; i < siz ; i++){
+
+                    Orders_parent_layout.addView(AddOrdersOnPArent(CustomerRows.get(i)));
+
+                }
+
             }
-            int siz = Integer.parseInt(hs_orderpage.get(pageCount));
-
-            OrderPageCount.setText("1"+"-"+siz+"/"+CustomerRows.size());
-
-            for (int i = 0 ; i < siz ; i++){
-
-                Orders_parent_layout.addView(AddOrdersOnPArent(CustomerRows.get(i)));
-
-            }
-
         }
+
+
 
 
 

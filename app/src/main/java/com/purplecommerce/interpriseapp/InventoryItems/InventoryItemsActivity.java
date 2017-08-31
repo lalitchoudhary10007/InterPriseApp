@@ -1,13 +1,19 @@
 package com.purplecommerce.interpriseapp.InventoryItems;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -78,7 +84,7 @@ public class InventoryItemsActivity extends AppCompatActivity {
 
     Dialog progress_dialog ;
     TextView  ItemsPageCount ;
-
+    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 0;
     RealmResults<ItemsInventoryTable> ItemsInventoryRows ;
     public static String prevoiusOne = "test" ;
     ArrayList<String> hs_page = new ArrayList<>();
@@ -86,7 +92,7 @@ public class InventoryItemsActivity extends AppCompatActivity {
     ChangeLogDBManager changeLogDBManager ;
     ItemsInventoryDBManager itemsDBManager ;
     private ItemsRequestReceiver receiver;
-
+    String lastUpdate = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,22 +130,11 @@ public class InventoryItemsActivity extends AppCompatActivity {
         /////////////////Start Service
 
 
-        String lastUpdate = "";
+
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         final String date = df.format(Calendar.getInstance().getTime());
         StringTokenizer tokenizer = new StringTokenizer(date , "T");
-        lastUpdate = date ;
-
-        if (changeLogDBManager.GetChangeLogAccordingName((Utils.ItemsChangeLog))==null){
-            Toast.makeText(this, "No Change Logs", Toast.LENGTH_SHORT).show();
-            last_update.setText("Not Yet");
-        }else {
-            lastUpdate = changeLogDBManager.GetChangeLogAccordingName(Utils.ItemsChangeLog).getChangeLogLastUpdate();
-            StringTokenizer st = new StringTokenizer(lastUpdate , "T");
-            last_update.setText(st.nextToken()+"\n"+st.nextToken());
-        }
-
 
 
         String to = tokenizer.nextToken();
@@ -159,12 +154,22 @@ public class InventoryItemsActivity extends AppCompatActivity {
 
 
         final String finalTodatetime = todatetime;
-        final String finalLastUpdate = lastUpdate;
+
         ll_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //http://seventies.apexhelp.co.uk:82/Interprise.Web.Services/changelog/Customer?from=2017-07-07&to=2017-11-14
+
+                if (changeLogDBManager.GetChangeLogAccordingName((Utils.ItemsChangeLog))==null){
+                    last_update.setText("Updating...");
+                    lastUpdate = "2016-06-11T11:55:37" ;
+                }else {
+                    lastUpdate = changeLogDBManager.GetChangeLogAccordingName(Utils.ItemsChangeLog).getChangeLogLastUpdate();
+                    StringTokenizer st = new StringTokenizer(lastUpdate , "T");
+                    last_update.setText(st.nextToken()+"\n"+st.nextToken());
+                }
+
 
                 String PageSize = "2000";
                 String PageNumber = "1";
@@ -173,11 +178,9 @@ public class InventoryItemsActivity extends AppCompatActivity {
                 Log.e("**to time",""+ finalTodatetime);
 
                 Intent serviceIntent = new Intent(InventoryItemsActivity.this, ItemsInventoryService.class);
-                serviceIntent.putExtra("URL","/changelog/InventoryItem?from="+ "2017-08-11T11:55:37" +"&to="+ finalTodatetime                         +"&page[number]=1&page[size]="+PageSize);
+                serviceIntent.putExtra("URL","/changelog/InventoryItem?from="+ "2016-06-11T11:55:37" +"&to="+ finalTodatetime                         +"&page[number]=1&page[size]="+PageSize);
                 serviceIntent.putExtra("TODATETIME" , finalTodatetime);
                 startService(serviceIntent);
-
-
 
             }
         });
@@ -190,11 +193,21 @@ public class InventoryItemsActivity extends AppCompatActivity {
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new IntentIntegrator((Activity) InventoryItemsActivity.this).initiateScan();
+
+                if (Build.VERSION.SDK_INT < 23) {
+                    //Do not need to check the permission
+                    new IntentIntegrator((Activity) InventoryItemsActivity.this).initiateScan();
+                } else {
+                    if (checkAndRequestPermissions()) {
+                        //If you have already permitted the permission
+                        new IntentIntegrator((Activity) InventoryItemsActivity.this).initiateScan();
+                    } else {
+
+                    }
+
+                }
             }
         });
-
-
 
 
 
@@ -207,10 +220,10 @@ public class InventoryItemsActivity extends AppCompatActivity {
                     Toast.makeText(InventoryItemsActivity.this, "Please Enter Customer Code !!", Toast.LENGTH_SHORT).show();
                 }else {
 
-                    RealmResults<ItemsInventoryTable> cust = itemsDBManager.SearchItems("ITEM-"+ed_srch_items.getText().toString().trim());
+                    RealmResults<ItemsInventoryTable> cust = itemsDBManager.SearchItems(ed_srch_items.getText().toString().trim().toUpperCase());
                     Log.e("**customer","customer"+cust);
                     if (cust==null){
-                        Toast.makeText(InventoryItemsActivity.this, "Customer Code Not Exist !!", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(InventoryItemsActivity.this, "Customer Code Not Exist !!", Toast.LENGTH_SHORT).show();
                     }else {
 
                         Utils.hideKeyboard(InventoryItemsActivity.this);
@@ -267,8 +280,15 @@ public class InventoryItemsActivity extends AppCompatActivity {
        final StringTokenizer tokenizer = new StringTokenizer(attributesBean.getItemlastUpdate(),"T");
 
 
-       second.setText(attributesBean.getItemName()+"\n"+attributesBean.getItemCode()+"("+attributesBean.getItemType()+")            "+"\n" +"By "+attributesBean.getItemManufactureCode()+
-                "\n"+"Last Updated On "+tokenizer.nextToken());
+        if (attributesBean.getItemManufactureCode().isEmpty()){
+            second.setText(attributesBean.getItemName()+"\n"+attributesBean.getItemCode()+"("+attributesBean.getItemType()+")"+"\n"
+                    +"Last Updated On "+tokenizer.nextToken());
+        }else {
+            second.setText(attributesBean.getItemName()+"\n"+attributesBean.getItemCode()+"("+attributesBean.getItemType()+")"+"\n" +"By "+attributesBean.getItemManufactureCode()+
+                    "\n"+"Last Updated On "+tokenizer.nextToken());
+        }
+
+
 
         Log.e("**image is ","database"+attributesBean.getItemPhoto());
 
@@ -351,8 +371,6 @@ public class InventoryItemsActivity extends AppCompatActivity {
 
     }
 
-
-
     public class ItemsRequestReceiver extends BroadcastReceiver {
 
 
@@ -364,7 +382,7 @@ public class InventoryItemsActivity extends AppCompatActivity {
 
             Log.e("in receiver","**"+responseString);
 
-            String lastUpdate = new ChangeLogDBManager(InventoryItemsActivity.this).GetChangeLogAccordingName(Utils.ItemsChangeLog).getChangeLogLastUpdate();
+            lastUpdate = new ChangeLogDBManager(InventoryItemsActivity.this).GetChangeLogAccordingName(Utils.ItemsChangeLog).getChangeLogLastUpdate();
             StringTokenizer st = new StringTokenizer(lastUpdate , "T");
             last_update.setText(st.nextToken()+"\n"+st.nextToken());
 
@@ -505,9 +523,68 @@ public class InventoryItemsActivity extends AppCompatActivity {
 
 
 
+    private boolean checkAndRequestPermissions() {
+        int permissionCAMERA = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA);
 
 
+//        int storagePermission = ContextCompat.checkSelfPermission(this,
+//
+//
+//                Manifest.permission.READ_EXTERNAL_STORAGE);
+//
+//        int smsPermission = ContextCompat.checkSelfPermission(this,
+//
+//
+//                Manifest.permission.READ_SMS);
+//
+//        int callPermission = ContextCompat.checkSelfPermission(this,
+//
+//
+//                Manifest.permission.CALL_PHONE);
 
+        List<String> listPermissionsNeeded = new ArrayList<>();
+//        if (storagePermission != PackageManager.PERMISSION_GRANTED) {
+//            listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+//        }
+        if (permissionCAMERA != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.CAMERA);
+        }
+//        if (smsPermission != PackageManager.PERMISSION_GRANTED) {
+//            listPermissionsNeeded.add(Manifest.permission.READ_SMS);
+//        }
+//        if (callPermission != PackageManager.PERMISSION_GRANTED) {
+//            listPermissionsNeeded.add(Manifest.permission.CALL_PHONE);
+//        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this,
+
+                    listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), MY_PERMISSIONS_REQUEST_CAMERA);
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_CAMERA:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    new IntentIntegrator((Activity) InventoryItemsActivity.this).initiateScan();
+                    //Permission Granted Successfully. Write working code here.
+                } else {
+
+                    //You did not accept the request can not use the functionality.
+                }
+                break;
+        }
+
+    }
 
 
 

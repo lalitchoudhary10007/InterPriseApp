@@ -11,14 +11,16 @@ import android.widget.TextView;
 import com.purplecommerce.interpriseapp.Database.CustomersDBManager;
 import com.purplecommerce.interpriseapp.Database.ItemsInventoryDBManager;
 import com.purplecommerce.interpriseapp.InventoryItems.InventoryItemsActivity;
+import com.purplecommerce.interpriseapp.Services.MyBackgroundService;
 import com.purplecommerce.interpriseapp.SessionManager.SessionManager;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
+import java.util.Date;
+import java.util.StringTokenizer;
+import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,12 +38,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+      //  startService(new Intent(this, MyBackgroundService.class));
+
+
         Init();
 
         fm_orders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this , OrdersActivity.class));
+                startActivity(new Intent(MainActivity.this , OrdersFromDBActivity.class));
             }
         });
 

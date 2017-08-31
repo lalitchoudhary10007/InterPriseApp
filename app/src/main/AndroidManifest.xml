@@ -3,6 +3,7 @@
     package="com.purplecommerce.interpriseapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +16,10 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".SplashActivity">
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,13 +47,17 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
+        <service android:name=".Services.MyBackgroundService" />
         <service
             android:name=".Services.CustomersService"
             android:exported="false" />
-
         <service
             android:name=".Services.ItemsInventoryService"
             android:exported="false" />
+
+        <service android:name=".Services.SalesOrdersService"
+            android:exported="false"/>
+
 
         <activity
             android:name=".AddressesActivity"
@@ -67,10 +75,15 @@
             android:name=".InventoryItems.InventoryItemsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".InventoryItems.ItemDetailsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
 
-        <activity android:name=".InventoryItems.ItemDetailsActivity"
+        <activity android:name=".OrdersFromDBActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
+
 
 
     </application>

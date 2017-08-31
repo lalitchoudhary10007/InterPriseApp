@@ -60,6 +60,7 @@ public class ItemsInventoryService extends IntentService {
         String requestUrl = intent.getStringExtra("URL");
         String lastUpdateTime = intent.getStringExtra("TODATETIME");
 
+
         ChangeLogDBManager changeLogDBManager  = new ChangeLogDBManager(ItemsInventoryService.this);;
         changeLogDBManager.SaveNewChangeLog(Utils.ItemsChangeLog , lastUpdateTime , ""+requestUrl);
 
@@ -108,11 +109,11 @@ public class ItemsInventoryService extends IntentService {
 
                 for (int i = 0 ; i < logItemsResponse.getData().size() ; i++){
 
-                    if (logItemsResponse.getData().get(i).getAttributes().getAction().equals("INSERT")){
+                 //   if (logItemsResponse.getData().get(i).getAttributes().getAction().equals("INSERT")){
 
                         NewItems.add(logItemsResponse.getData().get(i).getAttributes().getData());
 
-                    }
+                //    }
 
                 }
 
@@ -213,16 +214,16 @@ public class ItemsInventoryService extends IntentService {
                 }
 
 
-                if (detailsResponse.getData().getAttributes().getItemType().equals("Matrix Group")){
-
-                    Log.e("**","Matrix group");
-
-                }else {
+//                if (detailsResponse.getData().getAttributes().getItemType().equals("Matrix Group")){
+//
+//                    Log.e("**","Matrix group");
+//
+//                }else {
                     inventoryDBManager.SaveNewItems(detailsResponse.getData().getAttributes().getItemCode(), detailsResponse.getData().getAttributes().getItemName() ,
                             detailsResponse.getData().getAttributes().getItemType(), detailsResponse.getData().getAttributes().getStatus(), photo ,
-                            detailsResponse.getData().getAttributes().getManufacturerCode(),
+                            obj.optString("manufacturerCode"),
                             detailsResponse.getData().getAttributes().getDateCreated());
-                }
+           //     }
 
 
 

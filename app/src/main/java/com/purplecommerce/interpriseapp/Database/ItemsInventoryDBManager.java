@@ -143,15 +143,15 @@ public class ItemsInventoryDBManager {
 
 
         if(myRealm.where(ItemsInventoryTable.class)
-                .contains("ItemCode", ""+itemcode)
+                .contains("ItemName", ""+itemcode)
 
                 .count()==0)
         {
-            Toast.makeText(con, "Item Code Not Exist !!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(con, "Item Name Not Exist !!", Toast.LENGTH_SHORT).show();
         }else {
             items =
                     myRealm.where(ItemsInventoryTable.class)
-                            .contains("ItemCode", ""+itemcode , RealmQuery.CASE_INSENSITIVE)
+                            .contains("ItemName", ""+itemcode , RealmQuery.CASE_INSENSITIVE)
                             .findAll();
             return items ;
         }

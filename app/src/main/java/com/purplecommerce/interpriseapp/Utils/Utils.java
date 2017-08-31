@@ -30,6 +30,8 @@ public class Utils {
 
     public static final String CustomerChangeLog = "CustomersChangeLog" ;
     public static final String ItemsChangeLog = "ItemsChangeLog" ;
+    public static final String OrdersChangeLog = "OrdersChangeLog" ;
+
     public static final int PerPageCount = 20 ;
 
 

@@ -136,11 +136,8 @@ public class CustomersService extends IntentService {
 
                 for (int i = 0 ; i < changeLogResponse.getData().size() ; i++){
 
-                    if (changeLogResponse.getData().get(i).getAttributes().getAction().equals("INSERT")){
-
                      NewCustomers.add(changeLogResponse.getData().get(i).getAttributes().getData());
 
-                    }
 
                 }
 
