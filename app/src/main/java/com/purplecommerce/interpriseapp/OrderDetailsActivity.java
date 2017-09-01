@@ -44,7 +44,7 @@ import okhttp3.Route;
 public class OrderDetailsActivity extends AppCompatActivity {
 
 
-    LinearLayout ll_parent_products , ll_toolbar ;
+    LinearLayout ll_parent_products , ll_toolbar , ll_customerId ;
     TextView  Customer_id , Customer_name , ship_to , bill_to , subtotal , freight , total ,
     Invoice ;
     SessionManager sessionManager ;
@@ -69,7 +69,14 @@ public class OrderDetailsActivity extends AppCompatActivity {
         ll_toolbar.addView(Toolbartxts("ORDERS >"));
         ll_toolbar.addView(Toolbartxts(""+ii.getStringExtra("OrderNo")));
 
-        Customer_id.setText(""+ii.getStringExtra("CustomeId"));
+        if (ii.getStringExtra("CustomeId").equals("")){
+            ll_customerId.setVisibility(View.GONE);
+        }else {
+            ll_customerId.setVisibility(View.VISIBLE);
+            Customer_id.setText(""+ii.getStringExtra("CustomeId"));
+        }
+
+
         Customer_name.setText(""+ii.getStringExtra("CustomerName"));
         ship_to.setText(""+ii.getStringExtra("ShipTo"));
         bill_to.setText(""+ii.getStringExtra("BillTo"));
@@ -92,7 +99,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
     private void init() {
 
         ll_parent_products = (LinearLayout)findViewById(R.id.parent_products_layout);
-       // toolbartxt = (TextView)findViewById(R.id.toolbar_txt);
+       ll_customerId = (LinearLayout)findViewById(R.id.ll_customer_id);
         Customer_id = (TextView)findViewById(R.id.txt_customerid);
         Customer_name = (TextView)findViewById(R.id.txt_customername);
         ship_to = (TextView)findViewById(R.id.txt_shipto);

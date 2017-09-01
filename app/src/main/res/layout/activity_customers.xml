@@ -296,7 +296,7 @@
                     android:id="@+id/ed_search_order"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Order No"
+                    android:hint="Enter Customer Code"
                     android:textColorHint="@color/muted_white"
                     android:background="@null"
                     android:paddingLeft="@dimen/_4sdp"

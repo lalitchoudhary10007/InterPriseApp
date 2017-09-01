@@ -105,7 +105,14 @@ public class CustomersActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
+        if (changeLogDBManager.GetChangeLogAccordingName((Utils.CustomerChangeLog))==null){
+            last_update.setText("No Update");
+            lastUpdate = "2017-08-20T11:55:37" ;
+        }else {
+            lastUpdate = changeLogDBManager.GetChangeLogAccordingName(Utils.CustomerChangeLog).getChangeLogLastUpdate();
+            StringTokenizer st = new StringTokenizer(lastUpdate , "T");
+            last_update.setText(st.nextToken()+"\n"+st.nextToken());
+        }
 
         final String finalTodatetime = todatetime;
 

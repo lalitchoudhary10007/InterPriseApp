@@ -25,17 +25,94 @@
         />
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:orientation="vertical">
+
+
     <views.textview.TypefaceTextView
         android:id="@+id/second_txt"
         geekui:customTypeface="fonts/CoreSansDRegular.otf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary"
-        android:layout_weight="0.4"
         android:textSize="@dimen/_10sdp"
         android:text=""
         android:gravity="left"
         />
+
+            <views.textview.TypefaceTextView
+                android:id="@+id/source"
+                geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_10sdp"
+                android:text=""
+                android:gravity="left"
+                android:visibility="gone"/>
+
+            <views.textview.TypefaceTextView
+                android:id="@+id/po"
+                geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_10sdp"
+                android:text=""
+                android:gravity="left"
+                android:visibility="gone"/>
+
+            <views.textview.TypefaceTextView
+                android:id="@+id/total"
+                geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_10sdp"
+                android:text=""
+                android:gravity="left"
+                android:visibility="gone"/>
+
+            <views.textview.TypefaceTextView
+                android:id="@+id/paid"
+                geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_10sdp"
+                android:text=""
+                android:gravity="left"
+                android:visibility="gone"/>
+
+            <views.textview.TypefaceTextView
+                android:id="@+id/status"
+                geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_10sdp"
+                android:text=""
+                android:gravity="left"
+                android:visibility="gone"/>
+
+
+            <views.textview.TypefaceTextView
+                android:id="@+id/shipped_on"
+                geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_10sdp"
+                android:text=""
+                android:gravity="left"
+                android:visibility="gone"/>
+
+
+        </LinearLayout>
+
 
     <views.textview.TypefaceTextView
         android:id="@+id/third_txt"

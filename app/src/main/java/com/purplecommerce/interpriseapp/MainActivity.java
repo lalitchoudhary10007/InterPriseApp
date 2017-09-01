@@ -9,7 +9,9 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.purplecommerce.interpriseapp.Database.CustomersDBManager;
+import com.purplecommerce.interpriseapp.Database.InvoicesDBManager;
 import com.purplecommerce.interpriseapp.Database.ItemsInventoryDBManager;
+import com.purplecommerce.interpriseapp.Database.SalesOrdersDBManager;
 import com.purplecommerce.interpriseapp.InventoryItems.InventoryItemsActivity;
 import com.purplecommerce.interpriseapp.Services.MyBackgroundService;
 import com.purplecommerce.interpriseapp.SessionManager.SessionManager;
@@ -24,9 +26,9 @@ import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
-    FrameLayout fm_orders , fm_customers , fm_items ;
+    FrameLayout fm_orders , fm_customers , fm_items , fm_invoices ;
     SessionManager sm ;
-    TextView CustomersCount  , ItemsCount ;
+    TextView CustomersCount  , ItemsCount , orders_count , invoice_count;
     CustomersDBManager dbManager ;
     ItemsInventoryDBManager inventoryDBManager ;
 
@@ -64,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        fm_invoices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this , InvoicesFromDBActivity.class));
+            }
+        });
+
 
 
     }
@@ -73,14 +82,15 @@ public class MainActivity extends AppCompatActivity {
         fm_orders = (FrameLayout)findViewById(R.id.frame_orders);
         fm_customers = (FrameLayout)findViewById(R.id.frame_customers) ;
         fm_items = (FrameLayout)findViewById(R.id.fm_items);
+        fm_invoices = (FrameLayout)findViewById(R.id.frame_invoices) ;
         sm = new SessionManager(MainActivity.this);
         dbManager = new CustomersDBManager(MainActivity.this);
         inventoryDBManager = new ItemsInventoryDBManager(MainActivity.this);
         Log.e("**Key"+sm.getUrlDetails().get(SessionManager.KEY),"url"+sm.getUrlDetails().get(SessionManager.URL));
         CustomersCount = (TextView)findViewById(R.id.txt_customer_count);
         ItemsCount = (TextView)findViewById(R.id.items_count);
-
-
+        orders_count = (TextView)findViewById(R.id.orders_count);
+        invoice_count = (TextView)findViewById(R.id.txt_invoices);
 
     }
 
@@ -90,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         CustomersCount.setText(String.valueOf(dbManager.getCustomersCount()));
         ItemsCount.setText(String.valueOf(inventoryDBManager.GetItemsIventoryCount()));
-
+        orders_count.setText(String.valueOf(new SalesOrdersDBManager(MainActivity.this).GetSalesOrderCount()));
+        invoice_count.setText(String.valueOf(new InvoicesDBManager(MainActivity.this).GetInvoicesCount()));
     }
 }

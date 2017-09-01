@@ -157,23 +157,61 @@ public class InvoicesActivity extends AppCompatActivity {
         View vv = inflater.inflate(R.layout.layout_orders_include_two, null);
 
         TextView first = (TextView)vv.findViewById(R.id.first_txt);
-        TextView second = (TextView)vv.findViewById(R.id.second_txt);
-        TextView third = (TextView)vv.findViewById(R.id.third_txt);
+        TextView date = (TextView)vv.findViewById(R.id.second_txt);
+        TextView source = (TextView)vv.findViewById(R.id.source);
+        TextView po = (TextView)vv.findViewById(R.id.po);
+        TextView total = (TextView)vv.findViewById(R.id.total);
+        TextView paid = (TextView)vv.findViewById(R.id.paid);
+        TextView status = (TextView)vv.findViewById(R.id.status);
+        TextView third = (TextView)vv.findViewById(R.id.shipped_on);
 
 
         first.setText(attributesBean.getInvoiceCode());
 
-        StringTokenizer invoiceDate = new StringTokenizer(attributesBean.getInvoiceDate(),"T");
-        StringTokenizer poDate = new StringTokenizer(attributesBean.getPoDate());
-        StringTokenizer shipedOn = new StringTokenizer(attributesBean.getShippingDate(),"T");
+        StringTokenizer invoiceDate , poDate , shipedOn ;
+
+        String stotal = String.format( "%.2f", attributesBean.getTotal());
+        String spaid = String.format( "%.2f", attributesBean.getAmountPaid());
+
+        source.setText("Source :   "+attributesBean.getRootDocumentCode());
+        total.setText("Total :   "+stotal);
+        paid.setText("Paid :   "+spaid);
+        status.setText("Status :   "+attributesBean.getOrderStatus());
+
+        source.setVisibility(View.VISIBLE);
+        total.setVisibility(View.VISIBLE);
+        paid.setVisibility(View.VISIBLE);
+        status.setVisibility(View.VISIBLE);
 
 
-        String total = String.format( "%.2f", attributesBean.getTotal());
-        String paid = String.format( "%.2f", attributesBean.getAmountPaid());
+        if (!attributesBean.getPoDate().equals("")){
+            poDate = new StringTokenizer(attributesBean.getPoDate());
+            po.setVisibility(View.VISIBLE);
+            po.setText("PO Date :   "+poDate.nextToken());
+        }else {
+            po.setVisibility(View.GONE);
+        }
 
-        second.setText(invoiceDate.nextToken()+"\n"+"source :  "+attributesBean.getRootDocumentCode()+"\n"+"PO Date :   "+poDate.nextToken()+
-                "\n"+"Total :   "+total+"\n"+"Paid :   "+paid
-                + "\n"+"Status :   "+attributesBean.getOrderStatus()+"\n"+"Shipped On :   "+shipedOn.nextToken());
+
+        if (!attributesBean.getInvoiceDate().equals("")){
+            invoiceDate = new StringTokenizer(attributesBean.getInvoiceDate(),"T");
+            date.setVisibility(View.VISIBLE);
+            date.setText(""+invoiceDate.nextToken());
+        }else {
+            date.setVisibility(View.VISIBLE);
+        }
+
+
+        if (!attributesBean.getShippingDate().equals("")){
+            shipedOn = new StringTokenizer(attributesBean.getShippingDate(),"T");
+            third.setText("Shipped On :   "+shipedOn.nextToken());
+            third.setVisibility(View.VISIBLE);
+        }else {
+            third.setVisibility(View.VISIBLE);
+
+        }
+
+
 
 
         return vv ;
@@ -189,8 +227,6 @@ public class InvoicesActivity extends AppCompatActivity {
         ll_toolbar = (LinearLayout)findViewById(R.id.ll_toolbar);
         find = (TextView) findViewById(R.id.txt_find);
         InvoicesPageCount = (TextView)findViewById(R.id.ordr_count_page);
-
-
 
         okHttpClient = new OkHttpClient.Builder().authenticator(new Authenticator() {
             @Override

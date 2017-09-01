@@ -54,35 +54,53 @@
         <service
             android:name=".Services.ItemsInventoryService"
             android:exported="false" />
+        <service
+            android:name=".Services.SalesOrdersService"
+            android:exported="false" />
 
-        <service android:name=".Services.SalesOrdersService"
+        <service android:name=".Services.InvoicesService"
             android:exported="false"/>
-
 
         <activity
             android:name=".AddressesActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+
+
         <activity
             android:name=".CustomerContactsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+
+
         <activity
             android:name=".InvoicesActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+
+
         <activity
             android:name=".InventoryItems.InventoryItemsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+
+
         <activity
             android:name=".InventoryItems.ItemDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
-        <activity android:name=".OrdersFromDBActivity"
+
+        <activity
+            android:name=".OrdersFromDBActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
+
+
+        <activity android:name=".InvoicesFromDBActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+            />
 
 
 

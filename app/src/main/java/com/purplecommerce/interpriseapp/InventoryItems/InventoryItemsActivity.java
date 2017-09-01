@@ -178,7 +178,7 @@ public class InventoryItemsActivity extends AppCompatActivity {
                 Log.e("**to time",""+ finalTodatetime);
 
                 Intent serviceIntent = new Intent(InventoryItemsActivity.this, ItemsInventoryService.class);
-                serviceIntent.putExtra("URL","/changelog/InventoryItem?from="+ "2016-06-11T11:55:37" +"&to="+ finalTodatetime                         +"&page[number]=1&page[size]="+PageSize);
+                serviceIntent.putExtra("URL","/changelog/InventoryItem?from="+ lastUpdate +"&to="+ finalTodatetime                         +"&page[number]=1&page[size]="+PageSize);
                 serviceIntent.putExtra("TODATETIME" , finalTodatetime);
                 startService(serviceIntent);
 

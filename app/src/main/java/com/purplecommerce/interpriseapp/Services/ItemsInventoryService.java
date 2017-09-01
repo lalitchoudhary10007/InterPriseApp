@@ -201,37 +201,33 @@ public class ItemsInventoryService extends IntentService {
                 ItemsInventoryDBManager inventoryDBManager = new ItemsInventoryDBManager(ItemsInventoryService.this);
                 JSONObject obj = null;
                 byte[] photo = new byte[0];
-
+                String inventoryCode = "";
                 try {
                     obj = new JSONObject(response);
-                    if (obj.optString("photo").equals("")){
+
+                    JSONObject js1 = obj.getJSONObject("data");
+                    JSONObject js2 = js1.getJSONObject("attributes");
+                    inventoryCode = js2.getString("itemCode");
+
+                    if (js2.optString("photo").equals("")){
 
                     }else {
                         photo = Base64.decode(obj.getString("photo") , Base64.DEFAULT);
                     }
+
+                    inventoryDBManager.SaveNewItems(js2.optString("itemCode", ""),js2.optString("itemName" , "") , js2.optString("itemType" , "") ,
+                            js2.optString("status" , "") , photo , js2.optString("manufacturerCode" , "")  , js2.optString("dateCreated" , "") );
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
 
-//                if (detailsResponse.getData().getAttributes().getItemType().equals("Matrix Group")){
-//
-//                    Log.e("**","Matrix group");
-//
-//                }else {
-                    inventoryDBManager.SaveNewItems(detailsResponse.getData().getAttributes().getItemCode(), detailsResponse.getData().getAttributes().getItemName() ,
-                            detailsResponse.getData().getAttributes().getItemType(), detailsResponse.getData().getAttributes().getStatus(), photo ,
-                            obj.optString("manufacturerCode"),
-                            detailsResponse.getData().getAttributes().getDateCreated());
-           //     }
-
-
-
-
                 Log.e("**name",""+inventoryDBManager.GetItemsIventoryCount());
 
 
-                if (detailsResponse.getData().getId().equals(NewItems.get(NewItems.size()-1))){
+                if (inventoryCode.equals(NewItems.get(NewItems.size()-1))){
 
                     Log.e("**last","add hua"+detailsResponse.getData().getId());
 

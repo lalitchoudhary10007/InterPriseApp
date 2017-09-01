@@ -212,7 +212,7 @@ public class CustomersService extends IntentService {
 
             @Override
             public void onResponse(String response) {
-                Log.d("*** RESPONSE ", "" + response);
+                Log.e("*** RESPONSE ", "" + response);
 
 
                 CustomerDetailsResponse detailsResponse = new CustomerDetailsResponse();
@@ -220,34 +220,44 @@ public class CustomersService extends IntentService {
 
                 CustomersDBManager customersDBManager = new CustomersDBManager(CustomersService.this);
                 JSONObject obj = null;
+                String customerCode = "";
                 try {
                      obj = new JSONObject(response);
+                    JSONObject js1 = obj.getJSONObject("data");
+                    JSONObject js2 = js1.getJSONObject("attributes");
+
+                    customerCode = js1.getString("id");
+
+                    customersDBManager.SaveCustomers(js1.optString("id", ""), js2.optString("customerName", ""),js2.optString("telephone", "")
+                             , obj.optString("email" , "")  , obj.optString("defaultPrice" , "") , obj.optString("pricingLevel" , "") ,obj.optString("defaultShipToCode" , "") ,
+                             obj.optString("country" , ""),obj.optString("defaultContact" , ""));
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                if (detailsResponse.getData().getAttributes().getTelephone()==null){
-                    customersDBManager.SaveCustomers(detailsResponse.getData().getId() , detailsResponse.getData().getAttributes().getCustomerName(),
-                            "" , obj.optString("email")  ,
-                            detailsResponse.getData().getAttributes().getDefaultPrice(),obj.optString("pricingLevel")
-                            , detailsResponse.getData().getAttributes().getDefaultShipToCode(),detailsResponse.getData().getAttributes().getCountry()
-                            ,detailsResponse.getData().getAttributes().getDefaultContact());
-                }
-                else {
-                    customersDBManager.SaveCustomers(detailsResponse.getData().getId() , detailsResponse.getData().getAttributes().getCustomerName(),
-                            detailsResponse.getData().getAttributes().getTelephone() , obj.optString("email")  ,
-                            detailsResponse.getData().getAttributes().getDefaultPrice(),obj.optString("pricingLevel")
-                            , detailsResponse.getData().getAttributes().getDefaultShipToCode(),detailsResponse.getData().getAttributes().getCountry()
-                            ,detailsResponse.getData().getAttributes().getDefaultContact());
-                }
+//                if (detailsResponse.getData().getAttributes().getTelephone()==null){
+//                    customersDBManager.SaveCustomers(detailsResponse.getData().getId() , detailsResponse.getData().getAttributes().getCustomerName(),
+//                            "" , obj.optString("email")  ,
+//                            detailsResponse.getData().getAttributes().getDefaultPrice(),obj.optString("pricingLevel")
+//                            , detailsResponse.getData().getAttributes().getDefaultShipToCode(),detailsResponse.getData().getAttributes().getCountry()
+//                            ,detailsResponse.getData().getAttributes().getDefaultContact());
+//                }
+//                else {
+//                    customersDBManager.SaveCustomers(detailsResponse.getData().getId() , detailsResponse.getData().getAttributes().getCustomerName(),
+//                            detailsResponse.getData().getAttributes().getTelephone() , obj.optString("email")  ,
+//                            detailsResponse.getData().getAttributes().getDefaultPrice(),obj.optString("pricingLevel")
+//                            , detailsResponse.getData().getAttributes().getDefaultShipToCode(),detailsResponse.getData().getAttributes().getCountry()
+//                            ,detailsResponse.getData().getAttributes().getDefaultContact());
+//                }
 
 
 
                  Log.e("**name",""+customersDBManager.getCustomersCount());
 
 
-                if (detailsResponse.getData().getId().equals(NewCustomers.get(NewCustomers.size()-1))){
+                if (customerCode.equals(NewCustomers.get(NewCustomers.size()-1))){
 
                  Log.e("**last","add hua"+detailsResponse.getData().getId());
 
