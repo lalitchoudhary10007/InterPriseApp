@@ -119,15 +119,18 @@ public class ItemsInventoryDBManager {
 
 
         if(myRealm.where(ItemsInventoryTable.class)
-                .contains("ItemCode", ""+code)
-
+                .contains("ItemCode", ""+code.trim())
+                .or()
+                .contains("ItemName", ""+code.trim())
                 .count()==0)
         {
            // Toast.makeText(con, "Item Code Not Exist !!", Toast.LENGTH_SHORT).show();
         }else {
             Item =
                     myRealm.where(ItemsInventoryTable.class)
-                            .contains("ItemCode", ""+code)
+                            .contains("ItemCode", ""+code.trim())
+                            .or()
+                            .contains("ItemName", ""+code.trim())
                             .findFirst();
             return Item ;
         }
@@ -137,21 +140,27 @@ public class ItemsInventoryDBManager {
     }
 
 
-    public RealmResults<ItemsInventoryTable> SearchItems(String itemcode){
+    public RealmResults<ItemsInventoryTable> SearchItems(String searchquery){
+
+        Log.e("**search","query"+searchquery);
 
         RealmResults<ItemsInventoryTable> items = null;
 
 
         if(myRealm.where(ItemsInventoryTable.class)
-                .contains("ItemName", ""+itemcode)
-
+                .contains("ItemName", ""+searchquery.trim())
+                .or()
+                .contains("ItemCode" , searchquery.trim())
                 .count()==0)
         {
             Toast.makeText(con, "Item Name Not Exist !!", Toast.LENGTH_SHORT).show();
         }else {
+
             items =
                     myRealm.where(ItemsInventoryTable.class)
-                            .contains("ItemName", ""+itemcode , RealmQuery.CASE_INSENSITIVE)
+                            .contains("ItemName", ""+searchquery.trim())
+                            .or()
+                            .contains("ItemCode" , ""+searchquery.trim())
                             .findAll();
             return items ;
         }

@@ -97,7 +97,7 @@ public class InvoicesActivity extends AppCompatActivity {
 
                     for (int i = 0 ; i < OrdersData.size(); i++)
                     {
-                        if (OrdersData.get(i).getAttributes().getInvoiceCode().contains("INV-"+ed_srch_invoice.getText().toString()))
+                        if (OrdersData.get(i).getAttributes().getInvoiceCode().contains(ed_srch_invoice.getText().toString()))
                         {
                             OrderAttributes.add(OrdersData.get(i).getAttributes());
                         }
@@ -183,6 +183,8 @@ public class InvoicesActivity extends AppCompatActivity {
         paid.setVisibility(View.VISIBLE);
         status.setVisibility(View.VISIBLE);
 
+
+        Log.e("**","**"+attributesBean.getPoDate());
 
         if (!attributesBean.getPoDate().equals("")){
             poDate = new StringTokenizer(attributesBean.getPoDate());

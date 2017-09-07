@@ -97,7 +97,7 @@ public class CustomerContactsActivity extends AppCompatActivity {
 
                     for (int i = 0 ; i < OrdersData.size(); i++)
                     {
-                        if (OrdersData.get(i).getAttributes().getContactCode().contains("CCTC-"+ed_srch_contacts.getText().toString()))
+                        if (OrdersData.get(i).getAttributes().getContactCode().contains(ed_srch_contacts.getText().toString()))
                         {
                         OrderAttributes.add(OrdersData.get(i).getAttributes());
                         }

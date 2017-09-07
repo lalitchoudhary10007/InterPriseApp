@@ -68,7 +68,7 @@ public class OrdersActivity extends AppCompatActivity {
     List<CustomerSalesOrdersResponse.DataBean> OrdersData ;
     ArrayList<CustomerSalesOrdersResponse.DataBean.AttributesBean> OrderAttributes = new ArrayList<>();
     Spinner OrdersSpinner ;
-    String[] spinnerItems = { "SO" , "CRMA" , "BKO"};
+    String[] spinnerItems = { "SO" , "CRMA" , "BKO" , "QU" };
     String SelectedOrderType  ;
 
     public static String prevoiusOne = "test" ;
@@ -128,7 +128,7 @@ public class OrdersActivity extends AppCompatActivity {
 
                     for (int i = 0 ; i < OrdersData.size(); i++)
                     {
-                        if (OrdersData.get(i).getAttributes().getSalesOrderCode().contains(SelectedOrderType+"-"+ed_srch_order.getText().toString()))
+                        if (OrdersData.get(i).getAttributes().getSalesOrderCode().contains(ed_srch_order.getText().toString()))
                         {
 
                             OrderAttributes.add(OrdersData.get(i).getAttributes());

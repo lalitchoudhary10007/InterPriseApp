@@ -154,10 +154,6 @@ public class CustomersActivity extends AppCompatActivity {
 
             dbManager.SaveCustomers("CUST-000003" , "The Gadget Store" , "0191 948392" ,"tony.sandland@gadgetstore.co.uk" , "Wholesale" ,"" , "SHIP-000004" , "United Kingdom" , "CCTC-000004");
 
-            dbManager.SaveCustomers("CUST-001004" , "We Love Toys" , "01978 828348" ,"cherry.mcclenent@lovetoys.co.uk" , "Wholesale" ,"" , "SHIP-000005" , "United Kingdom" , "CCTC-000005");
-
-
-
 
         }
 
@@ -193,7 +189,7 @@ public class CustomersActivity extends AppCompatActivity {
                     Toast.makeText(CustomersActivity.this, "Please Enter Customer Code !!", Toast.LENGTH_SHORT).show();
                 }else {
 
-                    RealmResults<CustomersTable> cust = dbManager.getCustomerAccordingCUSTID("CUST-"+ed_srch_order.getText().toString().trim());
+                    RealmResults<CustomersTable> cust = dbManager.getCustomerAccordingCUSTID(ed_srch_order.getText().toString().trim());
                     Log.e("**customer","customer"+cust);
                     if (cust==null){
                         Toast.makeText(CustomersActivity.this, "Customer Code Not Exist !!", Toast.LENGTH_SHORT).show();
@@ -537,6 +533,8 @@ public class CustomersActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String responseString = intent.getStringExtra("Response");
+
+            Log.e("**","response"+responseString);
 
             progress_dialog.dismiss();
 

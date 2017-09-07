@@ -212,10 +212,10 @@ public class CustomerInvoicesResponse {
 
             private String invoiceCode;
 
-            private String rootDocumentCode;
-            private String invoiceDate;
-            private String shippingDate;
-            private String poDate;
+            private String rootDocumentCode = "";
+            private String invoiceDate = "";
+            private String shippingDate = "";
+            private String poDate = "";
 
             private String orderStatus;
             private String sourceCode;

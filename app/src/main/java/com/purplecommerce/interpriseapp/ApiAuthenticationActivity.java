@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,10 @@ import okhttp3.Route;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.purplecommerce.interpriseapp.Database.CustomersDBManager;
+import com.purplecommerce.interpriseapp.Database.InvoicesDBManager;
+import com.purplecommerce.interpriseapp.Database.ItemsInventoryDBManager;
+import com.purplecommerce.interpriseapp.Database.SalesOrdersDBManager;
 import com.purplecommerce.interpriseapp.Services.ItemsInventoryService;
 import com.purplecommerce.interpriseapp.SessionManager.SessionManager;
 import com.purplecommerce.interpriseapp.SetterGetters.ErrorResponse;
@@ -53,6 +58,9 @@ public class ApiAuthenticationActivity extends AppCompatActivity {
     GsonBuilder gsonBuilder;
     Gson gson;
     SessionManager sm ;
+
+
+
 
 
     @Override
@@ -123,6 +131,9 @@ public class ApiAuthenticationActivity extends AppCompatActivity {
                     String url = ed_Url.getText().toString()+"/customer?onlyActive=true";
 
                     VerifyKeyUrl(url , ed_Key.getText().toString() , ed_Url.getText().toString() ,okHttpClient);
+
+
+
                 }
 
 
@@ -179,9 +190,89 @@ public class ApiAuthenticationActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.d("*** RESPONSE ", "" + response);
-                progress_dialog.dismiss();
+
 
                 sm.CreateUrlCredentials(BaseUrl , key);
+
+                CustomersDBManager customersDBManager = new CustomersDBManager(ApiAuthenticationActivity.this);
+                InvoicesDBManager invoicesDBManager = new InvoicesDBManager(ApiAuthenticationActivity.this);
+                SalesOrdersDBManager ordersDBManager = new SalesOrdersDBManager(ApiAuthenticationActivity.this);
+                ItemsInventoryDBManager itemsInventoryDBManager = new ItemsInventoryDBManager(ApiAuthenticationActivity.this);
+
+
+                    invoicesDBManager.SaveNewOrders("INV-000001" , "2007-01-23T00:00:00" , "2007-01-23T00:00:00" ,
+                         "2007-01-23T00:00:00" , "127.34" , "116.34" , "SO-000003" , "Close");
+                    invoicesDBManager.SaveNewOrders("INV-000002" , "2007-01-23T00:00:00" , "2007-01-23T00:00:00" ,
+                            "2007-01-23T00:00:00" , "150.48" , "137.48" , "SO-000004" , "Close");
+                    invoicesDBManager.SaveNewOrders("INV-000003" , "2007-01-23T00:00:00" , "2007-01-23T00:00:00" ,
+                            "2007-01-23T00:00:00" , "1053.33" , "394.34" , "SO-000005" , "Close");
+                    invoicesDBManager.SaveNewOrders("INV-000004" , "2007-01-23T00:00:00" , "2007-01-23T00:00:00" ,
+                            "2007-01-23T00:00:00" , "0.00" , "0.00" , "SO-000009" , "Close");
+                    invoicesDBManager.SaveNewOrders("INV-000005" , "2007-01-23T00:00:00" , "" ,
+                            "2007-01-23T00:00:00" , "0.00" , "0.00" , "[To be generated]" , "Close");
+
+                    customersDBManager.SaveCustomers("CUST-000001" , "Toy Prospect UK Ltd" , "0800 032 4000" ,"info@toyprospect.co.uk" , "Retail" ,"" , "SHIP-000002" , "United Kingdom" , "CCTC-000002");
+                    customersDBManager.SaveCustomers("CUST-000002" , "Undergound Toys UK" , "0194 494839" ,"simon.mermon@underground.co.uk" , "Wholesale" ,"" , "SHIP-000003" , "United Kingdom" , "CCTC-000003");
+                    customersDBManager.SaveCustomers("CUST-000003" , "The Gadget Store" , "0191 948392" ,"tony.sandland@gadgetstore.co.uk" , "Wholesale" ,"" , "SHIP-000004" , "United Kingdom" , "CCTC-000004");
+                    customersDBManager.SaveCustomers("CUST-000004" , "We Love Toys" , "01978 828348" ,"cherry.mcclenent@lovetoys.co.uk" , "Wholesale" ,"" , "SHIP-000005" , "United Kingdom" , "CCTC-000005");
+                    customersDBManager.SaveCustomers("CUST-000005" , "All Toys R Us" , "01244 59403" ,"ali.mcaulay@alltoys.co.uk" , "Wholesale" ,"" , "SHIP-000006" , "United Kingdom" , "CCTC-000006");
+
+
+                    ordersDBManager.SaveNewOrders("QU-000001" , "2008-01-23T00:00:00" , "A Toy Customer" , "845 Evergreen Terrace, Eastham Road." ,
+                            "Manchester" ,"Lancashire" , "M54 5TG" , "United Kingdom" , "Internet" , "", "1768.74" , "Close" , "0870 555 3200" , "845 Evergreen Terrace, Eastham Road.",
+                            "Manchester","Lancashire" , "United Kingdom" , "1528.00" ,"0.00");
+                    ordersDBManager.SaveNewOrders("QU-000002" , "2008-01-23T00:00:00" , "A Toy Customer" , "845 Evergreen Terrace, Eastham Road." ,
+                            "Manchester" ,"Lancashire" , "M54 5TG" , "United Kingdom" , "Internet" , "", "129.25" , "Close" , "0870 555 3200" , "845 Evergreen Terrace, Eastham Road.",
+                            "Manchester","Lancashire" , "United Kingdom" , "100.00" ,"10.00");
+
+                    ordersDBManager.SaveNewOrders("QU-000003" , "2007-01-19T00:00:00" , "A French Customer" , "3000 De La Rue" ,
+                            "Paris" ,"AR123" , "PAR123" , "France" , "Unknown" , "", "400.00" , "Close" , "0800 111 2100" , "3000 De La Rue",
+                            "Paris","AR123" , "France" , "400.00" ,"0.00");
+
+                    ordersDBManager.SaveNewOrders("QU-000004" , "2008-01-23T00:00:00" , "The Gadget Store" , "Summerville House\\r\\n20-22 Harlow Road\\r\\nHarlow" ,
+                            "London" ,"" , "B15 2AA" , "United Kingdom" , "Internet" , "", "6283.90" , "Close" , "0191 948392" , "Summerville House\\r\\n20-22 Harlow Road\\r\\nHarlow",
+                            "London","" , "United Kingdom" , "5338.00" ,"10.00");
+
+                    ordersDBManager.SaveNewOrders("QU-000005" , "2008-01-23T00:00:00" , "Bikes and Trikes Ltd" , "\\r\\n13 Ashcroft Terrace" ,
+                            "Burnley" ,"Lancashire" , "BB10 1QW" , "United Kingdom" , "Internet" , "", "714.62" , "Close" , "01282428676" , "\\r\\n13 Ashcroft Terrace",
+                            "Burnley","Lancashire" , "United Kingdom" , "600.00" ,"10.00");
+
+                    ordersDBManager.SaveNewOrders("SO-000001" , "2007-01-23T00:00:00" , "A US Customer Inc" , "1400 Roxton Avenue" ,
+                            "Beverly Hills" ,"Los Angeles" , "90210" , "United States of America" , "Unknown" , "", "101.03" , "Completed" , "0870 445 332" , "1400 Roxton Avenue",
+                            "Beverly Hills","Los Angeles" , "United States of America" , "101.03" ,"0.00");
+
+                    ordersDBManager.SaveNewOrders("SO-000002" , "2007-01-23T00:00:00" , "A Toy Customer" , "845 Evergreen Terrace, Eastham Road." ,
+                            "Manchester" ,"Lancashire" , "M54 5TG" , "United Kingdom" , "Internet" , "", "1618.26" , "Open" , "0870 555 3200" , "845 Evergreen Terrace, Eastham Road.",
+                            "Manchester","Lancashire" , "United Kingdom" , "1398.00" ,"0.00");
+
+                    ordersDBManager.SaveNewOrders("SO-000003" , "2007-01-23T00:00:00" , "A Toy Customer" , "845 Evergreen Terrace, Eastham Road." ,
+                        "Manchester" ,"Lancashire" , "M54 5TG" , "United Kingdom" , "Internet" , "", "127.34" , "Completed" , "0870 555 3200" , "845 Evergreen Terrace, Eastham Road.",
+                        "Manchester","Lancashire" , "United Kingdom" , "100.00" ,"10.00");
+
+
+                    ordersDBManager.SaveNewOrders("SO-000004" , "2007-01-23T00:00:00" , "A Toy Customer" , "845 Evergreen Terrace, Eastham Road." ,
+                        "Manchester" ,"Lancashire" , "M54 5TG" , "United Kingdom" , "Internet" , "", "92611.58" , "Completed" , "0870 555 3200" , "845 Evergreen Terrace, Eastham Road.",
+                        "Manchester","Lancashire" , "United Kingdom" , "80000.00" ,"10.00");
+
+                    ordersDBManager.SaveNewOrders("SO-000005" , "2007-01-23T00:00:00" , "A Toy Customer" , "845 Evergreen Terrace, Eastham Road." ,
+                        "Manchester" ,"Lancashire" , "M54 5TG" , "United Kingdom" , "Internet" , "", "1053.33" , "Completed" , "0870 555 3200" , "845 Evergreen Terrace, Eastham Road.",
+                        "Manchester","Lancashire" , "United Kingdom" , "900.00" ,"10.00");
+
+
+                    byte[] photo = Base64.decode(Utils.image , Base64.DEFAULT);
+
+                    byte[] photo1 = Base64.decode("" , Base64.DEFAULT);
+
+                    itemsInventoryDBManager.SaveNewItems("ITEM-000001","Hand Gun" , "Stock" , "A" , photo ,"Guns R Us" , "2006-12-31T08:58:30.657");
+                    itemsInventoryDBManager.SaveNewItems("ITEM-000002","Bullets" , "Stock" , "A" , photo1 ,"" , "2006-12-31T09:00:15.453");
+                    itemsInventoryDBManager.SaveNewItems("ITEM-000003","Holster" , "Stock" , "A" , photo1 ,"" , "2006-12-31T09:02:12.483");
+                    itemsInventoryDBManager.SaveNewItems("ITEM-000004","Installation 1 Day" , "Service" , "A" , photo1 ,"" , "2006-12-31T09:03:24.5");
+                    itemsInventoryDBManager.SaveNewItems("ITEM-000005","2Ghz Motherboard" , "Stock" , "A" , photo1 ,"" , "2006-12-31T09:07:37.25");
+
+
+
+                progress_dialog.dismiss();
+
                 startActivity(new Intent(ApiAuthenticationActivity.this , MainActivity.class));
                 finish();
             }

@@ -220,7 +220,7 @@ public class InventoryItemsActivity extends AppCompatActivity {
                     Toast.makeText(InventoryItemsActivity.this, "Please Enter Customer Code !!", Toast.LENGTH_SHORT).show();
                 }else {
 
-                    RealmResults<ItemsInventoryTable> cust = itemsDBManager.SearchItems(ed_srch_items.getText().toString().trim().toUpperCase());
+                    RealmResults<ItemsInventoryTable> cust = itemsDBManager.SearchItems(ed_srch_items.getText().toString().trim());
                     Log.e("**customer","customer"+cust);
                     if (cust==null){
                      //   Toast.makeText(InventoryItemsActivity.this, "Customer Code Not Exist !!", Toast.LENGTH_SHORT).show();
@@ -326,6 +326,9 @@ public class InventoryItemsActivity extends AppCompatActivity {
         Items_parent_layout.removeAllViews();
 
         ItemsInventoryRows =  itemsDBManager.getAllItems();
+
+
+        Log.e("items size ","in db"+ItemsInventoryRows.size());
 
         if (ItemsInventoryRows.size() < perpagecount){
 

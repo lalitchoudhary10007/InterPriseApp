@@ -65,8 +65,9 @@
             android:textColor="@color/colorPrimary"
             android:gravity="center"
             android:textSize="@dimen/_14sdp"
-            android:text="App is being launched for the first time on this device."
-            android:padding="@dimen/_5sdp"/>
+            android:text="App is being launched for the first \n time on this device."
+            android:padding="@dimen/_5sdp"
+            android:visibility="gone"/>
 
         <views.textview.TypefaceTextView
             geekui:customTypeface="fonts/CoreSansDRegular.otf"
@@ -75,7 +76,7 @@
             android:textColor="@color/colorPrimary"
             android:gravity="center"
             android:textSize="@dimen/_14sdp"
-            android:text="Enter URL and key to connect to Interprise webservice."
+            android:text="Enter URL and key to connect to \n Interprise webservice."
             android:padding="@dimen/_5sdp"/>
 
 
@@ -116,12 +117,13 @@
                         android:background="@null"
                         android:textSize="@dimen/_14sdp"
                         android:textColor="@color/colorPrimary"
-                        />
+                        android:paddingLeft="@dimen/_3sdp"/>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_1sdp"
-                        android:background="@color/colorPrimary"/>
+                        android:background="@color/colorPrimary"
+                        android:layout_marginLeft="@dimen/_3sdp"/>
 
 
                 </LinearLayout>
@@ -159,12 +161,14 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:textSize="@dimen/_14sdp"
-                        android:textColor="@color/colorPrimary"/>
+                        android:textColor="@color/colorPrimary"
+                        android:paddingLeft="@dimen/_3sdp"/>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_1sdp"
-                        android:background="@color/colorPrimary"/>
+                        android:background="@color/colorPrimary"
+                        android:layout_marginLeft="@dimen/_3sdp"/>
 
 
                 </LinearLayout>

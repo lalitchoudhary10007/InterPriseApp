@@ -108,7 +108,7 @@ public class AddressesActivity extends AppCompatActivity {
 
                     for (int i = 0 ; i < OrdersData.size(); i++)
                     {
-                        if (OrdersData.get(i).getAttributes().getShipToCode().contains("SHIP-"+ed_srch_address.getText().toString()))
+                        if (OrdersData.get(i).getAttributes().getShipToCode().contains(ed_srch_address.getText().toString()))
                         {
 
                             OrderAttributes.add(OrdersData.get(i).getAttributes());
