@@ -582,6 +582,17 @@ public class CustomersActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        IntentFilter filter = new IntentFilter(CustomersService.BROADCASTCUSTOMER);
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        receiver = new CustomersRequestReceiver();
+        registerReceiver(receiver, filter);
+
+    }
+
     private View Toolbartxts(String txt){
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE );

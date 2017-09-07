@@ -165,83 +165,15 @@ public class OrderProductsResponse {
              * customFields : []
              */
 
-            private int counter;
-            private String salesOrderCode;
+
             private String itemCode;
-            private int lineNum;
-            private int sourceLineNum;
-            private String rootDocumentCode;
-            private String warehouseCode;
             private int quantityOrdered;
-            private int quantityBackOrdered;
-            private int quantityShipped;
-            private int quantityToBeShipped;
-            private int quantityAllocated;
-            private int quantityAlReadyRMA;
-            private int quantityReturned;
-            private int contractQuantity;
-            private int contractCalledOff;
-            private String itemDescription;
-            private int discount;
-            private int markup;
-            private String unitMeasureCode;
-            private int unitMeasureQty;
-            private double salesTaxAmount;
             private double salesTaxAmountRate;
-            private double salesPrice;
             private double salesPriceRate;
-            private double netPrice;
-            private double netPriceRate;
             private double extPrice;
-            private double extPriceRate;
-            private double cost;
-            private double costRate;
-            private double extCost;
-            private double extCostRate;
-            private double actualCost;
-            private double actualCostRate;
-            private double extActualCost;
-            private double extActualCostRate;
-            private double profit;
-            private double profitRate;
-            private double margin;
-            private String taxCode;
-            private String pricing;
-            private boolean isDropShip;
-            private int matrixBatch;
-            private String salesAccountCode;
-            private String inventoryAccountCode;
-            private String cogsAccountCode;
-            private String itemType;
-            private int volume;
-            private int weight;
-            private int netWeight;
-            private int extWeight;
-            private int extNetWeight;
-            private String dueDate;
-            private boolean isConvert;
-            private boolean isConverted;
-            private boolean isPickingNotePrinted;
-            private boolean isConfirmedPickedPacked;
-            private boolean commissionable;
-            private String commissionSource;
-            private int commissionPercent;
-            private int commissionAmount;
-            private int commissionAmountRate;
-            private String notc;
-            private String termsOfDelivery;
-            private boolean isIncludedInCoupon;
-            private boolean supUnitsReq;
-            private String inventoryDescription;
-            private boolean isInventoryDescription;
-            private String webSiteCode;
+
             private String userCreated;
             private String dateCreated;
-            private String userModified;
-            private String dateModified;
-            private boolean isPricingChanged;
-            private int discountCoupon;
-            private List<?> customFields;
 
 
 
@@ -306,13 +238,6 @@ public class OrderProductsResponse {
             }
 
 
-            public List<?> getCustomFields() {
-                return customFields;
-            }
-
-            public void setCustomFields(List<?> customFields) {
-                this.customFields = customFields;
-            }
         }
     }
 }

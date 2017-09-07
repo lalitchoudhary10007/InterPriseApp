@@ -116,10 +116,7 @@ public class InventoryItemsActivity extends AppCompatActivity {
 
         ////////////////////register broadcast receiver
 
-        IntentFilter filter = new IntentFilter(ItemsInventoryService.BROADCASTACTIONITEMS);
-        filter.addCategory(Intent.CATEGORY_DEFAULT);
-        receiver = new ItemsRequestReceiver();
-        registerReceiver(receiver, filter);
+
 
         /////////////////////
 
@@ -489,6 +486,15 @@ public class InventoryItemsActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter(ItemsInventoryService.BROADCASTACTIONITEMS);
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        receiver = new ItemsRequestReceiver();
+        registerReceiver(receiver, filter);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
