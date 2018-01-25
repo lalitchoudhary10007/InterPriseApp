@@ -314,9 +314,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <FrameLayout
+                        android:id="@+id/fm_showroom_sales"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
@@ -336,7 +337,7 @@
                                 android:textColor="@color/white"
                                 android:gravity="center"
                                 android:textSize="@dimen/_18sdp"
-                                android:text="Credit Notes"
+                                android:text="WMS"
                                 android:padding="@dimen/_5sdp"
                                 android:background="@drawable/primary_back_round"
                                 />
@@ -375,7 +376,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        >
+                        android:visibility="invisible">
 
 
                         <FrameLayout

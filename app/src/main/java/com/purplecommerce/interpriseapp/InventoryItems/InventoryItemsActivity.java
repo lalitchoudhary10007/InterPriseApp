@@ -16,7 +16,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,32 +26,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.AnalyticsListener;
-import com.androidnetworking.interfaces.StringRequestListener;
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.purplecommerce.interpriseapp.CustomersActivity;
 import com.purplecommerce.interpriseapp.Database.ChangeLogDBManager;
-import com.purplecommerce.interpriseapp.Database.CustomersDBManager;
-import com.purplecommerce.interpriseapp.Database.CustomersTable;
 import com.purplecommerce.interpriseapp.Database.ItemsInventoryDBManager;
 import com.purplecommerce.interpriseapp.Database.ItemsInventoryTable;
-import com.purplecommerce.interpriseapp.InvoicesActivity;
-import com.purplecommerce.interpriseapp.MainActivity;
 import com.purplecommerce.interpriseapp.R;
-import com.purplecommerce.interpriseapp.Services.CustomersService;
 import com.purplecommerce.interpriseapp.Services.ItemsInventoryService;
-import com.purplecommerce.interpriseapp.SessionManager.SessionManager;
-import com.purplecommerce.interpriseapp.SetterGetters.CustomerInvoicesResponse;
 import com.purplecommerce.interpriseapp.Utils.Utils;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -64,12 +47,6 @@ import java.util.StringTokenizer;
 import java.util.TimeZone;
 
 import io.realm.RealmResults;
-import okhttp3.Authenticator;
-import okhttp3.Credentials;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.Route;
 
 import static com.bumptech.glide.Glide.with;
 
@@ -193,11 +170,11 @@ public class InventoryItemsActivity extends AppCompatActivity {
 
                 if (Build.VERSION.SDK_INT < 23) {
                     //Do not need to check the permission
-                    new IntentIntegrator((Activity) InventoryItemsActivity.this).initiateScan();
+                   // new IntentIntegrator((Activity) InventoryItemsActivity.this).initiateScan(item_batches);
                 } else {
                     if (checkAndRequestPermissions()) {
                         //If you have already permitted the permission
-                        new IntentIntegrator((Activity) InventoryItemsActivity.this).initiateScan();
+                      //  new IntentIntegrator((Activity) InventoryItemsActivity.this).initiateScan(item_batches);
                     } else {
 
                     }
@@ -584,7 +561,7 @@ public class InventoryItemsActivity extends AppCompatActivity {
             case MY_PERMISSIONS_REQUEST_CAMERA:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    new IntentIntegrator((Activity) InventoryItemsActivity.this).initiateScan();
+                  //  new IntentIntegrator((Activity) InventoryItemsActivity.this).initiateScan(item_batches);
                     //Permission Granted Successfully. Write working code here.
                 } else {
 

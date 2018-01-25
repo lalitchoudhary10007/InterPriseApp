@@ -197,8 +197,16 @@ public class CustomerSalesOrdersResponse {
             private double subTotal;
 
             private double freight;
-
+            private double tax = 0.00;
             private double total;
+
+            public double getTax() {
+                return tax;
+            }
+
+            public void setTax(double tax) {
+                this.tax = tax;
+            }
 
             private String poCode;
 

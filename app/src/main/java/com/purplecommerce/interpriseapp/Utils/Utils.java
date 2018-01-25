@@ -11,6 +11,12 @@ import com.purplecommerce.interpriseapp.CustomersActivity;
 import com.purplecommerce.interpriseapp.SessionManager.SessionManager;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.StringTokenizer;
+import java.util.TimeZone;
 
 import okhttp3.Authenticator;
 import okhttp3.Credentials;
@@ -46,6 +52,17 @@ public class Utils {
             }
         }
     }
+
+
+    public static String GetCurrentDateTime(){
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        final String date = df.format(Calendar.getInstance().getTime());
+
+        return date ;
+
+    }
+
 
 
     public static void SetCountPerPage(int pgcount , int totalCustomers , int totalperpp , TextView txt){

@@ -6,12 +6,17 @@
 
 
     <color name="grey">#bdc3c7</color>
-
+    <color name="light_grey">#c4d6da</color>
     <color name="white">#ffffff</color>
 
     <color name="muted_white">#ecf0f1</color>
     <color name="dark_grey">#9E9E9E</color>
 
     <color name="black">#000000</color>
+
+
+    <color name="light_green_400">#9CCC65</color>
+    <color name="orange_400">#FF3D00</color>
+    <color name="blue_500">#2196F3</color>
 
 </resources>

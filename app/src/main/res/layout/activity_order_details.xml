@@ -443,6 +443,45 @@
                              android:textColor="@color/colorPrimary"
                              android:gravity="right"
                              android:textSize="@dimen/_13sdp"
+                             android:text="Tax"
+                             android:singleLine="true"
+                             android:layout_weight="1"/>
+
+
+                         <views.textview.TypefaceTextView
+                             android:id="@+id/txt_tax"
+                             geekui:customTypeface="fonts/CoreSansDRegular.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="right"
+                             android:textSize="@dimen/_13sdp"
+                             android:text="7.00"
+                             android:layout_weight="0.8"
+                             android:padding="@dimen/_3sdp"
+                             android:textAlignment="gravity"/>
+
+
+
+                     </LinearLayout>
+
+
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:padding="@dimen/_2sdp"
+                         android:layout_marginTop="@dimen/_5sdp">
+
+
+                         <views.textview.TypefaceTextView
+                             geekui:customTypeface="fonts/CoreSansDBold.otf"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:textColor="@color/colorPrimary"
+                             android:gravity="right"
+                             android:textSize="@dimen/_13sdp"
                              android:text="Total"
                              android:singleLine="true"
                              android:layout_weight="1"/>

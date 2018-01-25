@@ -22,7 +22,7 @@ public class ItemsInventoryDBManager {
 
     public ItemsInventoryDBManager(Context con){
         this.con = con ;
-        myRealm = Realm.getInstance(con);
+        myRealm = Realm.getDefaultInstance();
     }
 
 
@@ -174,7 +174,7 @@ public class ItemsInventoryDBManager {
 
     public  void ClearChangeLogTable(){
         myRealm.beginTransaction();
-        myRealm.allObjects(CustomersTable.class).clear();
+        myRealm.delete(CustomersTable.class);
         myRealm.commitTransaction();
 
     }

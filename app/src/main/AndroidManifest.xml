@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.purplecommerce.interpriseapp">
+
+    <uses-sdk tools:overrideLibrary="com.mindorks.placeholderview" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".application.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/interprise_app_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
@@ -57,51 +62,50 @@
         <service
             android:name=".Services.SalesOrdersService"
             android:exported="false" />
-
-        <service android:name=".Services.InvoicesService"
-            android:exported="false"/>
+        <service
+            android:name=".Services.InvoicesService"
+            android:exported="false" />
 
         <activity
             android:name=".AddressesActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
-
         <activity
             android:name=".CustomerContactsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
-
         <activity
             android:name=".InvoicesActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
-
         <activity
             android:name=".InventoryItems.InventoryItemsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
-
         <activity
             android:name=".InventoryItems.ItemDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
-
         <activity
             android:name=".OrdersFromDBActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
-
-        <activity android:name=".InvoicesFromDBActivity"
+        <activity
+            android:name=".InvoicesFromDBActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            />
-
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ShowRoomSalesModule.PickingActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".ShowRoomSalesModule.OrderPickActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".ShowRoomSalesModule.OrderItemsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
 
 
     </application>

@@ -226,6 +226,7 @@ public class OrdersActivity extends AppCompatActivity {
                 i.putExtra("SubTotal",""+attributes.getSubTotal());
                 i.putExtra("Freight", ""+attributes.getFreight());
                 i.putExtra("Total",""+attributes.getTotal());
+                i.putExtra("Tax",""+attributes.getTax());
                 startActivity(i);
             }
         });

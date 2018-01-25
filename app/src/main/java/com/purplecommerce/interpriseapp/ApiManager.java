@@ -1,8 +1,12 @@
 package com.purplecommerce.interpriseapp;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -13,6 +17,8 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.androidnetworking.interfaces.StringRequestListener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.purplecommerce.interpriseapp.SessionManager.SessionManager;
+import com.purplecommerce.interpriseapp.Utils.Utils;
 
 import org.json.JSONObject;
 
@@ -37,18 +43,19 @@ public class ApiManager {
     String url;
     HashMap map;
     GsonBuilder gsonBuilder;
-    Gson gson;
     APIFETCHER apifetcher;
+    SessionManager sm ;
+    Dialog progress_dialog ;
+    Gson gson ;
 
     private static final String TAG = "APIExecution";
 
 
-    OkHttpClient okHttpClient = new OkHttpClient.Builder().authenticator(new Authenticator() {
+   OkHttpClient okHttpClient = new OkHttpClient.Builder().authenticator(new Authenticator() {
         @Override
         public Request authenticate(Route route, Response response) throws IOException {
 
-            String credential = Credentials.basic("0ab63a19-d325-4439-90ba-a845611bacbe" , "");
-
+            String credential = Credentials.basic(sm.getUrlDetails().get(SessionManager.KEY), "");
 
             return response.request().newBuilder().header("Authorization" , credential).build();
         }
@@ -56,12 +63,21 @@ public class ApiManager {
 
 
 
-    public ApiManager(APIFETCHER apifetcher) {
+    public ApiManager(Context context , APIFETCHER apifetcher) {
         this.context = context;
         gsonBuilder = new GsonBuilder();
         gson = gsonBuilder.create();
         map = new HashMap();
         this.apifetcher = apifetcher;
+        this.sm = new SessionManager(context);
+        gson = new GsonBuilder().create();
+        LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = vi.inflate(R.layout.progress_view, null);
+        progress_dialog = new Dialog(context);
+        progress_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        progress_dialog.setCancelable(false);
+        progress_dialog.setContentView(v);
+        Utils.clearParentsBackgrounds(v);
     }
 
 
@@ -105,10 +121,58 @@ public class ApiManager {
                 });
     }
 
+    @SuppressLint("LongLogTag")
+    public void execution_post_JSON(final String tag, String url , JSONObject jsonObject) {
+        Log.d("** Executing API (POST) ", "Hashparameters => " +jsonObject);
+        Log.d("** Executing API (POST) ", "Name => " + tag + "  " + "URL => " + url);
+        apifetcher.onAPIRunningState(APIFETCHER.KEY_API_IS_STARTED);
+        progress_dialog.show();
+
+        AndroidNetworking.post(""+url)
+                .addJSONObjectBody(jsonObject)
+                .setTag(this)
+                .setOkHttpClient(okHttpClient)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .setAnalyticsListener(new AnalyticsListener() {
+                    @Override
+                    public void onReceived(long timeTakenInMillis, long bytesSent, long bytesReceived, boolean isFromCache) {
+                        Log.d(TAG, " timeTakenInMillis : " + timeTakenInMillis);
+                        Log.d(TAG, " bytesSent : " + bytesSent);
+                        Log.d(TAG, " bytesReceived : " + bytesReceived);
+                        Log.d(TAG, " isFromCache : " + isFromCache);
+                    }
+                })
+                .getAsString(new StringRequestListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("*** RESPONSE ", "" + response);
+                        progress_dialog.dismiss();
+                        apifetcher.onAPIRunningState(APIFETCHER.KEY_API_IS_STOPPED);
+                        apifetcher.onFetchComplete(response, tag , gson);
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        apifetcher.onAPIRunningState(APIFETCHER.KEY_API_IS_STOPPED);
+                        apifetcher.onFetchFailed(anError);
+                        progress_dialog.dismiss();
+                        Log.e("errror", "" + anError.getErrorBody());
+                        Log.e("errror", "" + anError.getErrorDetail());
+                        Log.e("errror", "" + anError.getMessage());
+                        Log.e("error", "" + anError.getStackTrace());
+                        Log.e("error", "" + anError.getCause());
+                    }
+                });
+    }
+
+
+
+
     public void execution_method_get(final String tag, String url) {
 
         Log.d("** Executing API ", "Name => " + tag + "  " + "URL => " + url);
-
+        progress_dialog.show();
 
         apifetcher.onAPIRunningState(APIFETCHER.KEY_API_IS_STARTED);
         AndroidNetworking.get(url)
@@ -129,21 +193,23 @@ public class ApiManager {
             @Override
             public void onResponse(String response) {
                 Log.d("*** RESPONSE ", "" + response);
+                progress_dialog.dismiss();
                 apifetcher.onAPIRunningState(APIFETCHER.KEY_API_IS_STOPPED);
-                apifetcher.onFetchComplete(response, tag);
+                apifetcher.onFetchComplete(response, tag , gson);
             }
 
             @Override
             public void onError(ANError anError) {
                 apifetcher.onAPIRunningState(APIFETCHER.KEY_API_IS_STOPPED);
                 apifetcher.onFetchFailed(anError);
+                progress_dialog.dismiss();
                 Log.e("errror", "" + anError.getErrorBody());
                 Log.e("errror", "" + anError.getErrorDetail());
                 Log.e("errror", "" + anError.getMessage());
                 Log.e("error", "" + anError.getStackTrace());
                 Log.e("error", "" + anError.getCause());
 
-                Toast.makeText(context, "Something Went wrong with url and key!!", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(context, "Something Went wrong with url and key!!", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -160,7 +226,7 @@ public class ApiManager {
 
         void onFetchProgress(int progress);  // This Will useful when downloading file
 
-        void onFetchComplete(String script, String APINAME); // This will give the full script
+        void onFetchComplete(String script, String APINAME, Gson gson); // This will give the full script
 
         void onFetchFailed(ANError error);  // This will give the cause of error if occurred
 

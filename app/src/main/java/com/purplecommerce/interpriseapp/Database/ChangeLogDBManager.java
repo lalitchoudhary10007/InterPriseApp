@@ -19,7 +19,7 @@ public class ChangeLogDBManager {
 
     public ChangeLogDBManager(Context con){
         this.con = con ;
-        myRealm = Realm.getInstance(con);
+        myRealm = Realm.getDefaultInstance();
     }
 
 
@@ -129,7 +129,7 @@ public class ChangeLogDBManager {
 
     public  void ClearChangeLogTable(){
         myRealm.beginTransaction();
-        myRealm.allObjects(CustomersTable.class).clear();
+        myRealm.delete(CustomersTable.class);
         myRealm.commitTransaction();
 
     }

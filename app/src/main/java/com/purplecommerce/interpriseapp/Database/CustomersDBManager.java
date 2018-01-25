@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import io.realm.Case;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -20,7 +21,7 @@ public class CustomersDBManager {
 
     public CustomersDBManager(Context con){
         this.con = con ;
-        myRealm = Realm.getInstance(con);
+        myRealm = Realm.getDefaultInstance();
     }
 
 
@@ -132,7 +133,7 @@ public class CustomersDBManager {
         }else {
             customer =
                     myRealm.where(CustomersTable.class)
-                            .contains("CustomerCode", ""+custid , RealmQuery.CASE_INSENSITIVE)
+                            .contains("CustomerCode", ""+custid , Case.INSENSITIVE)
                             .findAll();
             return customer ;
         }
@@ -152,7 +153,7 @@ public class CustomersDBManager {
                 CustomersTable cust =  customers.where().equalTo("CustomerCode" , custCODE).findFirst();
 
                 if (cust!=null){
-                    cust.removeFromRealm();
+                    cust.deleteFromRealm();
                 }else {
                     Toast.makeText(con, "Customer Id Not Exist !!", Toast.LENGTH_SHORT).show();
                 }
@@ -168,7 +169,7 @@ public class CustomersDBManager {
 
     public  void ClearCustomersTable(){
         myRealm.beginTransaction();
-        myRealm.allObjects(CustomersTable.class).clear();
+        myRealm.delete(CustomersTable.class);
         myRealm.commitTransaction();
 
     }

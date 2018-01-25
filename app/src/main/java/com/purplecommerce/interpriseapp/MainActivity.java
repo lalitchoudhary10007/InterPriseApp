@@ -15,6 +15,7 @@ import com.purplecommerce.interpriseapp.Database.SalesOrdersDBManager;
 import com.purplecommerce.interpriseapp.InventoryItems.InventoryItemsActivity;
 import com.purplecommerce.interpriseapp.Services.MyBackgroundService;
 import com.purplecommerce.interpriseapp.SessionManager.SessionManager;
+import com.purplecommerce.interpriseapp.ShowRoomSalesModule.PickingActivity;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -26,7 +27,7 @@ import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
-    FrameLayout fm_orders , fm_customers , fm_items , fm_invoices ;
+    FrameLayout fm_orders , fm_customers , fm_items , fm_invoices , fm_showroom_sales;
     SessionManager sm ;
     TextView CustomersCount  , ItemsCount , orders_count , invoice_count;
     CustomersDBManager dbManager ;
@@ -73,6 +74,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        fm_showroom_sales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                 startActivity(new Intent(MainActivity.this , PickingActivity.class));
+            }
+        });
+
 
 
     }
@@ -83,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         fm_customers = (FrameLayout)findViewById(R.id.frame_customers) ;
         fm_items = (FrameLayout)findViewById(R.id.fm_items);
         fm_invoices = (FrameLayout)findViewById(R.id.frame_invoices) ;
+        fm_showroom_sales = (FrameLayout)findViewById(R.id.fm_showroom_sales);
         sm = new SessionManager(MainActivity.this);
         dbManager = new CustomersDBManager(MainActivity.this);
         inventoryDBManager = new ItemsInventoryDBManager(MainActivity.this);

@@ -99,7 +99,7 @@ public class ItemInventoryDetailsResponse {
              * maxLevel : 99999999
              * commCustom : Sales Rep
              * trackingOption : None
-             * photo :
+             * photo :* photo
              * isPrinted : true
              * printCount : 5
              * manufacturerCode : Federal
@@ -133,6 +133,16 @@ public class ItemInventoryDetailsResponse {
             private String manufacturerCode;
             private String dateCreated ;
             private String status;
+
+            public String getPhoto() {
+                return photo;
+            }
+
+            public void setPhoto(String photo) {
+                this.photo = photo;
+            }
+
+            private String photo ;
             private int leadTime;
 
             public int getCounter() {

@@ -45,7 +45,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
 
 
     LinearLayout ll_parent_products , ll_toolbar , ll_customerId ;
-    TextView  Customer_id , Customer_name , ship_to , bill_to , subtotal , freight , total ,
+    TextView  Customer_id , Customer_name , ship_to , bill_to , subtotal , freight , total , tax ,
     Invoice ;
     SessionManager sessionManager ;
     OkHttpClient okHttpClient ;
@@ -85,7 +85,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
         freight.setText( String.format("%.2f" , Double.parseDouble(ii.getStringExtra("Freight"))));
         //freight.setText(""+ii.getStringExtra("Freight"));
         total.setText(String.format("%.2f" , Double.parseDouble(ii.getStringExtra("Total"))));
-
+        tax.setText(String.format("%.2f",Double.parseDouble(ii.getStringExtra("Tax"))));
 
 
         //SO-015284
@@ -109,7 +109,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
         total  = (TextView)findViewById(R.id.txt_total);
         Invoice = (TextView)findViewById(R.id.txt_invoice);
         ll_toolbar = (LinearLayout)findViewById(R.id.ll_toolbar);
-
+        tax = (TextView)findViewById(R.id.txt_tax);
 
 
 

@@ -76,7 +76,6 @@ public class ApiAuthenticationActivity extends AppCompatActivity {
 
 
 
-
         if (sm.isLoggedIn()){
 
             ed_Url.setText(sm.getUrlDetails().get(SessionManager.URL));
@@ -95,8 +94,11 @@ public class ApiAuthenticationActivity extends AppCompatActivity {
                     InputType.TYPE_TEXT_VARIATION_URI);
         }
 
-        ed_Url.setText("http://test.interprise.co.uk:82/Interprise.Web.Services.issidemouk");
-        ed_Key.setText("73a0d866-770a-46be-a26f-1b837ce5a371");
+        ed_Url.setText(sm.getUrlDetails().get(SessionManager.URL));
+        ed_Key.setText(sm.getUrlDetails().get(SessionManager.KEY));
+
+        ed_Url.setText("http://api.interprise.co.uk:82/Interprise.Web.Services");
+        ed_Key.setText("d5797e11-1384-428a-a388-104d5fb1f203");
 
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -220,43 +222,43 @@ public class ApiAuthenticationActivity extends AppCompatActivity {
 
                     ordersDBManager.SaveNewOrders("QU-000001" , "2008-01-23T00:00:00" , "A Toy Customer" , "845 Evergreen Terrace, Eastham Road." ,
                             "Manchester" ,"Lancashire" , "M54 5TG" , "United Kingdom" , "Internet" , "", "1768.74" , "Close" , "0870 555 3200" , "845 Evergreen Terrace, Eastham Road.",
-                            "Manchester","Lancashire" , "United Kingdom" , "1528.00" ,"0.00");
+                            "Manchester","Lancashire" , "United Kingdom" , "1528.00" ,"0.00","240.74");
                     ordersDBManager.SaveNewOrders("QU-000002" , "2008-01-23T00:00:00" , "A Toy Customer" , "845 Evergreen Terrace, Eastham Road." ,
                             "Manchester" ,"Lancashire" , "M54 5TG" , "United Kingdom" , "Internet" , "", "129.25" , "Close" , "0870 555 3200" , "845 Evergreen Terrace, Eastham Road.",
-                            "Manchester","Lancashire" , "United Kingdom" , "100.00" ,"10.00");
+                            "Manchester","Lancashire" , "United Kingdom" , "100.00" ,"10.00","19.25");
 
                     ordersDBManager.SaveNewOrders("QU-000003" , "2007-01-19T00:00:00" , "A French Customer" , "3000 De La Rue" ,
                             "Paris" ,"AR123" , "PAR123" , "France" , "Unknown" , "", "400.00" , "Close" , "0800 111 2100" , "3000 De La Rue",
-                            "Paris","AR123" , "France" , "400.00" ,"0.00");
+                            "Paris","AR123" , "France" , "400.00" ,"0.00","0.00");
 
                     ordersDBManager.SaveNewOrders("QU-000004" , "2008-01-23T00:00:00" , "The Gadget Store" , "Summerville House\\r\\n20-22 Harlow Road\\r\\nHarlow" ,
                             "London" ,"" , "B15 2AA" , "United Kingdom" , "Internet" , "", "6283.90" , "Close" , "0191 948392" , "Summerville House\\r\\n20-22 Harlow Road\\r\\nHarlow",
-                            "London","" , "United Kingdom" , "5338.00" ,"10.00");
+                            "London","" , "United Kingdom" , "5338.00" ,"10.00" , "935.90");
 
                     ordersDBManager.SaveNewOrders("QU-000005" , "2008-01-23T00:00:00" , "Bikes and Trikes Ltd" , "\\r\\n13 Ashcroft Terrace" ,
                             "Burnley" ,"Lancashire" , "BB10 1QW" , "United Kingdom" , "Internet" , "", "714.62" , "Close" , "01282428676" , "\\r\\n13 Ashcroft Terrace",
-                            "Burnley","Lancashire" , "United Kingdom" , "600.00" ,"10.00");
+                            "Burnley","Lancashire" , "United Kingdom" , "600.00" ,"10.00","104.62");
 
                     ordersDBManager.SaveNewOrders("SO-000001" , "2007-01-23T00:00:00" , "A US Customer Inc" , "1400 Roxton Avenue" ,
                             "Beverly Hills" ,"Los Angeles" , "90210" , "United States of America" , "Unknown" , "", "101.03" , "Completed" , "0870 445 332" , "1400 Roxton Avenue",
-                            "Beverly Hills","Los Angeles" , "United States of America" , "101.03" ,"0.00");
+                            "Beverly Hills","Los Angeles" , "United States of America" , "101.03" ,"0.00" , "0.00");
 
                     ordersDBManager.SaveNewOrders("SO-000002" , "2007-01-23T00:00:00" , "A Toy Customer" , "845 Evergreen Terrace, Eastham Road." ,
                             "Manchester" ,"Lancashire" , "M54 5TG" , "United Kingdom" , "Internet" , "", "1618.26" , "Open" , "0870 555 3200" , "845 Evergreen Terrace, Eastham Road.",
-                            "Manchester","Lancashire" , "United Kingdom" , "1398.00" ,"0.00");
+                            "Manchester","Lancashire" , "United Kingdom" , "1398.00" ,"0.00" , "220.26");
 
                     ordersDBManager.SaveNewOrders("SO-000003" , "2007-01-23T00:00:00" , "A Toy Customer" , "845 Evergreen Terrace, Eastham Road." ,
                         "Manchester" ,"Lancashire" , "M54 5TG" , "United Kingdom" , "Internet" , "", "127.34" , "Completed" , "0870 555 3200" , "845 Evergreen Terrace, Eastham Road.",
-                        "Manchester","Lancashire" , "United Kingdom" , "100.00" ,"10.00");
+                        "Manchester","Lancashire" , "United Kingdom" , "100.00" ,"10.00" , "17.34");
 
 
                     ordersDBManager.SaveNewOrders("SO-000004" , "2007-01-23T00:00:00" , "A Toy Customer" , "845 Evergreen Terrace, Eastham Road." ,
                         "Manchester" ,"Lancashire" , "M54 5TG" , "United Kingdom" , "Internet" , "", "92611.58" , "Completed" , "0870 555 3200" , "845 Evergreen Terrace, Eastham Road.",
-                        "Manchester","Lancashire" , "United Kingdom" , "80000.00" ,"10.00");
+                        "Manchester","Lancashire" , "United Kingdom" , "80000.00" ,"10.00","12601.58");
 
                     ordersDBManager.SaveNewOrders("SO-000005" , "2007-01-23T00:00:00" , "A Toy Customer" , "845 Evergreen Terrace, Eastham Road." ,
                         "Manchester" ,"Lancashire" , "M54 5TG" , "United Kingdom" , "Internet" , "", "1053.33" , "Completed" , "0870 555 3200" , "845 Evergreen Terrace, Eastham Road.",
-                        "Manchester","Lancashire" , "United Kingdom" , "900.00" ,"10.00");
+                        "Manchester","Lancashire" , "United Kingdom" , "900.00" ,"10.00" , "143.33");
 
 
                     byte[] photo = Base64.decode(Utils.image , Base64.DEFAULT);

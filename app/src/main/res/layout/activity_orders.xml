@@ -225,7 +225,8 @@
             android:layout_margin="@dimen/_10sdp"
             android:elevation="@dimen/_1sdp"
             android:background="@drawable/primary_back_round"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:padding="@dimen/_2sdp">
 
 
             <LinearLayout
@@ -250,7 +251,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:visibility="gone"/>
 
                     <!--</LinearLayout>-->
 

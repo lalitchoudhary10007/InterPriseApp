@@ -13,7 +13,7 @@
         android:textSize="@dimen/_14sdp"
         android:gravity="center"
         android:textColor="@color/white"
-        android:padding="@dimen/_5sdp"
+        android:padding="@dimen/_2sdp"
         android:text="jnkj"/>
 
 
